@@ -1,0 +1,13 @@
+.text_reg {
+	padding-bottom: 3px;
+	color: #00F;
+	text-align: right;
+	padding-right: 5px;
+}
+.text_input{
+	margin-left: 5px;
+	font-size: 16px;
+	font-style: normal;
+	
+	
+	}

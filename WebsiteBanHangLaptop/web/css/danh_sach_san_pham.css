@@ -1,0 +1,31 @@
+@charset "utf-8";
+.san_pham {
+	font-size: 16px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 5px;
+	border: 1px dotted #666;
+}
+.ten_san_pham {
+	font-family: "Comic Sans MS", cursive;
+	font-size: 18px;
+	color: #F00;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.gia {
+	font-family: "Comic Sans MS", cursive;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bolder;
+	font-variant: normal;
+	color: #00F;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.khuyen_mai {
+	font-size: 18px;
+	color: #F00;
+	text-decoration: underline;
+}
