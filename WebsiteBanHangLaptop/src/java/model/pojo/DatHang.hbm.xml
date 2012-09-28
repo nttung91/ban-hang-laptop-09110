@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 28, 2012 7:25:14 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.DatHang" table="dat_hang" schema="public">
+        <id name="maDonHang" type="string">
+            <column name="ma_don_hang" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="nhanVien" class="model.pojo.NhanVien" fetch="select">
+            <column name="nhan_vien" length="10" />
+        </many-to-one>
+        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select">
+            <column name="khach_hang" length="10" />
+        </many-to-one>
+        <many-to-one name="tinhTrangDonDatHang" class="model.pojo.TinhTrangDonDatHang" fetch="select">
+            <column name="tinh_trang" />
+        </many-to-one>
+        <set name="chiTietDonHangs" inverse="true">
+            <key>
+                <column name="ma_don_hang" length="10" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.ChiTietDonHang" />
+        </set>
+    </class>
+</hibernate-mapping>
