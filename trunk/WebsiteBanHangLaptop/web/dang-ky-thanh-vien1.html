@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Template1.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function showAvancedSearchMenu()
+{
+	var table = document.getElementById("tim_kiem_nang_cao");
+	if (table.style.display == "none"){
+		table.style.display = "block";
+	}
+	else {table.style.display = "none";}
+}
+</script>
+<style type="text/css">
+#banner_container {
+	position: relative;
+	width:1000px;
+	height:200px;
+	background-image:url(images/Banner.jpg);
+	background-repeat:no-repeat;
+}
+
+#banner_table_container{
+	position:absolute;
+	width:1000px;
+	height:200px;
+}
+#timkiem_bg {
+	background-image: url(images/timkiem_bg.jpg);
+	background-repeat:no-repeat;
+	background-position: center center;
+	vertical-align:middle;
+	
+}
+
+#btn_tim_kiem{
+	width:100px;
+	height:35px;
+	background-image:url(images/TimKiem.png);
+	background-repeat:no-repeat;
+	
+	}
+#Cart {
+	background-image: url(images/CartMenu.png);
+	height: 50px;
+	width: 150px;
+	background-repeat:no-repeat;
+}
+#menu_container {
+	padding-top:10px;
+	padding-bottom:10px;
+	}
+#menu, #menu ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+#menu li {
+	float:left;
+	position:relative;
+	line-height: 3.2em;
+	width: 250px;
+	text-align:center;
+	background-size:100% 100%;
+    -moz-background-size: 100% 100%;
+}
+#menu li ul {
+	position:absolute;
+	margin-top:0;
+	margin-left:0;
+	display:none;
+}
+#menu ul li ul {
+	margin-top:-3.2em;
+	margin-left:250px;
+}
+
+#menu a {
+	display:block;
+	border-right:1px solid #fff;
+	
+	color:#3B3B3B;
+	text-decoration:none;
+	padding:0 10px;
+}
+#menu a:hover {
+	
+	color:#fff;
+}
+#menu ul {
+	border-top:1px solid #fff;
+}
+#menu ul a {
+	border-right:none;
+	border-right:1px solid #fff;
+	border-bottom:1px solid #fff;
+	border-left:1px solid #fff;
+	background-color:#9999FF;
+	
+	
+}
+/* SHOW SUBMENU 1 */
+#menu li:hover ul, #menu li.over ul {
+	display:block;
+}
+#menu li:hover ul ul, #menu li.over ul ul {
+	display:none;
+}
+/* SHOW SUBMENU 2 */
+#menu ul li:hover ul, #menu ul li.over ul {
+	display:block;
+}
+
+.menu_first {
+	background-image:url(images/Menu_Item_First.jpg);
+	background-repeat:no-repeat;
+	}
+.menu_mid {
+	background-image:url(images/Menu_Item_Mid.jpg);
+	background-repeat:no-repeat;
+
+	}
+.menu_last {
+	background-image:url(images/Menu_Item_Last.jpg);
+	background-repeat:no-repeat;
+
+	}
+#tim_kiem_nang_cao {
+	display:block;
+	}
+.menu_login:hover{
+	color:#000;
+	text-decoration:none;
+	}
+.menu_login {
+	font-weight: bold; font-style: oblique; font-family: 'MS Serif', 'New York', serif; font-size:18px; color:#00F;
+	}
+</style></head>
+
+<body topmargin="-10px">
+<table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="50" colspan="3" id="banner_container"><table width="1000px" height="197" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="200" height="56">&nbsp;</td>
+        <td width="482">&nbsp;</td>
+        <td colspan="3"><table width="100%" height="30px">
+          <tr>
+            <td style="border-top-style: none; border-top-width: medium; border-top-color: #333; border-right-style:solid; border-right-width:medium; border-bottom-color:#000; padding-right:5px" align="right"><a href="#" class="menu_login">Dang nhap</a></td>
+            <td align="left" style="padding-left:5px"><a href="#" class="menu_login">Dang Ky</a></td>
+          </tr>
+        </table></td>
+        </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="3">&nbsp;</td>
+        </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td width="150">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td width="31">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td width="137" height="35">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr height="50px">
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td height="50px" width="137"><img src="images/CartMenu.png" width="100%" height="50px" /></td>
+        <td>&nbsp;</td>
+        </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td colspan="3" id="menu_container">
+    	
+<ul id="menu">
+	<li class="menu_first"><a href="#">Trang Chủ</a></li>
+	
+	<li class="menu_mid" ><a href="#" >Danh Mục</a>
+		<ul>
+			<li><a href="#">Laptop</a>
+				<ul>
+                <!--Cac hang lap top start-->
+					<li><a href="#" title="2003 projects">2003 projects</a></li>
+					<li><a href="#" title="2004 projects">2004 projects</a></li>
+					<li><a href="#" title="2005 projects">2005 projects</a></li>
+                    <!--Cac hang lap top end -->
+				</ul>
+			</li>
+			<li><a href="#" title="Active projects">Linn Kiện</a>
+				<ul>
+                <!--Cac hang link kien -->
+					<li><a href="#" title="Leaf industries">Leaf industries</a></li>
+					<li><a href="#" title="Omnicron">Omnicron</a></li>
+					<li><a href="#" title="Unkown.com">Unkown.com</a></li>
+                    <!--Cac hang linn kien end -->
+				</ul>
+			</li>
+		</ul>
+	</li>
+    <li class="menu_mid" ><a href="#" >Khuyến Mãi</a></li>
+	<li class="menu_last"><a href="#" >Contact</a></li>
+</ul>
+    </td>
+  </tr>
+  <tr>
+    <td height="50px" colspan="3" id="timkiem_bg">
+    <form method="get" action="#" name="frmSearch">
+                        <label for="tenSach" style="margin-left:10px">Tên Sản Phẩm</label>
+                          <input type="text"  name="tenSach" style="width:400px" />
+                        <label for="danhMuc">Danh mục</label>
+<select name="danhMuc" style="width:200px">
+                        	<option value="Tất cả" selected="selected">--Chọn danh mục--</option>
+                        	<option value="mã danh mục">Tên danh mục</option>
+        </select>
+        <label for="danhMuc" onclick="showAvancedSearchMenu()">Nang Cao</label>
+    <input type="submit" id="btn_tim_kiem"  value="&nbsp;&nbsp;&nbsp;Tìm kiếm" name="timKiem"/>
+    </form>
+    </td>
+  </tr>
+  <tr>
+  <td width="1000">
+  <table  width="1000px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
+    
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </td>
+  </tr>
+  <tr>
+    <td colspan="2"><!-- InstanceBeginEditable name="MainContent" -->
+      <table width="535" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="48" colspan="6" style="border: thin double #F00; padding-bottom:20px 0px; background:#69F; padding-left:10px; font-size: 24px;">Đăng ký thành viên</td>
+          <td width="4">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="4" height="38">&nbsp;</td>
+          <td colspan="6"style="font-style: italic; font-weight: bold; font-size: 18px; color: #FFF; background-color: #90F; border-left-color: #FFF; border-bottom-color: #FFF; border-right-color: #FFF; border-top-color: #F00; border-top-style: solid; border-top-width: 3px; margin-top: -10px;">Thông tin đăng nhập</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td width="102" class="text_reg">Tên Đăng nhập(<span style="color:#F00">*</span>)</td>
+          <td colspan="2" class="text_input"><input class="text_input" name="txt_ten_dang_nhap" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Mật Khẩu</td>
+          <td colspan="4"><input class="text_input" name="txt_mat_khau" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Nhập lại mật khẩu</td>
+          <td colspan="4"><input class="text_input" name="txt_nhap_lai_mat_khau" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Địa chỉ email</td>
+          <td colspan="4"><input class="text_input" name="txt_email" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Nhập Lại Địa chỉ email</td>
+          <td colspan="4"><input class="text_input" name="txt_nhap_lai_email" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td width="4" height="38">&nbsp;</td>
+          <td colspan="6" style="font-style: italic; font-weight: bold; font-size: 18px; color: #FFF; background-color: #90F; border-left-color: #FFF; border-bottom-color: #FFF; border-right-color: #FFF; border-top-color: #F00; border-top-style: solid; border-top-width: 3px; margin-top: -10px;">Thông tin khách hàng</td>
+        </tr>
+        <tr>
+          <td height="27" colspan="2">&nbsp;</td>
+          <td class="text_reg">Họ và Tên(<span style="color:#F00">*</span>)</td>
+          <td colspan="4"><input class="text_input" name="txt_ten_khach_hang" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Giới Tính(<span style="color:#F00">*</span>)</td>
+          <td colspan="4"><input name="gioitinh" type="radio" value="Nam" />
+            Nam
+            <input name="gioitinh" type="radio" value="Nữ" />
+            Nữ&nbsp;</td>
+        </tr>
+        <tr >
+          <td height="39" colspan="2">&nbsp;</td>
+          <td class="text_reg">Ngày Sinh(<span style="color:#F00">*</span>)</td>
+          <td width="422" style=" float:left;vertical-align:middle;" >Ngay
+          <select name="ngay">
+          </select> Thang <select name="thang">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>7</option>
+         
+          </select> Nam <select name="nam">
+          </select>
+          
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Điện Thoại(<span style="color:#F00">*</span>)</td>
+          <td colspan="4"><input class="text_input" name="txt_ten_khach_hang2" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td class="text_reg">Thành Phố(<span style="color:#F00">*</span>)</td>
+          <td colspan="4"><input class="text_input" name="txt_ten_khach_hang3" type="text" size="30" maxlength="50" /></td>
+        </tr>
+        <tr>
+          <td height="44" colspan="2">&nbsp;</td>
+          <td class="text_reg">&nbsp;</td>
+          <td colspan="4"><input name="dangnhap" type="button" value="&#272;&#259;ng Nh&#7853;p" />&nbsp;<input name="nhaplai" type="button" value="Nhập Lại" /></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>&nbsp; </p>
+    <!-- InstanceEndEditable --></td>
+    <td width="4">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
+  </tr>
+</table>
+</body>
+<!-- InstanceEnd --></html>
