@@ -16,7 +16,7 @@
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Template1.dwt" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Untitled Document</title>
@@ -80,8 +80,9 @@
                 float:left;
                 position:relative;
                 line-height: 3.2em;
-                width: 10em;
+                width: 250px;
                 text-align:center;
+				background-size:100% 100%;
             }
             #menu li ul {
                 position:absolute;
@@ -91,7 +92,7 @@
             }
             #menu ul li ul {
                 margin-top:-3.2em;
-                margin-left:10em;
+                margin-left:250px;
             }
 
             #menu a {
@@ -275,7 +276,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><!-- InstanceBeginEditable name="MainContent" -->
+                <td colspan="2">
                     <table width="1000px" border="0" cellspacing="0" cellpadding="0" style="margin-left:10px">
                         <tr>
                             <td width="459" height="36">Trang <a href="#">1</a> |</td>
@@ -283,7 +284,6 @@
                             <td><form method="post">
                                     <select name="soSachTrenTrang">
                                         <%
-                                        
                                         for (int i = 1 ; i <= 10 ; i ++){
                                         if (i==5){
 %>
@@ -365,7 +365,7 @@
                             </td>
                         </tr>
                     </table>
-                    <!-- InstanceEndEditable --></td>
+                    </td>
                 <td width="4">&nbsp;</td>
             </tr>
             <tr>
@@ -373,5 +373,5 @@
             </tr>
         </table>
     </body>
-    <!-- InstanceEnd --></html>
+</html>
 

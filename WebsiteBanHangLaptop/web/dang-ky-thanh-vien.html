@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript">
+window.onload = function()
+{
+	var i=0;
+	for (i = 1;i <=31;i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+  		var elSel = document.getElementById('ngay');
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+  		}
+	}
+	for (i = 1;i <=12;i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+  		var elSel = document.getElementById('thang');
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+  		}
+	}
+	var d = new Date();
+	var elSel = document.getElementById('nam');
+	for (i = 1912;i <= d.getFullYear();i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+		elOptNew.id="year"+i;
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+		}
+		
+	}
+	var currentyear = document.getElementById("year"+(i-10));
+	currentyear.selected = true;
+
+}
+</script>
+</head>
+
+<body>
+<table width="535" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="48" colspan="6" style="padding-bottom:20px 0px; background:#69F; padding-left:10px; font-size: 24px;">Đăng ký thành viên</td>
+    <td width="97">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="27" height="38">&nbsp;</td>
+    <td colspan="6"style="font-style: italic; font-weight: bold; font-size: 18px; color: #FFF; background-color: #90F; border-left-color: #FFF; border-bottom-color: #FFF; border-right-color: #FFF; border-top-color: #F00; border-top-style: solid; border-top-width: 3px; margin-top: -10px;">Thông tin đăng nhập</td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td width="143" class="text_reg">Tên Đăng nhập(<span style="color:#F00">*</span>)</td>
+   <td colspan="2" class="text_input"> <input class="text_input" name="txt_ten_dang_nhap" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Mật Khẩu</td>
+    <td colspan="4"><input class="text_input" name="txt_mat_khau" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Nhập lại mật khẩu</td>
+    <td colspan="4"><input class="text_input" name="txt_nhap_lai_mat_khau" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Địa chỉ email</td>
+    <td colspan="4"><input class="text_input" name="txt_email" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Nhập Lại Địa chỉ email</td>
+    <td colspan="4"><input class="text_input" name="txt_nhap_lai_email" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td width="27" height="38">&nbsp;</td>
+    <td colspan="6" style="font-style: italic; font-weight: bold; font-size: 18px; color: #FFF; background-color: #90F; border-left-color: #FFF; border-bottom-color: #FFF; border-right-color: #FFF; border-top-color: #F00; border-top-style: solid; border-top-width: 3px; margin-top: -10px;">Thông tin khách hàng</td>
+  </tr>
+  <tr>
+    <td height="27" colspan="2">&nbsp;</td>
+    <td class="text_reg">Họ và Tên(<span style="color:#F00">*</span>)</td>
+    <td colspan="4"><input class="text_input" name="txt_ten_khach_hang" type="text" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Giới Tính(<span style="color:#F00">*</span>)</td>
+    <td colspan="4"><input name="rad_nam" type="radio" value="Nam" />
+      Nam
+        <input name="rad_nu" type="radio" value="N&#7919;" />
+        Nữ&nbsp;</td>
+  </tr>
+  <tr >
+    <td height="39" colspan="2">&nbsp;</td>
+    <td class="text_reg">Ngày Sinh(<span style="color:#F00">*</span>)</td>
+    <td width="97" style="vertical-align:middle;" >
+    Ngày 
+      <select style="position:fixed;width:50px" name="ngay" id="ngay" onmouseover="this.size=5;" onmouseout="this.size=1;">
+</select> 
+</td>
+<td width="97" style="vertical-align:middle;">
+      Tháng 
+      <select  style="position:fixed;width:50px" name="ngay2" id="thang"  onmouseover="this.size=5;" onmouseout="this.size=1;" >
+      </select> 
+    </td>
+    <td colspan="2" style="vertical-align:middle;">
+      Năm
+      <select style="position:fixed;width:70px;"  name="ngay3" id="nam"  onmouseover="this.size=5;" onmouseout="this.size=1;">
+      </select></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Điện Thoại(<span style="color:#F00">*</span>)</td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">Thành Phố(<span style="color:#F00">*</span>)</td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td class="text_reg">&nbsp;</td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
