@@ -9,6 +9,8 @@
 <%@page import="model.dao.*,model.pojo.*" %>
 <%!    //khai bao bien vs ham
     SanPhamDAO spdao = new SanPhamDAO();
+    HangSanXuatDAO hangsxDAO = new HangSanXuatDAO();
+    
 %>
 
 
@@ -222,19 +224,29 @@
             </tr>
             <tr>
                 <td height="50px" colspan="3" id="timkiem_bg">
-                    <form method="get" action="#" name="frmSearch">
-                        <label for="tenSach" style="margin-left:10px">Tên Sản Phẩm</label>
-                        <input type="text"  name="tenSach" style="width:400px" />
-                        <label for="danhMuc">Danh mục</label>
-                        <select name="danhMuc" style="width:200px">
-                            <option value="Tất cả" selected="selected">--Chọn danh mục--</option>
-                            <option value="mã danh mục">Tên danh mục</option>
+                    <form method="get" action="DanhSachSanPham.jsp" name="frmSearch">
+                        <label for="tenSanPham" style="margin-left:10px">Tên Sản Phẩm</label>
+                        <input type="text"  name="tenSanPham" style="width:400px" />
+                        <label for="HangSanXuat">Danh mục</label>
+                        <select name="HangSanXuat" style="width:200px">
+                            <option value="H" selected="selected">--Chọn danh mục--</option>
+                            <% 
+                                List<HangSanXuat> listHangSX = hangsxDAO.getList();
+                                for(int i = 0 ; i <listHangSX.size() ; i ++){
+                                    HangSanXuat hsx = listHangSX.get(i);
+                                    if (hsx.getTinhTrang()==0)
+                                        continue;
+                            %>
+                            <option value=<%= hsx.getMaHang() %>><%= hsx.getTenHang() %></option>
+                            <%}%>
                         </select>
                         <label for="danhMuc" onclick="showAvancedSearchMenu()">Nang Cao</label>
                         <input type="submit" id="btn_tim_kiem"  value="&nbsp;&nbsp;&nbsp;Tìm kiếm" name="timKiem"/>
                     </form>
                 </td>
             </tr>
+            
+            
             <tr>
                 <td width="1000">
                     <table  width="1000px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
@@ -270,7 +282,15 @@
                             <td align="right">Số sản phẩm trên trang </td>
                             <td><form method="post">
                                     <select name="soSachTrenTrang">
-                                        <option value="1">1</option>
+                                        <%
+                                        
+                                        for (int i = 1 ; i <= 10 ; i ++){
+                                        if (i==5){
+%>
+<option value=<%= i%> selected=true><%= i%></option>
+                           <% i++;}%>
+                                        <option value=<%= i%> ><%= i%></option>
+                                        <% } %>
                                     </select>
                                 </form>
                             </td>
@@ -284,7 +304,20 @@
                             <td height="201" colspan="3"><table width="99%" border="0" cellspacing="0" cellpadding="0">
 
                                     <%
-                                        List<SanPham> list = spdao.getList();
+                                    List<SanPham> list=null;
+                                    String tensp = "";
+                                    String mahang = "H";
+                                    if(request.getParameter("tenSanPham")!=null)
+                                        tensp=request.getParameter("tenSanPham");
+                                    
+                                    if(request.getParameter("HangSanXuat")!=null)
+                                        mahang = request.getParameter("HangSanXuat");
+                                   
+                                    String timkiem= (tensp+","+mahang);
+                                    
+                                        list=spdao.search(timkiem);
+                                    
+                                        //list = spdao.getList();
                                         for (int i = 0; i < list.size(); i++) {
 
 
