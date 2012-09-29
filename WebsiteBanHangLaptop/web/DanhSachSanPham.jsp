@@ -230,7 +230,7 @@
                         <input type="text"  name="tenSanPham" style="width:400px" />
                         <label for="HangSanXuat">Danh mục</label>
                         <select name="HangSanXuat" style="width:200px">
-                            <option value="H" selected="selected">--Chọn danh mục--</option>
+                            <option value="" selected="selected">--Chọn danh mục--</option>
                             <% 
                                 List<HangSanXuat> listHangSX = hangsxDAO.getList();
                                 for(int i = 0 ; i <listHangSX.size() ; i ++){
@@ -306,7 +306,7 @@
                                     <%
                                     List<SanPham> list=null;
                                     String tensp = "";
-                                    String mahang = "H";
+                                    String mahang = "";
                                     if(request.getParameter("tenSanPham")!=null)
                                         tensp=request.getParameter("tenSanPham");
                                     
