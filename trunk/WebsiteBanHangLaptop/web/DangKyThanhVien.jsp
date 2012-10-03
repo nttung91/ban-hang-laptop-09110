@@ -10,10 +10,11 @@
 <%@page import="org.hibernate.HibernateException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.pojo.*,model.dao.*"%>
-<%!    String tenDanhNhap, matKhau, email, hoTen, gioiTinh, ngaySinh, dienThoai, thanhPho, nhapLaiMatKhau, nhapLaiEmail,diaChi;
+<%!    String tenDanhNhap, matKhau, email, hoTen, gioiTinh, ngaySinh, dienThoai, thanhPho, nhapLaiMatKhau, nhapLaiEmail, diaChi;
     String[] info = null;
     String[] listVal;
     String kq = "";
+
     private String checkData(HttpServletRequest request, HttpSession session) {
         boolean oke = true;
         listVal = new String[10];
@@ -69,15 +70,15 @@
         } else {
             oke = false;
         }
-		if (request.getParameter("diaChi") != null) {
+        if (request.getParameter("diaChi") != null) {
             diaChi = request.getParameter("diaChi");
             listVal[9] = thanhPho;
         } else {
             oke = false;
         }
-        
 
-        
+
+
         listVal[4] = request.getParameter("ngay");
         listVal[5] = request.getParameter("thang");
         listVal[6] = request.getParameter("nam");
@@ -86,7 +87,7 @@
         if (!oke) {
             kq += "Các mục (*) không được bỏ trống.</br>";
         } else {
-           
+
             boolean f = true;
             if (!matKhau.equals(nhapLaiMatKhau)) {
                 kq += "Mật khẩu nhập lại không trùng khớp</br>";
@@ -96,13 +97,13 @@
                 kq += "Email nhập lại không trùng khớp</br>";
                 f = false;
             }
-             if (!myLib.RegexChecking.CheckEmail(email)){
-            kq+="Email không đúng !";
-            f =false;
+            if (!myLib.RegexChecking.CheckEmail(email)) {
+                kq += "Email không đúng !";
+                f = false;
             }
-             if (!myLib.RegexChecking.CheckDienThoai(dienThoai)){
-            kq+="Số Điện Thoại không đúng !";
-            f =false;
+            if (!myLib.RegexChecking.CheckDienThoai(dienThoai)) {
+                kq += "Số Điện Thoại không đúng !";
+                f = false;
             }
             if (f) {
                 //check trung lap trong csdl
@@ -128,25 +129,25 @@
                     //khtt.setHoTen(hoTen);
                     khtt.setEmail(email);
                     KhachHang kh = new KhachHang();
-                    String maKhachHang = khachHangDao.generateKeyCode("KhachHang", "maKhachHang","KH");
+                    String maKhachHang = khachHangDao.generateKeyCode("KhachHang", "maKhachHang", "KH");
                     kh.setMaKhachHang(maKhachHang);
                     kh.setTenKhachHang(hoTen);
                     kh.setDienThoai(dienThoai);
                     kh.setDiaChi(diaChi);
                     kh.setThanhPho(thanhPho);
-                    Date ns = new Date(Integer.parseInt(listVal[6]),Integer.parseInt(listVal[5]), Integer.parseInt(listVal[4]));
+                    Date ns = new Date(Integer.parseInt(listVal[6]), Integer.parseInt(listVal[5]), Integer.parseInt(listVal[4]));
                     kh.setNgaySinh(ns);
                     kh.setGioiTinh(Integer.parseInt(gioiTinh));
                     Set<KhachHangTrucTuyen> dskhtt = new HashSet<KhachHangTrucTuyen>();
                     dskhtt.add(khtt);
                     kh.setKhachHangTrucTuyens(dskhtt);
-                    
+
                     //kh.setNgaySinh();
                     try {
                         khachHangDao.saveOrUpdateObject(kh);
                     } catch (HibernateException ex) {
                         kq += "Dang ky that bai</br>";
-                        kq+= ex.toString();
+                        kq += ex.toString();
                     }
                 }
             }
@@ -157,23 +158,29 @@
 
 %>
 <%    //kiem tra dieu kien
-    if (request.getParameter("logout")!=null){
-        if (Boolean.parseBoolean(request.getParameter("logout").toString())){
-            session.invalidate();
+    if (request.getParameter("logout") != null) {
+        if (Boolean.parseBoolean(request.getParameter("logout").toString())) {
+            session.setAttribute("daDangNhap", false);
         }
     }
-    kq="";
+     if (request.getParameter("daDangNhap") != null) {
+       session.setAttribute("daDangNhap", Boolean.parseBoolean(request.getParameter("daDangNhap").toString()));
+ 
+    }
+       else {
+       //chua dang nhap
+        session.setAttribute("daDangNhap",false);
+       }
+    kq = "";
     if (checkData(request, session).equals("")) {
-		//dang ky thanh cong
+        //dang ky thanh cong
         //remove tham so dang ky
         session.removeAttribute("listVal");
         info = null;
-        session.setAttribute("tenDangNhap",tenDanhNhap);
-	session.setAttribute("daDangNhap", true);	
+        session.setAttribute("tenDangNhap", tenDanhNhap);
+        session.setAttribute("daDangNhap", true);
         response.sendRedirect("DanhSachSanPham.jsp");
     }
-       else{
-       session.setAttribute("daDangNhap", false); };
     if (info == null) {
         info = new String[10];
     }
@@ -245,48 +252,48 @@
                                 }
                             }
                             var elSel1 = document.getElementById("thang"+<%if (info[5] != null) {
-                        out.print(info[5]);
-                    } else {
-                        out.print("1");
-                    }%>);
-                            if  (elSel1 != null) elSel1.selected = true;
-                            var d = new Date();
-                            var elSel = document.getElementById('nam');
-                            for (i = 1912;i <= d.getFullYear();i++)
-                            {
-                                var elOptNew = document.createElement('option');
-                                elOptNew.text = i ;
-                                elOptNew.value = i;
-                                elOptNew.id="year"+i;
-                                try {
-                                    elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
-                                }
-                                catch(ex) {
-                                    elSel.add(elOptNew); // IE only
-                                }
+                                    out.print(info[5]);
+                                } else {
+                                    out.print("1");
+                                }%>);
+                                        if  (elSel1 != null) elSel1.selected = true;
+                                        var d = new Date();
+                                        var elSel = document.getElementById('nam');
+                                        for (i = 1912;i <= d.getFullYear();i++)
+                                        {
+                                            var elOptNew = document.createElement('option');
+                                            elOptNew.text = i ;
+                                            elOptNew.value = i;
+                                            elOptNew.id="year"+i;
+                                            try {
+                                                elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+                                            }
+                                            catch(ex) {
+                                                elSel.add(elOptNew); // IE only
+                                            }
                    
-                            }
-                            var currentyear = document.getElementById("year"+<%if (info[6] != null) {
-                        out.print(info[6]);
-                    } else {
-                        out.print("(i-10)");
-                    }%>);
-                            currentyear.selected = true;
-                            //set value get from session
-                            // setListValue();	
+                                        }
+                                        var currentyear = document.getElementById("year"+<%if (info[6] != null) {
+                                    out.print(info[6]);
+                                } else {
+                                    out.print("(i-10)");
+                                }%>);
+                                        currentyear.selected = true;
+                                        //set value get from session
+                                        // setListValue();	
                 
                 
         
-                        }
+                                    }
            
-                        function showAvancedSearchMenu()
-                        {
-                            var table = document.getElementById("tim_kiem_nang_cao");
-                            if (table.style.display == "none"){
-                                table.style.display = "block";
-                            }
-                            else {table.style.display = "none";}
-                        }
+                                    function showAvancedSearchMenu()
+                                    {
+                                        var table = document.getElementById("tim_kiem_nang_cao");
+                                        if (table.style.display == "none"){
+                                            table.style.display = "block";
+                                        }
+                                        else {table.style.display = "none";}
+                                    }
         </script>
         <style type="text/css">
             #banner_container {
@@ -426,41 +433,37 @@
                                     <tr>
                                         <td style="border-top-style: none; border-top-width: medium; border-top-color: #333; border-right-style:solid; border-right-width:medium; border-bottom-color:#000; padding-right:5px" align="right">
                                             <a href="<%
-                                            if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())){
-    out.println("TrangCaNhan.jsp?tenDanhNhap="+session.getAttribute("tenDangNhap").toString()+"");
-    }
-else {
-         out.println("DangKyThanhVien.jsp");
-}%>" class="menu_login">
-                                            <!-- Sua noi dung -->
+                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
+                                                    out.println("TrangCaNhan.jsp?tenDanhNhap=" + session.getAttribute("tenDangNhap").toString() + "");
+                                                } else {
+                                                    out.println("DangNhap.jsp");
+                                                }%>" class="menu_login">
+                                                <!-- Sua noi dung -->
                                                 <%
-if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())){
-    out.println("Xin chào, "+tenDanhNhap);
-    }
-else {
-         out.println("Đăng nhập");
-}
-%>
-                                            
-                                            
+                                                    if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
+                                                        out.println("Xin chào, " + session.getAttribute("tenDangNhap"));
+                                                    } else {
+                                                        out.println("Đăng nhập");
+                                                    }
+                                                %>
+
+
                                             </a></td>
                                         <td align="left" style="padding-left:5px">
                                             <a href="<%
-                                            if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())){
-    out.println("DangKyThanhVien?logout=true");
+                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
+                                                    out.println("DangKyThanhVien.jsp?logout=true");
+                                                } else {
+                                                    out.println("DangKyThanhVien.jsp");
+                                                }
+
+                                               %>" class="menu_login"><%
+    if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
+        out.println("Thoat");
+    } else {
+        out.println("Dang Ky");
     }
-else {
-         out.println("DangKyThanhVien.jsp");
-}
-                                                 
-%>" class="menu_login"><%
-                            if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())){
-    out.println("Thoat");
-    }
-else {
-         out.println("Dang Ky");
-}
-                          %>                  </a></td>
+                                                %>                  </a></td>
                                     </tr>
                                 </table></td>
                         </tr>
@@ -569,7 +572,7 @@ else {
             </tr>
             <tr>
                 <td colspan="2">
-                <!-- Main content -->
+                    <!-- Main content -->
                     <form method="post" action="">
                         <% if (session.getAttribute("listVal") != null) {
                                 info = (String[]) session.getAttribute("listVal");
@@ -659,11 +662,11 @@ else {
                                             }%>" /></td>
                                     </tr>
                                     <tr>
-                                      <td colspan="2">&nbsp;</td>
-                                      <td class="text_reg">Địa Chỉ(<span style="color:#F00">*</span>)</td>
-                                      <td colspan="4"><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
-                                                out.println(info[9]);
-                                            }%>" /></td>
+                                        <td colspan="2">&nbsp;</td>
+                                        <td class="text_reg">Địa Chỉ(<span style="color:#F00">*</span>)</td>
+                                                               <td colspan="4"><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
+                                              out.println(info[9]);
+                                          }%>" /></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">&nbsp;</td>
