@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Sep 28, 2012 7:25:13 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,6 +10,7 @@ public class KhachHangTrucTuyen  implements java.io.Serializable {
 
 
      private String username;
+     private KhachHang khachHang;
      private String matKhau;
      private String hoTen;
      private Integer tinhTrang;
@@ -22,8 +23,9 @@ public class KhachHangTrucTuyen  implements java.io.Serializable {
     public KhachHangTrucTuyen(String username) {
         this.username = username;
     }
-    public KhachHangTrucTuyen(String username, String matKhau, String hoTen, Integer tinhTrang, String email) {
+    public KhachHangTrucTuyen(String username, KhachHang khachHang, String matKhau, String hoTen, Integer tinhTrang, String email) {
        this.username = username;
+       this.khachHang = khachHang;
        this.matKhau = matKhau;
        this.hoTen = hoTen;
        this.tinhTrang = tinhTrang;
@@ -36,6 +38,13 @@ public class KhachHangTrucTuyen  implements java.io.Serializable {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    public KhachHang getKhachHang() {
+        return this.khachHang;
+    }
+    
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
     }
     public String getMatKhau() {
         return this.matKhau;

@@ -11,3 +11,24 @@
 	
 	
 	}
+#errorList {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: normal;
+	color: #F00;
+}
+.login_header_td {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 18px;
+	color: #FFF;
+	background-color: #90F;
+	border-left-color: #FFF;
+	border-bottom-color: #FFF;
+	border-right-color: #FFF;
+	border-top-color: #F00;
+	border-top-style: solid;
+	border-top-width: 3px;
+	margin-top: -10px;
+	border-radius:10px;
+}
