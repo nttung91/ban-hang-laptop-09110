@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Sep 28, 2012 7:25:13 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class KhachHang  implements java.io.Serializable {
      private String diaChi;
      private String thanhPho;
      private Integer tinhTrang;
-     private String username;
+     private Set khachHangTrucTuyens = new HashSet(0);
      private Set datHangs = new HashSet(0);
 
     public KhachHang() {
@@ -30,7 +30,7 @@ public class KhachHang  implements java.io.Serializable {
     public KhachHang(String maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
-    public KhachHang(String maKhachHang, String tenKhachHang, Integer gioiTinh, Date ngaySinh, String dienThoai, String diaChi, String thanhPho, Integer tinhTrang, String username, Set datHangs) {
+    public KhachHang(String maKhachHang, String tenKhachHang, Integer gioiTinh, Date ngaySinh, String dienThoai, String diaChi, String thanhPho, Integer tinhTrang, Set khachHangTrucTuyens, Set datHangs) {
        this.maKhachHang = maKhachHang;
        this.tenKhachHang = tenKhachHang;
        this.gioiTinh = gioiTinh;
@@ -39,10 +39,9 @@ public class KhachHang  implements java.io.Serializable {
        this.diaChi = diaChi;
        this.thanhPho = thanhPho;
        this.tinhTrang = tinhTrang;
-       this.username = username;
+       this.khachHangTrucTuyens = khachHangTrucTuyens;
        this.datHangs = datHangs;
     }
-   
     public String getMaKhachHang() {
         return this.maKhachHang;
     }
@@ -99,12 +98,12 @@ public class KhachHang  implements java.io.Serializable {
     public void setTinhTrang(Integer tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-    public String getUsername() {
-        return this.username;
+    public Set getKhachHangTrucTuyens() {
+        return this.khachHangTrucTuyens;
     }
     
-    public void setUsername(String username) {
-        this.username = username;
+    public void setKhachHangTrucTuyens(Set khachHangTrucTuyens) {
+        this.khachHangTrucTuyens = khachHangTrucTuyens;
     }
     public Set getDatHangs() {
         return this.datHangs;

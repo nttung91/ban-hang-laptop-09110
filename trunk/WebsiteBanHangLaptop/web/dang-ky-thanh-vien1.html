@@ -1,11 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Template1.dwt" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 <link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
-
 <script language="javascript" type="text/javascript">
+window.onload = function()
+{
+	var i=0;
+	for (i = 1;i <=31;i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+  		var elSel = document.getElementById('ngay');
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+  		}
+	}
+	for (i = 1;i <=12;i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+  		var elSel = document.getElementById('thang');
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+  		}
+	}
+	var d = new Date();
+	var elSel = document.getElementById('nam');
+	for (i = 1912;i <= d.getFullYear();i++)
+	{
+  		var elOptNew = document.createElement('option');
+  		elOptNew.text = i ;
+  		elOptNew.value = i;
+		elOptNew.id="year"+i;
+		try {
+   			 elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+  			}
+  		catch(ex) {
+    	elSel.add(elOptNew); // IE only
+		}
+		
+	}
+	var currentyear = document.getElementById("year"+(i-10));
+	currentyear.selected = true;
+
+}
 function showAvancedSearchMenu()
 {
 	var table = document.getElementById("tim_kiem_nang_cao");
@@ -67,7 +115,7 @@ function showAvancedSearchMenu()
 	width: 250px;
 	text-align:center;
 	background-size:100% 100%;
-    -moz-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
 }
 #menu li ul {
 	position:absolute;
@@ -131,7 +179,7 @@ function showAvancedSearchMenu()
 
 	}
 #tim_kiem_nang_cao {
-	display:block;
+	display:none;
 	}
 .menu_login:hover{
 	color:#000;
@@ -260,10 +308,10 @@ function showAvancedSearchMenu()
   </td>
   </tr>
   <tr>
-    <td colspan="2"><!-- InstanceBeginEditable name="MainContent" -->
-      <table width="535" border="0" cellspacing="0" cellpadding="0">
+    <td colspan="2">
+      <table width="535" border="0" style="margin-top:10px" cellspacing="0" cellpadding="0">
         <tr>
-          <td height="48" colspan="6" style="border: thin double #F00; padding-bottom:20px 0px; background:#69F; padding-left:10px; font-size: 24px;">Đăng ký thành viên</td>
+          <td height="48" colspan="6" style="margin-top: 10px; border: thin double #F00; background:#69F; padding-left:10px; font-size: 24px;">Đăng ký thành viên</td>
           <td width="4">&nbsp;</td>
         </tr>
         <tr>
@@ -316,18 +364,10 @@ function showAvancedSearchMenu()
           <td height="39" colspan="2">&nbsp;</td>
           <td class="text_reg">Ngày Sinh(<span style="color:#F00">*</span>)</td>
           <td width="422" style=" float:left;vertical-align:middle;" >Ngay
-          <select name="ngay">
-          </select> Thang <select name="thang">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>7</option>
+          <select id="ngay" name="ngay">
+          </select> Thang <select id="thang" name="thang">
          
-          </select> Nam <select name="nam">
+          </select> Nam <select id="nam" name="nam">
           </select>
           
         <tr>
@@ -348,7 +388,7 @@ function showAvancedSearchMenu()
       </table>
       <p>&nbsp;</p>
       <p>&nbsp; </p>
-    <!-- InstanceEndEditable --></td>
+   </td>
     <td width="4">&nbsp;</td>
   </tr>
   <tr>
@@ -356,4 +396,4 @@ function showAvancedSearchMenu()
   </tr>
 </table>
 </body>
-<!-- InstanceEnd --></html>
+</html>
