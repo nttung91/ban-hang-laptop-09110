@@ -34,3 +34,16 @@
 	margin-top: -10px;
 	border-radius:10px;
 }
+#dang_ky {
+	vertical-align: middle;
+	text-align: center;
+	background-position: center center;
+	background-color: #99ff33;
+	color: #F00;
+	font-weight: bold;
+	line-height: 18px;
+	border-radius: 10px;
+	border-color:#F00;
+	border-width:medium;
+	border-style:solid;
+}

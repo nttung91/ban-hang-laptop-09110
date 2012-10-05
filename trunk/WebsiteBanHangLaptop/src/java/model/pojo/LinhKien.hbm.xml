@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 2, 2012 7:10:28 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 5, 2012 5:03:30 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="model.pojo.LinhKien" table="linh_kien" schema="public">
         <id name="maSanPham" type="string">
             <column name="ma_san_pham" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="sanPham" class="model.pojo.SanPham" update="false" insert="false" fetch="select">
+        <many-to-one name="sanPham" class="model.pojo.SanPham" update="false" insert="false" fetch="select" lazy="false">
             <column name="ma_san_pham" length="10" not-null="true" unique="true" />
         </many-to-one>
+        <property name="moTa" type="string">
+            <column name="mo_ta" />
+        </property>
     </class>
 </hibernate-mapping>

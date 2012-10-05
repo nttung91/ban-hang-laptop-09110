@@ -163,8 +163,7 @@
             session.setAttribute("daDangNhap", false);
         }
     }
-     if (request.getParameter("daDangNhap") != null) {
-       session.setAttribute("daDangNhap", Boolean.parseBoolean(request.getParameter("daDangNhap").toString()));
+     if (session.getAttribute("daDangNhap") != null) {
  
     }
        else {
@@ -678,7 +677,7 @@
                                     <tr>
                                         <td height="44" colspan="2">&nbsp;</td>
                                         <td class="text_reg">&nbsp;</td>
-                                        <td colspan="4"><input name="dangKy" type="submit" value="Đăng Ký"  />&nbsp;<input name="nhapLai" type="button" value="Nhập Lại" /></td>
+                                        <td colspan="4"><input name="dangKy" type="submit" value="Đăng Ký"  />&nbsp;<input name="nhapLai" type="reset" value="Nhập Lại" /></td>
                                     </tr>
                                     </table>
                                     </form>

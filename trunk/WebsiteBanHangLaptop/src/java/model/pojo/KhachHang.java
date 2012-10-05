@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 5, 2012 5:03:29 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -42,6 +42,7 @@ public class KhachHang  implements java.io.Serializable {
        this.khachHangTrucTuyens = khachHangTrucTuyens;
        this.datHangs = datHangs;
     }
+   
     public String getMaKhachHang() {
         return this.maKhachHang;
     }

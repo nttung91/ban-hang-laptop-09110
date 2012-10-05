@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 5, 2012 5:03:29 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -19,6 +19,9 @@ public class Laptop  implements java.io.Serializable {
      private Double canNang;
      private String manHinh;
      private String pin;
+     private String diaQuang;
+     private String cardKhongDay;
+     private String tinhNangKhac;
 
     public Laptop() {
     }
@@ -28,7 +31,7 @@ public class Laptop  implements java.io.Serializable {
         this.maSanPham = maSanPham;
         this.sanPham = sanPham;
     }
-    public Laptop(String maSanPham, SanPham sanPham, String chipCpu, String ram, String OCung, String cardDoHoa, String heDieuHanh, Double canNang, String manHinh, String pin) {
+    public Laptop(String maSanPham, SanPham sanPham, String chipCpu, String ram, String OCung, String cardDoHoa, String heDieuHanh, Double canNang, String manHinh, String pin, String diaQuang, String cardKhongDay, String tinhNangKhac) {
        this.maSanPham = maSanPham;
        this.sanPham = sanPham;
        this.chipCpu = chipCpu;
@@ -39,6 +42,9 @@ public class Laptop  implements java.io.Serializable {
        this.canNang = canNang;
        this.manHinh = manHinh;
        this.pin = pin;
+       this.diaQuang = diaQuang;
+       this.cardKhongDay = cardKhongDay;
+       this.tinhNangKhac = tinhNangKhac;
     }
    
     public String getMaSanPham() {
@@ -110,6 +116,27 @@ public class Laptop  implements java.io.Serializable {
     
     public void setPin(String pin) {
         this.pin = pin;
+    }
+    public String getDiaQuang() {
+        return this.diaQuang;
+    }
+    
+    public void setDiaQuang(String diaQuang) {
+        this.diaQuang = diaQuang;
+    }
+    public String getCardKhongDay() {
+        return this.cardKhongDay;
+    }
+    
+    public void setCardKhongDay(String cardKhongDay) {
+        this.cardKhongDay = cardKhongDay;
+    }
+    public String getTinhNangKhac() {
+        return this.tinhNangKhac;
+    }
+    
+    public void setTinhNangKhac(String tinhNangKhac) {
+        this.tinhNangKhac = tinhNangKhac;
     }
 
 

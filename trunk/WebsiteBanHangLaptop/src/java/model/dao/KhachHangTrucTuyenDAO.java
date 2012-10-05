@@ -46,6 +46,20 @@ public class KhachHangTrucTuyenDAO extends ObjectDAO<KhachHangTrucTuyen, String>
         session.close();
         return false;
     }
+    public  boolean isDangNhapThanhCong(String username,String password){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "select count(*) from KhachHangTrucTuyen kh where kh.username =:val1 and kh.matKhau=:val2";
+        Query query = session.createQuery(hql);
+        query.setParameter("val1", username);
+        query.setParameter("val2", password);
+        Object kq = query.uniqueResult();
+        if (Integer.parseInt(kq.toString())>0) {
+            session.close();
+            return true;
+        }
+        session.close();
+        return false;
+    }
     
     
 }

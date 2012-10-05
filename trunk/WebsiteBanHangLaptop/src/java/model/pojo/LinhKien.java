@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 5, 2012 5:03:29 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -11,13 +11,20 @@ public class LinhKien  implements java.io.Serializable {
 
      private String maSanPham;
      private SanPham sanPham;
+     private String moTa;
 
     public LinhKien() {
     }
 
+	
     public LinhKien(String maSanPham, SanPham sanPham) {
+        this.maSanPham = maSanPham;
+        this.sanPham = sanPham;
+    }
+    public LinhKien(String maSanPham, SanPham sanPham, String moTa) {
        this.maSanPham = maSanPham;
        this.sanPham = sanPham;
+       this.moTa = moTa;
     }
    
     public String getMaSanPham() {
@@ -33,6 +40,13 @@ public class LinhKien  implements java.io.Serializable {
     
     public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
+    }
+    public String getMoTa() {
+        return this.moTa;
+    }
+    
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 
 

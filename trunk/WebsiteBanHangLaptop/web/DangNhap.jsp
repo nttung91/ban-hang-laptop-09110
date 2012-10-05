@@ -20,13 +20,12 @@
 
         }
     }
-    if (request.getParameter("daDangNhap") != null) {
-        if (Boolean.parseBoolean(request.getParameter("daDangNhap").toString())) {
-
-        }
+    if (session.getAttribute("daDangNhap") != null) {
+        // out.println("<h1>fad</h1>");
     } else {
 
         session.setAttribute("daDangNhap", false);
+               }
 
         boolean flag = true;
     
@@ -55,13 +54,13 @@
                 //session.removeAttribute("listVal");
                 session.setAttribute("tenDangNhap", username);
                 session.setAttribute("daDangNhap", true);
-               
+              //  out.println("<h1>fad</h1>");
 
             }
 
         }
         
-    }
+
 
 
 %>
@@ -89,7 +88,6 @@
                 background-image:url(images/Banner.jpg);
                 background-repeat:no-repeat;
             }
-
             #banner_table_container{
                 position:absolute;
                 width:1000px;
@@ -366,9 +364,9 @@
                                 <td height="48" colspan="4" style="transition: all; -o-transition: all; -ms-transition: all; -moz-transition: all; -webkit-transition: all; margin-top: 10px; border: thin double #F00; background: #69F; padding-left: 10px; font-size: 24px; border-radius:10px;">Đăng Nhập</td>
                             </tr>
                             <tr>
-                                <td width="138" height="41" class="text_reg" style="padding-left: 10px;">Tên đăng nhập</td>
+                                <td width="153" height="41" class="text_reg" style="padding-left: 10px;">Tên đăng nhập</td>
                                 <td colspan="2"><input name="tenDangNhap" type="text" dir="ltr" size="40px" maxlength="20" /></td>
-                                <td width="14">&nbsp;</td>
+                                <td width="18">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td height="36" class="text_reg" style="padding-left: 10px;">Mật Khẩu</td>
@@ -378,12 +376,12 @@
                             <tr>
                                 <td height="39">&nbsp;</td>
                                 <td colspan="2"><input style="width:100px; height:30px;" name="btnDangNhap" type="submit" value="Đăng Nhập" />&nbsp;
-                                    <input style="width:100px; height:30px;" name="btnNhapLai" type="button" value="Nhập Lại"/></td>
+                                    <input style="width:100px; height:30px;" name="btnNhapLai" type="reset" value="Nhập Lại"/></td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td height="39" colspan="2" class="text_reg">Bạn chưa có tài khoản?</td>
-                                <td width="239" style="vertical-align: middle; text-align: center; background-position: center center; background-color: #99ff33; color: #F00; font-weight: bold; line-height: 18px; border-radius:10px;"><a href="DangKyThanhVien.jsp">Đăng ký ngay</a></td>
+                                <td width="245" id="dang_ky"><a href="DangKyThanhVien.jsp">Đăng ký ngay</a></td>
                                 <td>&nbsp;</td>
                             </tr>
                         </form>
