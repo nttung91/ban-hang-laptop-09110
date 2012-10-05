@@ -1,8 +1,7 @@
 package model.pojo;
-// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 5, 2012 5:03:29 PM by Hibernate Tools 3.2.1.GA
 
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,9 +13,8 @@ public class KhuyenMai  implements java.io.Serializable {
 
      private String maKhuyenMai;
      private String noiDungKhuyenMai;
-     private Date thoiGianBatDau;
-     private Date thoiGianKetThuc;
      private Integer tinhTrang;
+     private String ghiChu;
      private Set chiTietKhuyenMais = new HashSet(0);
 
     public KhuyenMai() {
@@ -26,12 +24,11 @@ public class KhuyenMai  implements java.io.Serializable {
     public KhuyenMai(String maKhuyenMai) {
         this.maKhuyenMai = maKhuyenMai;
     }
-    public KhuyenMai(String maKhuyenMai, String noiDungKhuyenMai, Date thoiGianBatDau, Date thoiGianKetThuc, Integer tinhTrang, Set chiTietKhuyenMais) {
+    public KhuyenMai(String maKhuyenMai, String noiDungKhuyenMai, Integer tinhTrang, String ghiChu, Set chiTietKhuyenMais) {
        this.maKhuyenMai = maKhuyenMai;
        this.noiDungKhuyenMai = noiDungKhuyenMai;
-       this.thoiGianBatDau = thoiGianBatDau;
-       this.thoiGianKetThuc = thoiGianKetThuc;
        this.tinhTrang = tinhTrang;
+       this.ghiChu = ghiChu;
        this.chiTietKhuyenMais = chiTietKhuyenMais;
     }
    
@@ -49,26 +46,19 @@ public class KhuyenMai  implements java.io.Serializable {
     public void setNoiDungKhuyenMai(String noiDungKhuyenMai) {
         this.noiDungKhuyenMai = noiDungKhuyenMai;
     }
-    public Date getThoiGianBatDau() {
-        return this.thoiGianBatDau;
-    }
-    
-    public void setThoiGianBatDau(Date thoiGianBatDau) {
-        this.thoiGianBatDau = thoiGianBatDau;
-    }
-    public Date getThoiGianKetThuc() {
-        return this.thoiGianKetThuc;
-    }
-    
-    public void setThoiGianKetThuc(Date thoiGianKetThuc) {
-        this.thoiGianKetThuc = thoiGianKetThuc;
-    }
     public Integer getTinhTrang() {
         return this.tinhTrang;
     }
     
     public void setTinhTrang(Integer tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+    public String getGhiChu() {
+        return this.ghiChu;
+    }
+    
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
     public Set getChiTietKhuyenMais() {
         return this.chiTietKhuyenMais;

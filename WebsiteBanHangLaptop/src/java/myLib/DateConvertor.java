@@ -53,6 +53,18 @@ public class DateConvertor {
         java.sql.Date sqlDate = new java.sql.Date(cal.getTime().getTime()); // your sql date
         return sqlDate;
     }
+    public static String formatUtilDate(java.util.Date d) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+             Date d1 = sdf.parse(d.toString());
+             SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+             return sdf1.format(d1);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateConvertor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+         
+    }
      public static java.sql.Date Util2SqlDateConvertor(String d) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
          java.util.Calendar cal = Calendar.getInstance();

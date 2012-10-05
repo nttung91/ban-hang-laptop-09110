@@ -7,6 +7,8 @@ package model.dao;
 import java.util.List;
 import model.dao.util.HibernateUtil;
 import model.pojo.SanPham;
+import model.pojo.ThongTinLaptop;
+import model.pojo.ThongTinLinhKien;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
@@ -36,5 +38,24 @@ public class SanPhamDAO extends ObjectDAO<SanPham, String> {
         session.close();
         
         return list;
+    }
+    //not using Lazy
+    public ThongTinLaptop getLaptopInfo(String masp){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql1 = "select new model.pojo.ThongTinLaptop( l.maSanPham,l.sanPham.hangSanXuat,l.sanPham.tinhTrangSanPham,l.sanPham.tenSanPham,l.sanPham.hinhAnh,l.sanPham.gia,l.sanPham.soLuongTon,l.sanPham.ngayCapNhat,l.chipCpu,l.ram,l.OCung,l.cardDoHoa,l.heDieuHanh,l.canNang,l.manHinh,l.pin) from  Laptop l where l.maSanPham = :masp";
+         String hql = "from  Laptop l where l.maSanPham = :masp";
+        Query query = session.createQuery(hql1);
+        query.setParameter("masp", masp);
+        ThongTinLaptop ds = (ThongTinLaptop)query.uniqueResult();
+        return ds;
+    }
+     public ThongTinLinhKien getEquipmentInfo(String masp){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql1 = "select new model.pojo.ThongTinLinhKien( l.maSanPham,l.sanPham.hangSanXuat,l.sanPham.tinhTrangSanPham,l.sanPham.tenSanPham,l.sanPham.hinhAnh,l.sanPham.gia,l.sanPham.soLuongTon,l.sanPham.ngayCapNhat,l.moTa) from  LinhKien l where l.maSanPham = :masp";
+         String hql = "from  LinhKien l where l.maSanPham = :masp";
+        Query query = session.createQuery(hql1);
+        query.setParameter("masp", masp);
+        ThongTinLinhKien ds = (ThongTinLinhKien)query.uniqueResult();
+        return ds;
     }
 }

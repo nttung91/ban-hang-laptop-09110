@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Oct 2, 2012 7:10:27 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 5, 2012 5:03:29 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,6 +20,7 @@ public class SanPham  implements java.io.Serializable {
      private Double gia;
      private Integer soLuongTon;
      private Date ngayCapNhat;
+     private Integer thoiGianBaoHanh;
      private Set chiTietDonHangs = new HashSet(0);
      private Set chiTietKhuyenMais = new HashSet(0);
      private Set linhKiens = new HashSet(0);
@@ -32,7 +33,7 @@ public class SanPham  implements java.io.Serializable {
     public SanPham(String maSanPham) {
         this.maSanPham = maSanPham;
     }
-    public SanPham(String maSanPham, HangSanXuat hangSanXuat, TinhTrangSanPham tinhTrangSanPham, String tenSanPham, String hinhAnh, Double gia, Integer soLuongTon, Date ngayCapNhat, Set chiTietDonHangs, Set chiTietKhuyenMais, Set linhKiens, Set laptops) {
+    public SanPham(String maSanPham, HangSanXuat hangSanXuat, TinhTrangSanPham tinhTrangSanPham, String tenSanPham, String hinhAnh, Double gia, Integer soLuongTon, Date ngayCapNhat, Integer thoiGianBaoHanh, Set chiTietDonHangs, Set chiTietKhuyenMais, Set linhKiens, Set laptops) {
        this.maSanPham = maSanPham;
        this.hangSanXuat = hangSanXuat;
        this.tinhTrangSanPham = tinhTrangSanPham;
@@ -41,6 +42,7 @@ public class SanPham  implements java.io.Serializable {
        this.gia = gia;
        this.soLuongTon = soLuongTon;
        this.ngayCapNhat = ngayCapNhat;
+       this.thoiGianBaoHanh = thoiGianBaoHanh;
        this.chiTietDonHangs = chiTietDonHangs;
        this.chiTietKhuyenMais = chiTietKhuyenMais;
        this.linhKiens = linhKiens;
@@ -102,6 +104,13 @@ public class SanPham  implements java.io.Serializable {
     
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
+    }
+    public Integer getThoiGianBaoHanh() {
+        return this.thoiGianBaoHanh;
+    }
+    
+    public void setThoiGianBaoHanh(Integer thoiGianBaoHanh) {
+        this.thoiGianBaoHanh = thoiGianBaoHanh;
     }
     public Set getChiTietDonHangs() {
         return this.chiTietDonHangs;

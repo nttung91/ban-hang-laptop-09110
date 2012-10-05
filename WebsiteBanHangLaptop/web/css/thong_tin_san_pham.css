@@ -11,23 +11,54 @@
 	border-bottom-width: thin;
 	border-bottom-style: solid;
 	border-bottom-color: #999;
+	height:30px;
 }
 .gia_san_pham {
 	font-size: 24px;
 	color: #F00;
 	padding-left: 5px;
+	font-weight: bold;
 }
 .text_header {
+	height:20px;
+	width:800px;
 	font-size: 20px;
-	color: #FFF;
-	border: 2px solid #90F;
-	background-color: #009;
+	color:#000;
+	background-color: 	#00FF00;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 10px;
+	border-radius:20px 20px 0px 0px;
+	border-top-width: 10px;
+	border-top-style: solid;
+	border-top-color: #00F;
 }
 #hinh_anh_sp_chi_tiet {
+	width:55%;
 	font-size: 36px;
 	text-align: center;
 	vertical-align: middle;
 }
+.showed{
+	display:block;
+	}
+.hidden{
+	display:none;
+	}
+.khuyen_mai {
+	font-size: 16px;
+	font-style: italic;
+	line-height: normal;
+	font-weight: bold;
+	color: #F00;
+	
+	
+	}
+.container {
+	float:left;
+	width:100%;
+	}
+.chi_tiet_phu_kien {
+	color:#009;
+	font-size:medium;
+	}
