@@ -2,17 +2,17 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="BanLaptopDatabase" match-schema="public"/>
-  <table-filter match-name="san_pham"/>
   <table-filter match-name="khuyen_mai"/>
-  <table-filter match-name="dat_hang"/>
-  <table-filter match-name="chi_tiet_don_hang"/>
-  <table-filter match-name="tinh_trang_san_pham"/>
-  <table-filter match-name="tinh_trang_don_dat_hang"/>
   <table-filter match-name="khach_hang_truc_tuyen"/>
-  <table-filter match-name="nhan_vien"/>
-  <table-filter match-name="linh_kien"/>
-  <table-filter match-name="hang_san_xuat"/>
-  <table-filter match-name="laptop"/>
+  <table-filter match-name="dat_hang"/>
+  <table-filter match-name="san_pham"/>
   <table-filter match-name="khach_hang"/>
   <table-filter match-name="chi_tiet_khuyen_mai"/>
+  <table-filter match-name="chi_tiet_don_hang"/>
+  <table-filter match-name="nhan_vien"/>
+  <table-filter match-name="hang_san_xuat"/>
+  <table-filter match-name="linh_kien"/>
+  <table-filter match-name="laptop"/>
+  <table-filter match-name="tinh_trang_san_pham"/>
+  <table-filter match-name="tinh_trang_don_dat_hang"/>
 </hibernate-reverse-engineering>

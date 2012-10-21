@@ -80,8 +80,25 @@
         <title><%=maSanPham%></title>
         <link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
         <link href="css/thong_tin_san_pham.css" rel="stylesheet" type="text/css" />
+        <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
         <script language="javascript" type="text/javascript">
-            function showAvancedSearchMenu()
+			$(function() {
+            var offset = $("#giohang").offset();
+         	var button = $("#btn_tim_kiem").position();
+			  $("#giohang").css("top",button.top);
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > button.top) {
+                    $("#giohang").stop().animate({
+                        top: 10
+                    });
+                } else {
+                    $("#giohang").stop().animate({
+                        top: button.top-$(window).scrollTop()
+                    });
+                };
+            });
+        });
+			function showAvancedSearchMenu()
             {
                 var table = document.getElementById("tim_kiem_nang_cao");
                 if (table.style.display == "none"){
@@ -217,12 +234,15 @@
         </style></head>
 
     <body topmargin="-10px">
-        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+    <div id="giohang">
+    <p id="abc">sfad</p>
+    </div>
+        <table align="center" width="1000" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td height="50" colspan="3" id="banner_container"><table width="1000px" height="197" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td width="200" height="56">&nbsp;</td>
-                            <td width="482">&nbsp;</td>
+                            <td width="482"></td>
                             <td colspan="3"><table width="100%" height="30px">
                                     <tr>
                                         <td style="border-top-style: none; border-top-width: medium; border-top-color: #333; border-right-style:solid; border-right-width:medium; border-bottom-color:#000; padding-right:5px" align="right">
@@ -427,7 +447,7 @@
                         <tr>
                             <td height="24">&nbsp;</td>
                             <td height="24">&nbsp;</td>
-                            <td height="24">Thông tin thêm</td>
+                            <td height="24">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Thông tin thêm</td>
                             <td height="24">&nbsp;</td>
                             <td height="24">&nbsp;</td>
                         </tr>

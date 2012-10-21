@@ -62,3 +62,13 @@
 	color:#009;
 	font-size:medium;
 	}
+#giohang{
+	position:fixed;
+	top:50px;
+	left:1200px;
+	height:300px;
+	width:100px;
+	background:#00C;
+	animation-delay:1000;
+	
+	}

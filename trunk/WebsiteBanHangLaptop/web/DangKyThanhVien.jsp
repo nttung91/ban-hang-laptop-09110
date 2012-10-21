@@ -14,6 +14,8 @@
     String[] info = null;
     String[] listVal;
     String kq = "";
+    boolean isMore = true;
+    String captchaInput, createdCaptcha;
 
     private String checkData(HttpServletRequest request, HttpSession session) {
         boolean oke = true;
@@ -45,43 +47,47 @@
         } else {
             oke = false;
         }
-        if (request.getParameter("tenKhachHang") != null) {
-            hoTen = request.getParameter("tenKhachHang");
-            listVal[2] = hoTen;
-        } else {
-            oke = false;
-        }
-
-        if (request.getParameter("gioiTinh") != null) {
-            gioiTinh = request.getParameter("gioiTinh");
-            listVal[3] = gioiTinh;
-        } else {
-            oke = false;
-        }
-        if (request.getParameter("dienThoai") != null) {
-            dienThoai = request.getParameter("dienThoai");
-            listVal[7] = dienThoai;
-        } else {
-            oke = false;
-        }
-        if (request.getParameter("thanhPho") != null) {
-            thanhPho = request.getParameter("thanhPho");
-            listVal[8] = thanhPho;
-        } else {
-            oke = false;
-        }
-        if (request.getParameter("diaChi") != null) {
-            diaChi = request.getParameter("diaChi");
-            listVal[9] = thanhPho;
-        } else {
-            oke = false;
-        }
 
 
+        if (isMore) {
+            if (request.getParameter("tenKhachHang") != null) {
+                hoTen = request.getParameter("tenKhachHang");
+                listVal[2] = hoTen;
+            } else {
+                oke = false;
+            }
 
-        listVal[4] = request.getParameter("ngay");
-        listVal[5] = request.getParameter("thang");
-        listVal[6] = request.getParameter("nam");
+            if (request.getParameter("gioiTinh") != null) {
+                gioiTinh = request.getParameter("gioiTinh");
+                listVal[3] = gioiTinh;
+            } else {
+                oke = false;
+            }
+            if (request.getParameter("dienThoai") != null) {
+                dienThoai = request.getParameter("dienThoai");
+                listVal[7] = dienThoai;
+            } else {
+                oke = false;
+            }
+            if (request.getParameter("thanhPho") != null) {
+                thanhPho = request.getParameter("thanhPho");
+                listVal[8] = thanhPho;
+            } else {
+                oke = false;
+            }
+            if (request.getParameter("diaChi") != null) {
+                diaChi = request.getParameter("diaChi");
+                listVal[9] = thanhPho;
+            } else {
+                oke = false;
+            }
+
+
+
+            listVal[4] = request.getParameter("ngay");
+            listVal[5] = request.getParameter("thang");
+            listVal[6] = request.getParameter("nam");
+        }
         session.setAttribute("listVal", listVal);
         info = listVal;
         if (!oke) {
@@ -98,11 +104,27 @@
                 f = false;
             }
             if (!myLib.RegexChecking.CheckEmail(email)) {
-                kq += "Email không đúng !";
+                kq += "Email không đúng !</br>";
                 f = false;
             }
-            if (!myLib.RegexChecking.CheckDienThoai(dienThoai)) {
+            if (!myLib.RegexChecking.CheckDienThoai(dienThoai) && isMore) {
                 kq += "Số Điện Thoại không đúng !";
+                f = false;
+            }
+            if (request.getParameter("inputCaptcha") != null) {
+                captchaInput = request.getParameter("inputCaptcha");
+                createdCaptcha = request.getParameter("createdCaptcha");
+                if (createdCaptcha != null) {
+
+                    createdCaptcha = createdCaptcha.replaceAll(" ", "");
+                    if (captchaInput.equals(createdCaptcha)) {
+                    } else {
+                        kq += "Ma xac nhan khong chinh xac !";
+                        f = false;
+                    }
+                }
+            } else {
+                kq += "Ban chua nhap ma xac nhan!";
                 f = false;
             }
             if (f) {
@@ -123,31 +145,41 @@
                 if (f1) {
                     //luu vao csdl
                     KhachHangDAO khachHangDao = new KhachHangDAO();
+                    KhachHangTrucTuyenDAO khachhangttDao = new KhachHangTrucTuyenDAO();
                     KhachHangTrucTuyen khtt = new KhachHangTrucTuyen();
                     khtt.setUsername(tenDanhNhap);
                     khtt.setMatKhau(myLib.MD5Convertor.Convert2MD5(matKhau));
                     //khtt.setHoTen(hoTen);
                     khtt.setEmail(email);
-                    KhachHang kh = new KhachHang();
-                    String maKhachHang = khachHangDao.generateKeyCode("KhachHang", "maKhachHang", "KH");
-                    kh.setMaKhachHang(maKhachHang);
-                    kh.setTenKhachHang(hoTen);
-                    kh.setDienThoai(dienThoai);
-                    kh.setDiaChi(diaChi);
-                    kh.setThanhPho(thanhPho);
-                    Date ns = new Date(Integer.parseInt(listVal[6]), Integer.parseInt(listVal[5]), Integer.parseInt(listVal[4]));
-                    kh.setNgaySinh(ns);
-                    kh.setGioiTinh(Integer.parseInt(gioiTinh));
-                    Set<KhachHangTrucTuyen> dskhtt = new HashSet<KhachHangTrucTuyen>();
-                    dskhtt.add(khtt);
-                    kh.setKhachHangTrucTuyens(dskhtt);
+                    if (!isMore) {
+                        try {
+                            khachhangttDao.saveOrUpdateObject(khtt);
+                        } catch (HibernateException ex) {
+                            kq += "Dang ky that bai</br>";
+                            kq += ex.toString();
+                        }
+                    } else {
 
-                    //kh.setNgaySinh();
-                    try {
-                        khachHangDao.saveOrUpdateObject(kh);
-                    } catch (HibernateException ex) {
-                        kq += "Dang ky that bai</br>";
-                        kq += ex.toString();
+
+                        KhachHang kh = new KhachHang();
+                        String maKhachHang = khachHangDao.generateKeyCode("KhachHang", "maKhachHang", "KH");
+                        kh.setMaKhachHang(maKhachHang);
+                        kh.setTenKhachHang(hoTen);
+                        kh.setDienThoai(dienThoai);
+                        kh.setDiaChi(diaChi);
+                        kh.setThanhPho(thanhPho);
+                        Date ns = new Date(Integer.parseInt(listVal[6]), Integer.parseInt(listVal[5]), Integer.parseInt(listVal[4]));
+                        kh.setNgaySinh(ns);
+                        kh.setGioiTinh(Integer.parseInt(gioiTinh));
+                        khtt.setKhachHang(kh);
+
+                        //kh.setNgaySinh();
+                        try {
+                            khachhangttDao.saveOrUpdateObject(khtt);
+                        } catch (HibernateException ex) {
+                            kq += "Dang ky that bai</br>";
+                            kq += ex.toString();
+                        }
                     }
                 }
             }
@@ -163,13 +195,11 @@
             session.setAttribute("daDangNhap", false);
         }
     }
-     if (session.getAttribute("daDangNhap") != null) {
- 
+    if (session.getAttribute("daDangNhap") != null) {
+    } else {
+        //chua dang nhap
+        session.setAttribute("daDangNhap", false);
     }
-       else {
-       //chua dang nhap
-        session.setAttribute("daDangNhap",false);
-       }
     kq = "";
     if (checkData(request, session).equals("")) {
         //dang ky thanh cong
@@ -178,10 +208,17 @@
         info = null;
         session.setAttribute("tenDangNhap", tenDanhNhap);
         session.setAttribute("daDangNhap", true);
-        response.sendRedirect("DanhSachSanPham.jsp");
+        response.sendRedirect("DangNhap.jsp");
     }
     if (info == null) {
         info = new String[10];
+    }
+    if (request.getParameter("isMore") != null) {
+        if (request.getParameter("isMore").equals("noMore")) {
+            isMore = false;
+        }
+        //isMore = Boolean.parseBoolean(request.getParameter("isMore"));
+        out.println("<h2>" + request.getParameter("isMore") + "</h2>");
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -190,29 +227,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Untitled Document</title>
         <link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
+        <script src="js/dangky.js" type="text/javascript"></script>
         <script language="javascript" type="text/javascript">
-            function setCheckedValue(radioObj, newValue) {
-                if(!radioObj)
-                    return;
-                var radioLength = radioObj.length;
-                if(radioLength == undefined) {
-                    radioObj.checked = (radioObj.value == newValue.toString());
-                    return;
+              
+            function optionCustomerInfo(){
+                var option = document.getElementById('khachhang_info');
+                var btn= document.getElementById('More');
+                var btn_more = document.getElementById('btn_More');
+                if (option.style.display == "none"){
+                    option.style.display = "block";
+                    btn.value = "More";
+                    btn_more.value = "Nhap sau";	 
+                } 
+                else {
+                    option.style.display = "none";
+                    btn.value = "noMore";
+                    btn_more.value = "Nhap thong tin";
                 }
-                for(var i = 0; i < radioLength; i++) {
-                    radioObj[i].checked = false;
-                    if(radioObj[i].value == newValue.toString()) {
-                        radioObj[i].checked = true;
-                    }
-                }
-            }   ;
-            function setSelectedOption(obj,newValue) {
-                 
-                if (!obj) return;
-                ele.setAttribute(name, value) = newValue;
+                //alert(check.value);
+  
+                      
             }
             window.onload = function()
             {
+                DrawCaptcha();
                 var i=0;
                 for (i = 1;i <=31;i++)
                 {
@@ -220,7 +258,7 @@
                     elOptNew.text = i ;
                     elOptNew.value = i;
                     elOptNew.id = "ngay"+i;
-                    
+                      
                     var elSel = document.getElementById('ngay');
                     try {
                         elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
@@ -235,7 +273,7 @@
                         out.print("1");
                     }%>);
                             elSel.selected = true;
-                
+                  
                             for (i = 1;i <=12;i++)
                             {
                                 var elOptNew = document.createElement('option');
@@ -270,156 +308,24 @@
                                             catch(ex) {
                                                 elSel.add(elOptNew); // IE only
                                             }
-                   
+                     
                                         }
                                         var currentyear = document.getElementById("year"+<%if (info[6] != null) {
-                                    out.print(info[6]);
-                                } else {
-                                    out.print("(i-10)");
-                                }%>);
-                                        currentyear.selected = true;
-                                        //set value get from session
-                                        // setListValue();	
-                
-                
-        
-                                    }
-           
-                                    function showAvancedSearchMenu()
-                                    {
-                                        var table = document.getElementById("tim_kiem_nang_cao");
-                                        if (table.style.display == "none"){
-                                            table.style.display = "block";
-                                        }
-                                        else {table.style.display = "none";}
-                                    }
+                                                out.print(info[6]);
+                                            } else {
+                                                out.print("(i-10)");
+                                            }%>);
+                                                    currentyear.selected = true;
+                                                    //set value get from session
+                                                    // setListValue();	
+                  
+                  
+          
+                                                }
+             
+                                              
         </script>
-        <style type="text/css">
-            #banner_container {
-                position: relative;
-                width:1000px;
-                height:200px;
-                background-image:url(images/Banner.jpg);
-                background-repeat:no-repeat;
-            }
-
-            #banner_table_container{
-                position:absolute;
-                width:1000px;
-                height:200px;
-            }
-            #timkiem_bg {
-                background-image: url(images/timkiem_bg.jpg);
-                background-repeat:no-repeat;
-                background-position: center center;
-                vertical-align:middle;
-
-            }
-
-            #btn_tim_kiem{
-                width:100px;
-                height:35px;
-                background-image:url(images/TimKiem.png);
-                background-repeat:no-repeat;
-
-            }
-            #Cart {
-                background-image: url(images/CartMenu.png);
-                height: 50px;
-                width: 150px;
-                background-repeat:no-repeat;
-            }
-            #menu_container {
-                padding-top:10px;
-                padding-bottom:10px;
-            }
-            #menu, #menu ul {
-                list-style:none;
-                padding:0;
-                margin:0;
-            }
-
-            #menu li {
-                float:left;
-                position:relative;
-                line-height: 3.2em;
-                width: 250px;
-                text-align:center;
-                background-size:100% 100%;
-                -moz-background-size: 100% 100%;
-            }
-            #menu li ul {
-                position:absolute;
-                margin-top:0;
-                margin-left:0;
-                display:none;
-            }
-            #menu ul li ul {
-                margin-top:-3.2em;
-                margin-left:250px;
-            }
-
-            #menu a {
-                display:block;
-                border-right:1px solid #fff;
-
-                color:#3B3B3B;
-                text-decoration:none;
-                padding:0 10px;
-            }
-            #menu a:hover {
-
-                color:#fff;
-            }
-            #menu ul {
-                border-top:1px solid #fff;
-            }
-            #menu ul a {
-                border-right:none;
-                border-right:1px solid #fff;
-                border-bottom:1px solid #fff;
-                border-left:1px solid #fff;
-                background-color:#9999FF;
-
-
-            }
-            /* SHOW SUBMENU 1 */
-            #menu li:hover ul, #menu li.over ul {
-                display:block;
-            }
-            #menu li:hover ul ul, #menu li.over ul ul {
-                display:none;
-            }
-            /* SHOW SUBMENU 2 */
-            #menu ul li:hover ul, #menu ul li.over ul {
-                display:block;
-            }
-
-            .menu_first {
-                background-image:url(images/Menu_Item_First.jpg);
-                background-repeat:no-repeat;
-            }
-            .menu_mid {
-                background-image:url(images/Menu_Item_Mid.jpg);
-                background-repeat:no-repeat;
-
-            }
-            .menu_last {
-                background-image:url(images/Menu_Item_Last.jpg);
-                background-repeat:no-repeat;
-
-            }
-            #tim_kiem_nang_cao {
-                display:none;
-            }
-            .menu_login:hover{
-                color:#000;
-                text-decoration:none;
-            }
-            .menu_login {
-                font-weight: bold; font-style: oblique; font-family: 'MS Serif', 'New York', serif; font-size:18px; color:#00F;
-            }
-        </style></head>
+    </head>
 
     <body topmargin="-10px">
         <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
@@ -457,11 +363,11 @@
                                                 }
 
                                                %>" class="menu_login"><%
-    if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-        out.println("Thoat");
-    } else {
-        out.println("Dang Ky");
-    }
+                                                   if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
+                                                       out.println("Thoat");
+                                                   } else {
+                                                       out.println("Dang Ky");
+                                                   }
                                                 %>                  </a></td>
                                     </tr>
                                 </table></td>
@@ -572,125 +478,135 @@
             <tr>
                 <td colspan="2">
                     <!-- Main content -->
-                    <form method="post" action="">
+                    <form method="get" action="">
                         <% if (session.getAttribute("listVal") != null) {
                                 info = (String[]) session.getAttribute("listVal");
                             }%>
-                        <table width="745" border="0" style="margin-top:10px" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td height="48" colspan="6" style="transition: all; -o-transition: all; -ms-transition: all; -moz-transition: all; -webkit-transition: all; margin-top: 10px; border: thin double #F00; background: #69F; padding-left: 10px; font-size: 24px;">Đăng ký thành viên</td>
-                                <td width="214">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td colspan="7"><p id="errorList"><%=kq%></p></td>
-                            </tr>
-                            <tr>
-                                <td width="4" height="38">&nbsp;</td>
-                                <td colspan="6" class="login_header_td">Thông tin đăng nhập</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td width="178" class="text_reg">Tên Đăng nhập(<span style="color:#F00">*</span>)</td>
-                                <td colspan="2" class="text_input"><input class="text_input" id="tenDangNhap" name="tenDangNhap" type="text" size="30" maxlength="50" value="<% if (info[0] != null) {
-                                        out.println(info[0]);
-                                    }%>"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td class="text_reg">Mật Khẩu(<span style="color:#F00">*</span>)</td>
-                                <td colspan="4"><input class="text_input" name="matKhau" type="password" size="30" maxlength="50" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td class="text_reg">Nhập lại mật khẩu(<span style="color:#F00">*</span>)</td>
-                                <td colspan="4"><input class="text_input" name="nhapLaiMatKhau" type="password" size="30" maxlength="50" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td class="text_reg">Địa chỉ email(<span style="color:#F00">*</span>)</td>
-                                <td colspan="4"><input class="text_input" id="email" name="email" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
-                                        out.println(info[1]);
-                                    }%>"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td class="text_reg">Nhập Lại Địa chỉ email(<span style="color:#F00">*</span>)</td>
-                                <td colspan="4"><input class="text_input" name="nhapLaiEmail" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
-                                        out.println(info[1]);
-                                    }%>"/></td>
-                            </tr>
-                            <tr>
-                                <td width="4" height="38">&nbsp;</td>
-                                <td colspan="6" class="login_header_td">Thông tin khách hàng</td>
-                            </tr>
-                            <tr>
-                                <td height="27" colspan="2">&nbsp;</td>
-                                <td class="text_reg">Họ và Tên(<span style="color:#F00">*</span>)</td>
-                                <td colspan="4"><input class="text_input" id="tenKhachHang" name="tenKhachHang" type="text" size="30" maxlength="50" value="<% if (info[2] != null) {
-                                        out.println(info[2]);
-                                    }%>"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td class="text_reg">Giới Tính(<span style="color:#F00">*</span>)</td>
+                        <div id="dangky_info" >
+                            <table width="100%" style="margin-top:10px">
+                                <tr>
+                                    <td colspan="2" class="login_header_td">Thông tin đăng nhập</td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">&nbsp;</td>
+                                    <td class="text_input"><p id="errorList"><%=kq%></p></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Tên Đăng nhập(<span style="color:#F00">*</span>)</td>
+                                                                  <td class="text_input"><input class="text_input" id="tenDangNhap" name="tenDangNhap" type="text" size="30"  maxlength="50" value="<% if (info[0] != null) {
+                                                                          out.println(info[0]);
+                                                                      }%>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Mật Khẩu(<span style="color:#F00">*</span>)</td>
+                                    <td  ><input class="text_input" name="matKhau" type="password" size="30" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Nhập lại mật khẩu(<span style="color:#F00">*</span>)</td>
+                                    <td  ><input class="text_input" name="nhapLaiMatKhau" type="password" size="30" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Địa chỉ email(<span style="color:#F00">*</span>)</td>
+                                                 <td  ><input class="text_input" id="email" name="email" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
+                                                         out.println(info[1]);
+                                                     }%>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Nhập Lại Địa chỉ email(<span style="color:#F00">*</span>)</td>
+                                                 <td  ><input class="text_input" name="nhapLaiEmail" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
+                                                         out.println(info[1]);
+                                                     }%>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Nhập thông tin cá nhân</td>
+                                    <td  ><input type="button" value="Nhap sau" id="btn_More" onclick="optionCustomerInfo()" />
+                                        <input type="hidden" name="isMore" id="More" value="More" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="khachhang_info" style="display:<% if (isMore) {
+                                out.println("block");
+                            } else {
+                                out.println("none");
+                            }%>;">
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2" class="login_header_td">Thông tin khách hàng</td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Họ và Tên(<span style="color:#F00">*</span>)</td>
+                                    <td  ><input class="text_input" id="tenKhachHang" name="tenKhachHang" type="text" size="30" maxlength="50" value="<% if (info[2] != null) {
+                                            out.println(info[2]);
+                                        }%>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Giới Tính(<span style="color:#F00">*</span>)</td>
+                                               <td><input name="gioiTinh" id="gioiTinh" type="radio" value="0" <% if (info[3] != null && info[3].equals("0")) {
+                                                       out.print("checked");
+                                                   }%>/>
+                                        Nam
+                                               <input name="gioiTinh" type="radio" value="1" <% if (info[3] != null && info[3].equals("1")) {
+                                                       out.print("checked");
+                                                   }%>/>
+                                        Nữ</td>
+                                </tr>
+                                <tr >
+                                    <td class="text_reg">Ngày Sinh(<span style="color:#F00">*</span>)</td>
+                                    <td style=" float:left;vertical-align:middle;" >Ngay
+                                        <select id="ngay" name="ngay">
+                                        </select>
+                                        Thang
+                                        <select id="thang" name="thang">
+                                        </select>
+                                        Nam
+                                        <select id="nam" name="nam">
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Điện Thoại(<span style="color:#F00">*</span>)</td>
+                                                 <td  ><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="<% if (info[7] != null) {
+                                                         out.println(info[7]);
+                                                     }%>" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Địa Chỉ(<span style="color:#F00">*</span>)</td>
+                                                 <td  ><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
+                                                         out.println(info[9]);
+                                                     }%>" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="text_reg">Thành Phố(<span style="color:#F00">*</span>)</td>
+                                                 <td  ><input class="text_input" id="thanhPho" name="thanhPho" type="text" size="30" maxlength="50" value="<% if (info[8] != null) {
+                                                         out.println(info[8]);
+                                                     }%>" /></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                                <td colspan="4"><input name="gioiTinh" id="gioiTinh" type="radio" value="0" <% if (info[3] != null && info[3].equals("0")) {
-                                        out.print("checked");
-                                    }%>/>
-                                    Nam
-                                    <input name="gioiTinh" type="radio" value="1" <% if (info[3] != null && info[3].equals("1")) {
-                                            out.print("checked");
-                                        }%>/>
-                                    Nữ</td>
-                            </tr>
-                            <tr >
-                                <td height="39" colspan="2">&nbsp;</td>
-                                <td class="text_reg">Ngày Sinh(<span style="color:#F00">*</span>)</td>
-                                <td width="346" style=" float:left;vertical-align:middle;" >Ngay
-                                    <select id="ngay" name="ngay">
-                                    </select> Thang <select id="thang" name="thang">
 
-                                    </select> Nam <select id="nam" name="nam">
-                                    </select>
 
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td class="text_reg">Điện Thoại(<span style="color:#F00">*</span>)</td>
-                                        <td colspan="4"><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="<% if (info[7] != null) {
-                                                out.println(info[7]);
-                                            }%>" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td class="text_reg">Địa Chỉ(<span style="color:#F00">*</span>)</td>
-                                                               <td colspan="4"><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
-                                              out.println(info[9]);
-                                          }%>" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td class="text_reg">Thành Phố(<span style="color:#F00">*</span>)</td>
-                                        <td colspan="4"><input class="text_input" id="thanhPho" name="thanhPho" type="text" size="30" maxlength="50" value="<% if (info[8] != null) {
-                                                out.println(info[8]);
-                                            }%>" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td height="44" colspan="2">&nbsp;</td>
-                                        <td class="text_reg">&nbsp;</td>
-                                        <td colspan="4"><input name="dangKy" type="submit" value="Đăng Ký"  />&nbsp;<input name="nhapLai" type="reset" value="Nhập Lại" /></td>
-                                    </tr>
-                                    </table>
-                                    </form>
+                        <div style="padding-left:210px;">
+                            <input type="text" id="txtInput" name="inputCaptcha" width="10"/>
+                            <input type="text" id="txtCaptcha" name="createdCaptcha"
+                                   style="background-image:url(images/1.JPG); text-align:center; border:none;
+                                   font-weight:bold; font-family:Modern; font-size:18px;"/>
+                            <input type="button" id="btnrefresh" value="Refresh" onclick="DrawCaptcha();" />
+                        </div>
 
-                                    <p>&nbsp;</p>
-                                    <p>&nbsp; </p>
-                                </td>
-                                <td width="4">&nbsp;</td>
-                            </tr>
-                            <!-- End of Main content -->
-                            <tr>
-                                <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
-                            </tr>
-                        </table>
-                        </body>
-                        </html>
+                        <div id="control">
+                            <input name="dangKy" type="submit" value="Đăng Ký"/>&nbsp;<a href="DangKyThanhVien.jsp"><input name="nhapLai" type="button" value="Nhập Lại"/></a>
+                        </div>
+                    </form>
+                    <p>&nbsp;</p>
+                    <p>&nbsp; </p>
+                </td>
+                <td width="4">&nbsp;</td>
+            </tr>
+            <!-- End of Main content -->
+            <tr>
+                <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
+            </tr>
+        </table>
+    </body>
+</html>
