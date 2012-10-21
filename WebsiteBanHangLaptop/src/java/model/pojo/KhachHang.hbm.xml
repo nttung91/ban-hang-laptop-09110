@@ -33,7 +33,7 @@
             <key>
                 <column name="khach_hang" length="10" unique="true" />
             </key>
-            <one-to-many class="model.pojo.KhachHangTrucTuyen" />
+            <one-to-many class="model.pojo.KhachHangTrucTuyen"/>
         </set>
         <set name="datHangs" inverse="true">
             <key>

@@ -1,0 +1,45 @@
+@charset "utf-8";
+#gio_hang {
+	margin-top:20px;
+	
+}
+.hinh_anh_san_pham
+{
+height:100px;
+width:120px;
+text-align:center;
+vertical-align:middle;
+}
+.ten_san_pham {
+text-align:center;
+text-transform:uppercase;
+
+}
+.gia_san_pham {
+text-align:center;
+}
+.so_luong{
+text-align:center;
+}
+.thanh_tien{
+text-align:center;
+}
+.xoa_san_pham{
+text-align:center;
+	}
+.gio_hang_header{
+	font-size: 16px;
+	background-color: #999;
+	color: #000;
+	text-transform: uppercase;
+	font-weight: bold;
+	
+}
+.button_control{
+	height:40px;
+	text-transform:uppercase;
+	font-weight:bold;
+	margin-top:20px;
+	margin-left:5px;
+	margin-right:5px;
+}
