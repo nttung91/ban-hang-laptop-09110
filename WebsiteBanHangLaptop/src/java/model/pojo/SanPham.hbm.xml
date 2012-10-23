@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 5, 2012 5:03:30 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="model.pojo.SanPham" table="san_pham" schema="public">
         <id name="maSanPham" type="string">
             <column name="ma_san_pham" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="hangSanXuat" class="model.pojo.HangSanXuat" fetch="select" lazy="false">
+        <many-to-one name="hangSanXuat" class="model.pojo.HangSanXuat" fetch="select">
             <column name="ma_hang" length="10" />
         </many-to-one>
         <many-to-one name="tinhTrangSanPham" class="model.pojo.TinhTrangSanPham" fetch="select">
@@ -40,19 +40,19 @@
             </key>
             <one-to-many class="model.pojo.ChiTietDonHang" />
         </set>
-        <set name="chiTietKhuyenMais" inverse="true" lazy="false">
+        <set name="chiTietKhuyenMais" inverse="true">
             <key>
                 <column name="ma_san_pham" length="10" not-null="true" />
             </key>
-            <one-to-many class="model.pojo.ChiTietKhuyenMai"/>
+            <one-to-many class="model.pojo.ChiTietKhuyenMai" />
         </set>
-        <set name="linhKiens" inverse="true">
+        <set name="linhKiens" inverse="true" lazy="false">
             <key>
                 <column name="ma_san_pham" length="10" not-null="true" unique="true" />
             </key>
             <one-to-many class="model.pojo.LinhKien" />
         </set>
-        <set name="laptops" inverse="true">
+        <set name="laptops" inverse="true" lazy="false">
             <key>
                 <column name="ma_san_pham" length="10" not-null="true" unique="true" />
             </key>

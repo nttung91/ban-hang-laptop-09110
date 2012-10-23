@@ -4,6 +4,7 @@
     Author     : THANHTUNG
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.Set"%>
@@ -19,6 +20,7 @@
     SanPham sp;
     Laptop lt = new Laptop();
     LinhKien lk = new LinhKien();
+    ArrayList<SanPham> gioHang;
 %>
 <%    //kiem tra dieu kien
 
@@ -71,7 +73,13 @@
             sp = lk.getSanPham();
         }
     }
-
+    //kiem tra gio hang va lay san tu gio hang
+    if (session.getAttribute("gioHang")!=null){
+        gioHang = (ArrayList<SanPham>)session.getAttribute("gioHang");
+    }
+       else {
+        gioHang = new ArrayList<SanPham>();
+       }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -98,6 +106,8 @@
                 };
             });
         });
+		
+		
 			function showAvancedSearchMenu()
             {
                 var table = document.getElementById("tim_kiem_nang_cao");
@@ -234,9 +244,23 @@
         </style></head>
 
     <body topmargin="-10px">
+   <!--pop up gio hang-->
     <div id="giohang">
-    <p id="abc">sfad</p>
+    <div id="title">Ban co <%=gioHang.size()%> </br>san pham</br>trong gio</div>
+    
+    <div id="chitietgiohang">
+        <%
+for (int i = 0;i<gioHang.size();i++)
+{       %>     
+<a href="ChiTietSanPham.jsp?loaiSanPham=Laptop&maSanPham=<%=gioHang.get(i).getMaSanPham()%>"><li><%=gioHang.get(i).getTenSanPham()%></li></a>
+          <%      }  
+    %>
+                </div>
+    <div>
+        <a href="GioHang.jsp"><input type="button" value="Xem chi tiet" /></a>
     </div>
+    </div>
+   <!--pop up gio hang-->
         <table align="center" width="1000" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td height="50" colspan="3" id="banner_container"><table width="1000px" height="197" border="0" cellspacing="0" cellpadding="0">

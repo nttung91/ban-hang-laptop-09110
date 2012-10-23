@@ -180,3 +180,8 @@
 	width:200px;
 	text-align:center;
 	}
+#txt_error {
+	font-size:14px;
+	font-style:italic;
+	color:#F00;	
+}

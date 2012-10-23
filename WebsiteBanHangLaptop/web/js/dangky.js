@@ -38,10 +38,10 @@ function setSelectedOption(obj,newValue) {
                                       
                                                 function DrawCaptcha()
                                                 {
-                                                    var a = Math.ceil((Math.random() * 10)%10)+ '';
-                                                    var b = Math.ceil((Math.random() * 10)%10)+ '';       
-                                                    var c = Math.ceil((Math.random() * 10)%10)+ '';  
-                                                    var d = Math.ceil((Math.random() * 10)%10)+ '';  
+                                                    var a = Math.floor(Math.random() * 10)+ '';
+                                                    var b = Math.floor(Math.random() * 10)+ '';       
+                                                    var c = Math.floor(Math.random() * 10)+ '';  
+                                                    var d = Math.floor(Math.random() * 10)+ '';  
                                                     //var e = Math.ceil(Math.random() * 10)+ '';  
                                                     //var f = Math.ceil(Math.random() * 10)+ '';  
                                                     //	var g = Math.ceil(Math.random() * 10)+ '';  

@@ -47,6 +47,15 @@
         } else {
             oke = false;
         }
+        if (request.getParameter("isMore") != null) {
+            if (request.getParameter("isMore").equals("noMore")) {
+                isMore = false;
+            }
+            //isMore = Boolean.parseBoolean(request.getParameter("isMore"));
+            // out.println("<h2>" + request.getParameter("isMore") + "</h2>");
+        } else {
+            isMore = true;
+        }
 
 
         if (isMore) {
@@ -107,9 +116,11 @@
                 kq += "Email không đúng !</br>";
                 f = false;
             }
-            if (!myLib.RegexChecking.CheckDienThoai(dienThoai) && isMore) {
-                kq += "Số Điện Thoại không đúng !";
-                f = false;
+            if (isMore) {
+                if (!myLib.RegexChecking.CheckDienThoai(dienThoai) && isMore) {
+                    kq += "Số Điện Thoại không đúng !";
+                    f = false;
+                }
             }
             if (request.getParameter("inputCaptcha") != null) {
                 captchaInput = request.getParameter("inputCaptcha");
@@ -213,13 +224,7 @@
     if (info == null) {
         info = new String[10];
     }
-    if (request.getParameter("isMore") != null) {
-        if (request.getParameter("isMore").equals("noMore")) {
-            isMore = false;
-        }
-        //isMore = Boolean.parseBoolean(request.getParameter("isMore"));
-        out.println("<h2>" + request.getParameter("isMore") + "</h2>");
-    }
+    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -328,126 +333,9 @@
     </head>
 
     <body topmargin="-10px">
+        <jsp:include page="header.jsp" />
         <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td height="50" colspan="3" id="banner_container"><table width="1000px" height="197" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td width="200" height="56">&nbsp;</td>
-                            <td width="482">&nbsp;</td>
-                            <td colspan="3"><table width="100%" height="30px">
-                                    <tr>
-                                        <td style="border-top-style: none; border-top-width: medium; border-top-color: #333; border-right-style:solid; border-right-width:medium; border-bottom-color:#000; padding-right:5px" align="right">
-                                            <a href="<%
-                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                    out.println("TrangCaNhan.jsp?tenDanhNhap=" + session.getAttribute("tenDangNhap").toString() + "");
-                                                } else {
-                                                    out.println("DangNhap.jsp");
-                                                }%>" class="menu_login">
-                                                <!-- Sua noi dung -->
-                                                <%
-                                                    if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                        out.println("Xin chào, " + session.getAttribute("tenDangNhap"));
-                                                    } else {
-                                                        out.println("Đăng nhập");
-                                                    }
-                                                %>
 
-
-                                            </a></td>
-                                        <td align="left" style="padding-left:5px">
-                                            <a href="<%
-                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                    out.println("DangKyThanhVien.jsp?logout=true");
-                                                } else {
-                                                    out.println("DangKyThanhVien.jsp");
-                                                }
-
-                                               %>" class="menu_login"><%
-                                                   if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                       out.println("Thoat");
-                                                   } else {
-                                                       out.println("Dang Ky");
-                                                   }
-                                                %>                  </a></td>
-                                    </tr>
-                                </table></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td colspan="3">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="150">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="31">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="137" height="35">&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr height="50px">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td height="50px" width="137"><img src="images/CartMenu.png" width="100%" height="50px" /></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table></td>
-            </tr>
-            <tr>
-                <td colspan="3" id="menu_container">
-
-                    <ul id="menu">
-                        <li class="menu_first"><a href="#">Trang Chủ</a></li>
-
-                        <li class="menu_mid" ><a href="#" >Danh Mục</a>
-                            <ul>
-                                <li><a href="#">Laptop</a>
-                                    <ul>
-                                        <!--Cac hang lap top start-->
-                                        <li><a href="#" title="2003 projects">2003 projects</a></li>
-                                        <li><a href="#" title="2004 projects">2004 projects</a></li>
-                                        <li><a href="#" title="2005 projects">2005 projects</a></li>
-                                        <!--Cac hang lap top end -->
-                                    </ul>
-                                </li>
-                                <li><a href="#" title="Active projects">Linn Kiện</a>
-                                    <ul>
-                                        <!--Cac hang link kien -->
-                                        <li><a href="#" title="Leaf industries">Leaf industries</a></li>
-                                        <li><a href="#" title="Omnicron">Omnicron</a></li>
-                                        <li><a href="#" title="Unkown.com">Unkown.com</a></li>
-                                        <!--Cac hang linn kien end -->
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu_mid" ><a href="#" >Khuyến Mãi</a></li>
-                        <li class="menu_last"><a href="#" >Contact</a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td height="50px" colspan="3" id="timkiem_bg">
-                    <form method="get" action="#" name="frmSearch">
-                        <label for="tenSach" style="margin-left:10px">Tên Sản Phẩm</label>
-                        <input type="text"  name="tenSach" style="width:400px" />
-                        <label for="danhMuc">Danh mục</label>
-                        <select name="danhMuc" style="width:200px">
-                            <option value="Tất cả" selected="selected">--Chọn danh mục--</option>
-                            <option value="mã danh mục">Tên danh mục</option>
-                        </select>
-                        <label for="danhMuc" onclick="showAvancedSearchMenu()">Nang Cao</label>
-                        <input type="submit" id="btn_tim_kiem"  value="&nbsp;&nbsp;&nbsp;Tìm kiếm" name="timKiem"/>
-                    </form>
-                </td>
-            </tr>
             <tr>
                 <td width="1000">
                     <table  width="1000px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
@@ -493,9 +381,9 @@
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Tên Đăng nhập(<span style="color:#F00">*</span>)</td>
-                                                                  <td class="text_input"><input class="text_input" id="tenDangNhap" name="tenDangNhap" type="text" size="30"  maxlength="50" value="<% if (info[0] != null) {
-                                                                          out.println(info[0]);
-                                                                      }%>"/></td>
+                                    <td class="text_input"><input class="text_input" id="tenDangNhap" name="tenDangNhap" type="text" size="30"  maxlength="50" value="<% if (info[0] != null) {
+                                            out.println(info[0]);
+                                        }%>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Mật Khẩu(<span style="color:#F00">*</span>)</td>
@@ -507,15 +395,15 @@
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Địa chỉ email(<span style="color:#F00">*</span>)</td>
-                                                 <td  ><input class="text_input" id="email" name="email" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
-                                                         out.println(info[1]);
-                                                     }%>"/></td>
+                                    <td  ><input class="text_input" id="email" name="email" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
+                                            out.println(info[1]);
+                                        }%>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Nhập Lại Địa chỉ email(<span style="color:#F00">*</span>)</td>
-                                                 <td  ><input class="text_input" name="nhapLaiEmail" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
-                                                         out.println(info[1]);
-                                                     }%>"/></td>
+                                    <td  ><input class="text_input" name="nhapLaiEmail" type="text" size="30" maxlength="50" value="<% if (info[1] != null) {
+                                            out.println(info[1]);
+                                        }%>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Nhập thông tin cá nhân</td>
@@ -542,13 +430,13 @@
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Giới Tính(<span style="color:#F00">*</span>)</td>
-                                               <td><input name="gioiTinh" id="gioiTinh" type="radio" value="0" <% if (info[3] != null && info[3].equals("0")) {
-                                                       out.print("checked");
-                                                   }%>/>
+                                    <td><input name="gioiTinh" id="gioiTinh" type="radio" value="0" <% if (info[3] != null && info[3].equals("0")) {
+                                            out.print("checked");
+                                        }%>/>
                                         Nam
-                                               <input name="gioiTinh" type="radio" value="1" <% if (info[3] != null && info[3].equals("1")) {
-                                                       out.print("checked");
-                                                   }%>/>
+                                        <input name="gioiTinh" type="radio" value="1" <% if (info[3] != null && info[3].equals("1")) {
+                                                out.print("checked");
+                                            }%>/>
                                         Nữ</td>
                                 </tr>
                                 <tr >
@@ -565,21 +453,21 @@
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Điện Thoại(<span style="color:#F00">*</span>)</td>
-                                                 <td  ><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="<% if (info[7] != null) {
-                                                         out.println(info[7]);
-                                                     }%>" /></td>
+                                    <td  ><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="<% if (info[7] != null) {
+                                            out.println(info[7]);
+                                        }%>" /></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Địa Chỉ(<span style="color:#F00">*</span>)</td>
-                                                 <td  ><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
-                                                         out.println(info[9]);
-                                                     }%>" /></td>
+                                    <td  ><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="<% if (info[9] != null) {
+                                            out.println(info[9]);
+                                        }%>" /></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg">Thành Phố(<span style="color:#F00">*</span>)</td>
-                                                 <td  ><input class="text_input" id="thanhPho" name="thanhPho" type="text" size="30" maxlength="50" value="<% if (info[8] != null) {
-                                                         out.println(info[8]);
-                                                     }%>" /></td>
+                                    <td  ><input class="text_input" id="thanhPho" name="thanhPho" type="text" size="30" maxlength="50" value="<% if (info[8] != null) {
+                                            out.println(info[8]);
+                                        }%>" /></td>
                                 </tr>
                             </table>
                         </div>
@@ -590,7 +478,7 @@
                             <input type="text" id="txtInput" name="inputCaptcha" width="10"/>
                             <input type="text" id="txtCaptcha" name="createdCaptcha"
                                    style="background-image:url(images/1.JPG); text-align:center; border:none;
-                                   font-weight:bold; font-family:Modern; font-size:18px;"/>
+                                   font-weight:bold; font-family:Modern; font-size:18px;"  onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off "/>
                             <input type="button" id="btnrefresh" value="Refresh" onclick="DrawCaptcha();" />
                         </div>
 
@@ -604,9 +492,7 @@
                 <td width="4">&nbsp;</td>
             </tr>
             <!-- End of Main content -->
-            <tr>
-                <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
-            </tr>
         </table>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
