@@ -4,7 +4,8 @@
     Author     : THANHTUNG
 --%>
 
-
+<%@page errorPage="ThongBaoLoi.jsp" %>
+<%@page isErrorPage="true" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.Set"%>
@@ -12,8 +13,8 @@
 <%@page import="org.hibernate.HibernateException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.pojo.*,model.dao.*"%>
+<%@ page import="javax.servlet.http.HttpUtils.*" %> 
 <%!    String username, password;
-
 %>
 <%    //kiem tra dieu kien
     if (request.getParameter("logout") != null) {
@@ -22,6 +23,7 @@
 
         }
     }
+    session.setAttribute("PrevPage",request.getRequestURL());
     if (session.getAttribute("daDangNhap") == null) {
         session.setAttribute("daDangNhap", false);
     }
@@ -47,6 +49,7 @@
         if (request.getParameter("maSanPham") != null) {
 
             maSanPham = request.getParameter("maSanPham");
+            if (maSanPham == null) return;
             SanPhamDAO dao = new SanPhamDAO();
             SanPham sanPham = dao.getObject(maSanPham);
             boolean isExist = false;
@@ -134,127 +137,9 @@
         </style></head>
 
     <body topmargin="-10px">
+    <jsp:include page="header.jsp"/>
         <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td height="50" colspan="3" id="banner_container"><table width="1000px" height="197" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td width="200" height="56">&nbsp;</td>
-                            <td width="482">&nbsp;</td>
-                            <td colspan="3"><table width="100%" height="30px">
-                                    <tr>
-                                        <td style="border-top-style: none; border-top-width: medium; border-top-color: #333; border-right-style:solid; border-right-width:medium; border-bottom-color:#000; padding-right:5px" align="right">
-                                            <a href="<%
-                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                    out.println("TrangCaNhan.jsp?tenDanhNhap=" + session.getAttribute("tenDangNhap").toString() + "");
-                                                } else {
-                                                    out.println("DangNhap.jsp");
-                                                }%>" class="menu_login">
-                                                <!-- Sua noi dung -->
-                                                <%
-                                                    if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                        out.println("Xin chào, " + session.getAttribute("tenDangNhap"));
-                                                    } else {
-                                                        out.println("Đăng nhập");
-                                                    }
-                                                %>
-
-
-                                            </a></td>
-                                        <td align="left" style="padding-left:5px">
-                                            <a href="<%
-                                                if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                    out.println("DangKyThanhVien.jsp?logout=true");
-                                                } else {
-                                                    out.println("DangKyThanhVien.jsp");
-                                                }
-
-                                               %>" class="menu_login"><%
-                                                   if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-                                                       out.println("Thoat");
-                                                   } else {
-                                                       out.println("Dang Ky");
-                                                   }
-                                                %>                  </a></td>
-                                    </tr>
-                                </table></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td colspan="3">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="150">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="31">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="137" height="35">&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr height="50px">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td height="50px" width="137"><img src="images/CartMenu.png" width="100%" height="50px" /></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table></td>
-            </tr>
-            <tr>
-                <td colspan="3" id="menu_container">
-
-                    <ul id="menu">
-                        <li class="menu_first"><a href="#">Trang Chủ</a></li>
-
-                        <li class="menu_mid" ><a href="#" >Danh Mục</a>
-                            <ul>
-                                <li><a href="#">Laptop</a>
-                                    <ul>
-                                        <!--Cac hang lap top start-->
-                                        <li><a href="#" title="2003 projects">2003 projects</a></li>
-                                        <li><a href="#" title="2004 projects">2004 projects</a></li>
-                                        <li><a href="#" title="2005 projects">2005 projects</a></li>
-                                        <!--Cac hang lap top end -->
-                                    </ul>
-                                </li>
-                                <li><a href="#" title="Active projects">Linn Kiện</a>
-                                    <ul>
-                                        <!--Cac hang link kien -->
-                                        <li><a href="#" title="Leaf industries">Leaf industries</a></li>
-                                        <li><a href="#" title="Omnicron">Omnicron</a></li>
-                                        <li><a href="#" title="Unkown.com">Unkown.com</a></li>
-                                        <!--Cac hang linn kien end -->
-                                    </ul>
-
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu_mid" ><a href="#" >Khuyến Mãi</a></li>
-                        <li class="menu_last"><a href="#" >Contact</a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td height="50px" colspan="3" id="timkiem_bg">
-                    <form method="get" action="#" name="frmSearch">
-                        <label for="tenSach" style="margin-left:10px">Tên Sản Phẩm</label>
-                        <input type="text"  name="tenSach" style="width:400px" />
-                        <label for="danhMuc">Danh mục</label>
-                        <select name="danhMuc" style="width:200px">
-                            <option value="Tất cả" selected="selected">--Chọn danh mục--</option>
-                            <option value="mã danh mục">Tên danh mục</option>
-                        </select>
-                        <label for="danhMuc" onclick="showAvancedSearchMenu()">Nang Cao</label>
-                        <input type="submit" id="btn_tim_kiem"  value="&nbsp;&nbsp;&nbsp;Tìm kiếm" name="timKiem"/>
-                    </form>
-                </td>
-            </tr>
+           
             <tr>
                 <td width="1000">
                     <table  width="1000px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
@@ -323,7 +208,20 @@ if (gioHang.size()==0) {
                                     <td><div class="xoa_san_pham"><a href="GioHang.jsp?Action=XoaSanPham&maSanPham=<%= sp.getMaSanPham()%>" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
                                 </tr>
                                 
- <%}}%>                               
+                               
+                            <tr>
+                            <td colspan="5" align="right" style="padding-right:5px" width="70%">Thanh tien</td>
+                            <td colspan="2">100,000,000 VND</td>
+                            </tr>
+                            <tr>
+                            <td colspan="5" align="right" style="padding-right:5px" width="70%">VAT (10%):</td>
+                            <td colspan="2">100,000,000 VND</td>
+                            </tr>
+                            <tr>
+                            <td colspan="5"align="right" style="padding-right:5px" width="70%">Tong cong:</td>
+                            <td colspan="2">100,000,000 VND</td>
+                            </tr>
+                            <%}}%> 
                             </table>
                             <div align="right">
                                 <p>
@@ -345,9 +243,7 @@ if (gioHang.size()==0) {
                 </td>
             </tr>
             <!-- End of Main content -->
-            <tr>
-                <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
-            </tr>
         </table>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>

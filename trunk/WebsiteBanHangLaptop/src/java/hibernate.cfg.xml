@@ -13,6 +13,7 @@
     <mapping resource="model/pojo/HangSanXuat.hbm.xml"/>
     <mapping resource="model/pojo/ChiTietDonHang.hbm.xml"/>
     <mapping resource="model/pojo/SanPham.hbm.xml"/>
+    <mapping resource="model/pojo/KhoanGia.hbm.xml"/>
     <mapping resource="model/pojo/ChiTietKhuyenMai.hbm.xml"/>
     <mapping resource="model/pojo/LinhKien.hbm.xml"/>
     <mapping resource="model/pojo/TinhTrangDonDatHang.hbm.xml"/>

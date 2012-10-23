@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 5, 2012 5:03:30 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="model.pojo.KhachHangTrucTuyen" table="khach_hang_truc_tuyen" schema="public">
         <id name="username" type="string">
             <column name="username" length="50" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select" cascade="save-update">
+        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select">
             <column name="khach_hang" length="10" unique="true" />
         </many-to-one>
         <property name="matKhau" type="string">
