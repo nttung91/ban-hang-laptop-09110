@@ -26,8 +26,19 @@
         session.setAttribute("daDangNhap", false);
     }
 %>
-<link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
-
+<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.8.2.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/main.js" language="javascript" type="text/javascript"></script>
+   <script language="javascript">
+function showAvancedSearchMenu()
+            {
+                var table = document.getElementById("tim_kiem_nang_cao");
+                if (table.style.display == "none"){
+                    table.style.display = "block";
+                }
+                else {table.style.display = "none";}
+            }
+</script>
 
 <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
     <tr>
@@ -96,7 +107,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td height="50px" width="137"><img src="../images/CartMenu.png" width="100%" height="50px" /></td>
+                    <td height="50px" width="137"><img src="images/CartMenu.png" width="100%" height="50px" /></td>
                     <td>&nbsp;</td>
                 </tr>
             </table></td>
@@ -185,19 +196,37 @@
         </td>
     </tr>
     <tr>
-        <td height="50px" colspan="3" id="timkiem_bg">
+        <td height="70px" colspan="3">
+       
             <form method="post" action="DanhSachSanPham.jsp?Trang=1&SoSanPham=<%= obj.getSosptrang()%>" name="frmSearch" >
+             <div id="timkiem_bg">
 
-                <select name="LoaiSanPham" style="margin-left:10px " >
-                    <option value="" selected="selected">--All--</option>
-                    <option value="laptop" >LapTop</option>
-                    <option value="linhkien" >Linh Kiện</option>
-                </select>
-
-                <label  for="tenSanPham" >Tên Sản Phẩm</label>
-                <input type="text"  name="tenSanPham" style="width:350px" value="<%= obj.getTensp()%>" />
+              <!--  <select name="LoaiSanPham" style="margin-left:10px " onchange="showValue(this.value)" >
+                    <option value="-1" selected="selected" title="images/1.JPG"></option>
+                    <option value="laptop" title="images/1.JPG" ></option>
+                    <option value="linhkien" title="images/1.JPG"></option>
+              </select> -->
+           <table>
+           <tr>
+           <td>
+           <div class="loai_san_pham" id="linhkien_icon" onclick="selectType(this)" style="background:url(images/phukien.jpg); background-size:100% 100%;background-repeat:no-repeat;background-position:center;"></div>
+           </td>
+           <td>
+           
+           <div class="loai_san_pham" id="laptop_icon" onclick="selectType(this)" style="background:url(images/laptop.png); background-size:100% 100%;background-repeat:no-repeat;background-position:center;"></div>
+           </td>
+           <td>
+           <input type="hidden" name="Loaisp" id="Loaisp" value="Laptop"/>
+            <label  for="tenSanPham" >Tên Sản Phẩm</label>
+            </td>
+            <td>
+            
+                <input type="text"  name="tenSanPham" style="width:320px; font-size:22px; color:#666;" value="<%= obj.getTensp()%>" />
+            </td><td>
                 <label for="HangSanXuat">Danh mục</label>
-                <select name="HangSanXuat" style="width:200px">
+                </td>
+                <td>
+                <select name="HangSanXuat" style="width:200px; height:35px;font-size:22px; color:#666;">
                     <option value="" selected="selected">--Chọn danh mục--</option>
                     <%
 
@@ -210,9 +239,19 @@
                     <option value=<%= hsx.getMaHang()%>><%= hsx.getTenHang()%></option>
                     <%}%>
                 </select>
-                <label for="danhMuc" onclick="showAvancedSearchMenu()">Nang Cao</label>
-                <input type="submit" id="btn_tim_kiem"  value="&nbsp;&nbsp;&nbsp;Tìm kiếm" name="timKiem"/>
+               </td>
+              <td>
+                <input type="submit" id="btn_tim_kiem" name="timKiem" value=""/>
+                </td>
+                <td>
+                <input type="image" value="&nbsp;" onclick="showAvancedSearchMenu()" style=" background-image:url(images/More.png); height:50px;width:70px;background-size:100% 100%;"/>
+             </td>
+             </tr>
+             </table>
+             </div>
             </form>
+            
+           
         </td>
     </tr>
 

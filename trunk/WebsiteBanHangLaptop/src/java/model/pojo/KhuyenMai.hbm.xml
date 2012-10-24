@@ -17,7 +17,7 @@
         <property name="ghiChu" type="string">
             <column name="ghi_chu" length="100" />
         </property>
-        <set name="chiTietKhuyenMais" inverse="true">
+        <set name="chiTietKhuyenMais" inverse="true" lazy="false">
             <key>
                 <column name="ma_khuyen_mai" length="10" not-null="true" />
             </key>
