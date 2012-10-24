@@ -29,15 +29,23 @@
 <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-1.8.2.min.js" language="javascript" type="text/javascript"></script>
 <script src="js/main.js" language="javascript" type="text/javascript"></script>
-   <script language="javascript">
+<script>
 function showAvancedSearchMenu()
             {
-                var table = document.getElementById("tim_kiem_nang_cao");
-                if (table.style.display == "none"){
-                    table.style.display = "block";
+              
+                if ($('#tim_kiem_nang_cao').css('display') == 'none'){
+                    $('#tim_kiem_nang_cao').show('slow');
+					$('#btnMore').css('background-image','url(images/Less.png)');
                 }
-                else {table.style.display = "none";}
+                else {
+					$('#tim_kiem_nang_cao').hide('slow');
+					$('#btnMore').css('background-image','url(images/More.png)');
+					}
+					
+				
+				
             }
+
 </script>
 
 <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
@@ -123,7 +131,7 @@ function showAvancedSearchMenu()
                 <li class="menu_mid" ><a href="#" >Danh Mục</a>
                     <ul>
                         <li><a href="#">Laptop</a>
-                            <ul
+                            <ul>
                                 <!--Cac hang lap top start-->
                                 <%
                                     temp_class obj = new temp_class();
@@ -244,7 +252,8 @@ function showAvancedSearchMenu()
                 <input type="submit" id="btn_tim_kiem" name="timKiem" value=""/>
                 </td>
                 <td>
-                <input type="image" value="&nbsp;" onclick="showAvancedSearchMenu()" style=" background-image:url(images/More.png); height:50px;width:70px;background-size:100% 100%;"/>
+  
+                <input id="btnMore" type="button" onclick="showAvancedSearchMenu()" style="background-image:url(images/More.png); height:50px;width:70px;background-size:100% 100%;"/>
              </td>
              </tr>
              </table>
@@ -259,9 +268,10 @@ function showAvancedSearchMenu()
     <tr>
         <td></td>
         <td width="820px">
-            <table  width="820px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
+        <div id="tim_kiem_nang_cao">
+            <table  width="820px" border="0" cellspacing="0" cellpadding="0">
 
-                <form method="post" action="DanhSachSanPham.jsp?Trang=1&SoSanPham=<%= obj.getSosptrang()%>" name="frmSearch">
+                <form method="post" action="DanhSachSanPham.jsp?Trang=1&SoSanPham=<%= obj.getSosptrang()%>">
                     <tr>
                         <td width="151"> <label  for="tenSanPham" style="margin-left:10px">Tên Sản Phẩm</label></td>
                         <td width="515"><input type="text" name="tenSanPham" /></td>
@@ -324,6 +334,7 @@ function showAvancedSearchMenu()
                     </tr>
                 </form>
             </table>
+            </div>
         </td>
     </tr>
 </table>

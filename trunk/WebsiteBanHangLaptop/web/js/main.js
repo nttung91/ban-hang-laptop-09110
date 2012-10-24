@@ -11,7 +11,7 @@ function selectType(div){
 				div.style.backgroundSize="100% 100%";
 	div.style.borderStyle = "solid";
 				//kiem tra xem doi tuong con lai co duoc chon ko
-				if (adiv.style.borderStyle=="solid"){
+				if (adiv.style.borderStyle!="solid"){
 						loai.value = "All";
 						
 					}
@@ -25,7 +25,7 @@ function selectType(div){
 					if (adiv.style.borderStyle!="dotted"){
 							div.style.backgroundSize = "80% 80%";
 							div.style.borderStyle = "dotted";
-							loai.value = "LinhKien"
+							loai.value = "LinhKien";
 						}
 						
 					}
@@ -49,10 +49,10 @@ function selectType(div){
 					if (bdiv.style.borderStyle!="dotted"){
 							div.style.backgroundSize = "80% 80%";
 							div.style.borderStyle = "dotted";
-							loai.value = "Laptop"
+							loai.value = "Laptop";
 						}
 					}
 		}
-		alert(loai.value);
+	//	alert(loai.value);
 }
 	
