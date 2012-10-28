@@ -22,6 +22,7 @@
 				background-size:100% 100%;
 				vertical-align:middle;
 				float:left;
+				width:100%;
 				
 
             }
@@ -139,7 +140,18 @@
 
             }
             #tim_kiem_nang_cao {
-                display:none;
+				margin-bottom:10px;
+                display:block;
+				border-radius:10px 10px 10px 10px;
+				background: #dbf1f9; /* Old browsers */
+background: -moz-linear-gradient(top,  #dbf1f9 0%, #7fcee9 83%, #77c2d9 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbf1f9), color-stop(83%,#7fcee9), color-stop(100%,#77c2d9)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #dbf1f9 0%,#7fcee9 83%,#77c2d9 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #dbf1f9 0%,#7fcee9 83%,#77c2d9 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #dbf1f9 0%,#7fcee9 83%,#77c2d9 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #dbf1f9 0%,#7fcee9 83%,#77c2d9 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbf1f9', endColorstr='#77c2d9',GradientType=0 ); /* IE6-9 */
+
             }
             .menu_login:hover{
                 color:#000;
