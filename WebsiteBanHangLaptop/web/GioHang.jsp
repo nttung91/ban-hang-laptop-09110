@@ -55,7 +55,7 @@
             boolean isExist = false;
             for (int i = 0; i < gioHang.size(); i++) {
                 if (gioHang.get(i).getMaSanPham().equals(maSanPham)) {
-                    gioHang.get(i).setSoLuongTon(gioHang.get(i).getSoLuongTon() + 1);
+                   // gioHang.get(i).setSoLuongTon(gioHang.get(i).getSoLuongTon() + 1);
                     isExist = true;
                     break;
                 }
@@ -138,39 +138,10 @@
 
     <body topmargin="-10px">
     <jsp:include page="header.jsp"/>
-        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
-           
+     <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
             <tr>
-                <td width="1000">
-                    <table  width="1000px" border="0" cellspacing="0" cellpadding="0" id="tim_kiem_nang_cao">
-
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <!-- Main content -->
-                    <form method="get">
+                <td>
+         <form method="get">
                         <div id="gio_hang">
                             <table width="100%" border="1px solid thin black">
                                 <tr>
@@ -207,7 +178,7 @@ if (gioHang.size()==0) {
                                     <td><div class="thanh_tien"><span class="gia_san_pham"><%=myLib.CurrencyConvertor.AmountToCurrencyFomat(sp.getGia()*sp.getSoLuongTon(),"VND")%></span></div></td>
                                     <td><div class="xoa_san_pham"><a href="GioHang.jsp?Action=XoaSanPham&maSanPham=<%= sp.getMaSanPham()%>" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
                                 </tr>
-                                
+                                 <%}}%> 
                                
                             <tr>
                             <td colspan="5" align="right" style="padding-right:5px" width="70%">Thanh tien</td>
@@ -221,7 +192,7 @@ if (gioHang.size()==0) {
                             <td colspan="5"align="right" style="padding-right:5px" width="70%">Tong cong:</td>
                             <td colspan="2">100,000,000 VND</td>
                             </tr>
-                            <%}}%> 
+                           
                             </table>
                             <div align="right">
                                 <p>
@@ -236,13 +207,8 @@ if (gioHang.size()==0) {
                         </div>
 
                     </form>
-
-
-                    <!--End of Main content -->
-
-                </td>
+                    </td>
             </tr>
-            <!-- End of Main content -->
         </table>
         <jsp:include page="footer.jsp"/>
     </body>

@@ -37,20 +37,50 @@
         </script>
 
         <style type="text/css">
-
-            #sidebox-title{
-                margin: 1px 0px 0px 0px;
+            .sidebox-wrapper {
+                text-align:center;
+                vertical-align:top;
+                border-radius:10px;
+                border:#999 medium solid;
+            }
+            .sidebox-title{
+                margin: 0px 0px 0px 0px;
                 padding: 5px 6px 0px 6px;
                 height: 35px;
                 line-height: 100%;
-
-
-
                 background: #D1D1D1;
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A9A9A9, endColorstr=#C2C2C2);
                 background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#C2C2C2));
                 background: -moz-linear-gradient(top,  #A9A9A9,  #C2C2C2);
-                border: solid 3px #6D6D6D;
+
+            }
+            .sidebox-body div a{
+                padding-left:5px;} 
+            .sidebox-body span {
+                background-image:url(images/more-h.png);
+                background-size:100% 100%;
+                width:30px;
+                height:20px
+            }
+            .sidebox-body div{
+                height:20px;
+                margin:5px 0px;
+                width:100%;
+
+                font-size:18px;
+                font-weight:bold;
+                border-bottom:3px #0000CC solid;
+                border-top:3px #0000CC solid;
+                text-align:left;
+                background: #b3dced; /* Old browsers */
+                background: -moz-linear-gradient(top,  #b3dced 0%, #29b8e5 50%, #bce0ee 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b3dced), color-stop(50%,#29b8e5), color-stop(100%,#bce0ee)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #b3dced 0%,#29b8e5 50%,#bce0ee 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #b3dced 0%,#29b8e5 50%,#bce0ee 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #b3dced 0%,#29b8e5 50%,#bce0ee 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #b3dced 0%,#29b8e5 50%,#bce0ee 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ); /* IE6-9 */
+
             }
 
         </style>
@@ -63,28 +93,25 @@
 
             <tr>
                 <td style="vertical-align: top;">
-                    <div class="sidebox-wrapper " style="border:medium ; vertical-align: top; ">
-                        <h3 id="sidebox-title"  ><span>THƯƠNG HIỆU</span></h3>
-                        <div class="sidebox-body" style="width:180px ; border:solid 2px #6D6D6D ;" > 
-                            <ul>
-                                <%
-                                    temp_class obj = (temp_class) session.getAttribute("Info");
-                                    for (int i = 0; i < obj.getListHangSX().size(); i++) {
-                                        HangSanXuat hsx = obj.getListHangSX().get(i);
-                                        if (hsx.getTinhTrang() == 0) {
-                                            continue;
-                                        }
-                                %>
-                                <li><a href="DanhSachSanPham.jsp?HangSanXuat=<%=hsx.getMaHang()%>&LoaiSanPham=<%= obj.getLoaiSanPham()%>&Trang=1&SoSanPham=<%= obj.getSosptrang()%>"><%= hsx.getTenHang()%></a></li>
-                                <% }%>
-
-                            </ul>
+                    <div class="sidebox-wrapper">
+                        <h3 class="sidebox-title"  ><span>THƯƠNG HIỆU</span></h3>
+                        <div class="sidebox-body">
+                            <%
+                                temp_class obj = (temp_class) session.getAttribute("Info");
+                                for (int i = 0; i < obj.getListHangSX().size(); i++) {
+                                    HangSanXuat hsx = obj.getListHangSX().get(i);
+                                    if (hsx.getTinhTrang() == 0) {
+                                        continue;
+                                    }
+                            %>
+                            <div><a href="DanhSachSanPham.jsp?HangSanXuat=<%=hsx.getMaHang()%>&LoaiSanPham=<%= obj.getLoaiSanPham()%>&Trang=1&SoSanPham=<%= obj.getSosptrang()%>"><%= hsx.getTenHang()%><span style="color:#FF0;float:right;"></span></a></div>
+                            <% }%>
                         </div>
                     </div>
                     <%
                         List<String> LString = null;
                         List<SanPham> list = null;
-                     
+
                         if (request.getParameter("tenSanPham") != null) {
                             obj.setTensp(request.getParameter("tenSanPham"));
                         }
@@ -123,22 +150,22 @@
                         if (obj.getLoaiSanPham().equals("laptop")) {
 
                     %>
-                    <div class="sidebox-wrapper " style="border:medium ; ">
-                        <h3 id="sidebox-title"  ><span>Tính Năng</span></h3>
+                    <div class="sidebox-wrapper">
+                        <h3 class="sidebox-title"><span>Tính Năng</span></h3>
 
-                        <div class="sidebox-body" style="width:180px ; border:solid 2px #6D6D6D ;" > 
-                            <h4 style="margin-left:10px" >Giá Laptop</h4>
-                            <ul>
-                                <%     for (int i = 0; i < obj.getListKhoanGia().size(); i++) {
-                                        KhoanGia kg = obj.getListKhoanGia().get(i);
+                        <div class="sidebox-body"> 
+                            <h4>Giá Laptop</h4>
 
-                                        String tu = (String.valueOf(kg.getGiaTu() / 1000));
-                                        String den = (String.valueOf(kg.getGiaDen() / 1000));
-                                %>
-                                <li><a href="DanhSachSanPham.jsp?HangSanXuat=<%= obj.getMahang()%>&LoaiSanPham=laptop&Trang=1&SoSanPham=<%=obj.getSosptrang()%>&giatu=<%= kg.getGiaTu()%>&giaden=<%=kg.getGiaDen()%>"><%= tu%> triệu - <%= den%> triệu </a></li>
-                                <%}%>
+                            <%     for (int i = 0; i < obj.getListKhoanGia().size(); i++) {
+                                    KhoanGia kg = obj.getListKhoanGia().get(i);
 
-                            </ul>
+                                    String tu = (String.valueOf(kg.getGiaTu() / 1000));
+                                    String den = (String.valueOf(kg.getGiaDen() / 1000));
+                            %>
+                            <div><a href="DanhSachSanPham.jsp?HangSanXuat=<%= obj.getMahang()%>&LoaiSanPham=laptop&Trang=1&SoSanPham=<%=obj.getSosptrang()%>&giatu=<%= kg.getGiaTu()%>&giaden=<%=kg.getGiaDen()%>"><%= tu%> triệu - <%= den%> triệu </a></div>
+                            <%}%>
+
+
                             <h4 style="margin-left:10px" >Màn Hình</h4>
                             <ul>
                                 <li><a href="/laptop/laptop-sony/">0 - 14 inch</a></li>
@@ -149,7 +176,7 @@
                     </div>
                     <%}%>
                 </td>
-                <td colspan="2" style="vertical-align: top;" >
+                <td  style="vertical-align: top;" >
                     <%
 
 
@@ -248,20 +275,20 @@
                                         LinhKienDAO linhkienDAO = new LinhKienDAO();
                                         //  l=laptopDAO.searchPhanTrang(timkiem, sosptrang, trang);
 
-                                        String loaiSanPham="Laptop";
+                                        String loaiSanPham = "Laptop";
                                         l = spdao.searchPhanTrang(timkiem, obj.getSosptrang(), obj.getTrang());
                                         if (obj.getLoaiSanPham().equals("laptop")) {
                                             l = laptopDAO.searchPhanTrang(timkiem, obj.getSosptrang(), obj.getTrang(), obj.getGiatu(), obj.getGiaden());
-                                            loaiSanPham="Laptop";
+
                                         }
                                         if (obj.getLoaiSanPham().equals("linhkien")) {
                                             l = linhkienDAO.searchPhanTrang(timkiem, obj.getSosptrang(), obj.getTrang());
-                                            loaiSanPham="Linhkien";
+
                                         }
                                         //list = spdao.getList();
-                                            
+
                                         for (int i = 0; i < l.size(); i++) {
-                                 
+
 
                                             SanPham sp = null;
                                             if (obj.getLoaiSanPham().equals("laptop")) {
@@ -271,27 +298,32 @@
                                             } else {
                                                 sp = (SanPham) l.get(i);
                                             }
+                                            if (!sp.getLaptops().isEmpty()) {
+                                                loaiSanPham = "Laptop";
+                                            } else {
+                                                loaiSanPham = "LinhKien";
+                                            }
 
-                                        %>
-                                        <div class="item">
-                                            <!-- sp 1 - 1 -->
-                                            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="san_pham">
-                                                <tr>
-                                                    <td><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loaiSanPham %>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><img src=<%= sp.getHinhAnh()%> width="130" height="103" /></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ten_san_pham"><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loaiSanPham %>&maSanPham=<%=sp.getMaSanPham() %>" style="text-decoration:none;"><%=sp.getTenSanPham()%></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="gia"><%= sp.getGia() + "00 VND"%></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="khuyen_mai"><%=0%></td>
-                                                </tr>
-                                            </table>
-                                            <!-- sp 1 - 1 end -->
-                                        </div>
-                                    
+                                    %>
+                                    <div class="item">
+                                        <!-- sp 1 - 1 -->
+                                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="san_pham">
+                                            <tr>
+                                                <td><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loaiSanPham%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><img src=<%= sp.getHinhAnh()%> width="130" height="103" /></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ten_san_pham"><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loaiSanPham%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><%=sp.getTenSanPham()%></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="gia"><%= sp.getGia() + "00 VND"%></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="khuyen_mai"><%=0%></td>
+                                            </tr>
+                                        </table>
+                                        <!-- sp 1 - 1 end -->
+                                    </div>
+
                                     <%}%>
 
                                     <!--ket thuc 1 dong -->
@@ -305,12 +337,11 @@
                         </tr>
                     </table>
                 </td>
-                <td width="4">&nbsp;</td>
+
             </tr>
-            <tr>
-                <td colspan="3"><img src="images/footer1.jpg" width="1000" /></td>
-            </tr>
+
         </table>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
 

@@ -266,8 +266,8 @@ function showAvancedSearchMenu()
 
 
     <tr>
-        <td></td>
-        <td width="820px">
+       
+        <td width="820px" colspan="3">
         <div id="tim_kiem_nang_cao">
             <table  width="820px" border="0" cellspacing="0" cellpadding="0">
 

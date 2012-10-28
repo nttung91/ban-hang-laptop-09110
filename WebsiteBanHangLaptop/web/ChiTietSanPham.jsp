@@ -55,6 +55,7 @@
     //loaiSanPham = "Laptop";
     boolean isItemExist = false;
     if (hasSanPham) {
+		out.println("<script>alert("+maSanPham+loaiSanPham+")</script>");
         if (loaiSanPham.equals("Laptop")) {
             lt = daolt.getObject(maSanPham);
             if (lt != null) {
@@ -327,7 +328,7 @@
                                         }%>">
                                         <div bgcolor="#0066CC" class="text_header">Thông tin chi tiết</div>
                                         <div style="margin-top:0px;top:0px;left:0px; ">
-                                            <ul><% if (hasSanPham) {
+                                            <ul><% if (hasSanPham && loaiSanPham.equals("LinhKien")) {
                                                     String s = lk.getMoTa();
                                                     String[] arr = s.split("</br>");
                                                     for (int i = 0; i < arr.length; i++) {
