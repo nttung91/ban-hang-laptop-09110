@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.Laptop" table="laptop" schema="public">
+        <id name="maSanPham" type="string">
+            <column name="ma_san_pham" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sanPham" class="model.pojo.SanPham" update="false" insert="false" fetch="select" lazy="false">
+            <column name="ma_san_pham" length="10" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="chipCpu" type="string">
+            <column name="chip_cpu" length="40" />
+        </property>
+        <property name="ram" type="string">
+            <column name="ram" length="20" />
+        </property>
+        <property name="OCung" type="string">
+            <column name="o_cung" length="40" />
+        </property>
+        <property name="cardDoHoa" type="string">
+            <column name="card_do_hoa" length="40" />
+        </property>
+        <property name="heDieuHanh" type="string">
+            <column name="he_dieu_hanh" length="40" />
+        </property>
+        <property name="canNang" type="java.lang.Double">
+            <column name="can_nang" precision="17" scale="17">
+                <comment>don vi kg</comment>
+            </column>
+        </property>
+        <property name="manHinh" type="string">
+            <column name="man_hinh" length="40">
+                <comment>kich thuoc man hinh</comment>
+            </column>
+        </property>
+        <property name="pin" type="string">
+            <column name="pin" length="40" />
+        </property>
+        <property name="diaQuang" type="string">
+            <column name="dia_quang" length="100" />
+        </property>
+        <property name="cardKhongDay" type="string">
+            <column name="card_khong_day" length="100" />
+        </property>
+        <property name="tinhNangKhac" type="string">
+            <column name="tinh_nang_khac" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

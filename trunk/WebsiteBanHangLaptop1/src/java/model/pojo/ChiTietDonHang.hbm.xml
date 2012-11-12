@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.ChiTietDonHang" table="chi_tiet_don_hang" schema="public">
+        <composite-id name="id" class="model.pojo.ChiTietDonHangId">
+            <key-property name="maDonHang" type="string">
+                <column name="ma_don_hang" length="10" />
+            </key-property>
+            <key-property name="maSanPham" type="string">
+                <column name="ma_san_pham" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="datHang" class="model.pojo.DatHang" update="false" insert="false" fetch="select">
+            <column name="ma_don_hang" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sanPham" class="model.pojo.SanPham" update="false" insert="false" fetch="select">
+            <column name="ma_san_pham" length="10" not-null="true" />
+        </many-to-one>
+        <property name="tinhTrang" type="java.lang.Integer">
+            <column name="tinh_trang" />
+        </property>
+        <property name="soLuong" type="java.lang.Integer">
+            <column name="so_luong" />
+        </property>
+        <property name="donGia" type="java.lang.Double">
+            <column name="don_gia" precision="17" scale="17" />
+        </property>
+    </class>
+</hibernate-mapping>
