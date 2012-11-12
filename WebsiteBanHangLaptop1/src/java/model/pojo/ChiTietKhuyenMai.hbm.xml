@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.ChiTietKhuyenMai" table="chi_tiet_khuyen_mai" schema="public">
+        <composite-id name="id" class="model.pojo.ChiTietKhuyenMaiId">
+            <key-property name="maSanPham" type="string">
+                <column name="ma_san_pham" length="10" />
+            </key-property>
+            <key-property name="maKhuyenMai" type="string">
+                <column name="ma_khuyen_mai" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sanPham" class="model.pojo.SanPham" update="false" insert="false" fetch="select">
+            <column name="ma_san_pham" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="khuyenMai" class="model.pojo.KhuyenMai" update="false" insert="false" fetch="select" lazy="false">
+            <column name="ma_khuyen_mai" length="10" not-null="true" />
+        </many-to-one>
+        <property name="ngayBatDau" type="date">
+            <column name="ngay_bat_dau" length="13" />
+        </property>
+        <property name="ngayKetThuc" type="date">
+            <column name="ngay_ket_thuc" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

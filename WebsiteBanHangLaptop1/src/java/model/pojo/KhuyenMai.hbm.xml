@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.KhuyenMai" table="khuyen_mai" schema="public">
+        <id name="maKhuyenMai" type="string">
+            <column name="ma_khuyen_mai" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="noiDungKhuyenMai" type="string">
+            <column name="noi_dung_khuyen_mai" length="100" />
+        </property>
+        <property name="tinhTrang" type="java.lang.Integer">
+            <column name="tinh_trang" />
+        </property>
+        <property name="ghiChu" type="string">
+            <column name="ghi_chu" length="100" />
+        </property>
+        <set name="chiTietKhuyenMais" inverse="true" lazy="false">
+            <key>
+                <column name="ma_khuyen_mai" length="10" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.ChiTietKhuyenMai" />
+        </set>
+    </class>
+</hibernate-mapping>

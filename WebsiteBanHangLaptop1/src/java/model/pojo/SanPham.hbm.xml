@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.SanPham" table="san_pham" schema="public">
+        <id name="maSanPham" type="string">
+            <column name="ma_san_pham" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="hangSanXuat" class="model.pojo.HangSanXuat" fetch="select" lazy="false">
+            <column name="ma_hang" length="10" />
+        </many-to-one>
+        <many-to-one name="tinhTrangSanPham" class="model.pojo.TinhTrangSanPham" fetch="select">
+            <column name="tinh_trang" />
+        </many-to-one>
+        <property name="tenSanPham" type="string">
+            <column name="ten_san_pham" length="70" />
+        </property>
+        <property name="hinhAnh" type="string">
+            <column name="hinh_anh" length="100" />
+        </property>
+        <property name="gia" type="java.lang.Double">
+            <column name="gia" precision="17" scale="17">
+                <comment>don vi dong</comment>
+            </column>
+        </property>
+        <property name="soLuongTon" type="java.lang.Integer">
+            <column name="so_luong_ton" />
+        </property>
+        <property name="ngayCapNhat" type="date">
+            <column name="ngay_cap_nhat" length="13" />
+        </property>
+        <property name="thoiGianBaoHanh" type="java.lang.Integer">
+            <column name="thoi_gian_bao_hanh" />
+        </property>
+        <property name="soLuotXem" type="java.lang.Integer">
+            <column name="so_luot_xem" />
+        </property>
+        <set name="chiTietDonHangs" inverse="true">
+            <key>
+                <column name="ma_san_pham" length="10" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.ChiTietDonHang" />
+        </set>
+        <set name="chiTietKhuyenMais" inverse="true" lazy="false">
+            <key>
+                <column name="ma_san_pham" length="10" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.ChiTietKhuyenMai" />
+        </set>
+        <set name="linhKiens" inverse="true" lazy="false">
+            <key>
+                <column name="ma_san_pham" length="10" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="model.pojo.LinhKien" />
+        </set>
+        <set name="laptops" inverse="true" lazy="false">
+            <key>
+                <column name="ma_san_pham" length="10" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="model.pojo.Laptop" />
+        </set>
+    </class>
+</hibernate-mapping>

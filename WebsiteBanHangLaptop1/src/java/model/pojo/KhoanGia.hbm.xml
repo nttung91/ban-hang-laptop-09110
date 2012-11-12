@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2012 10:38:35 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.pojo.KhoanGia" table="khoan_gia" schema="public">
+        <id name="maKhoanGia" type="string">
+            <column name="ma_khoan_gia" />
+            <generator class="assigned" />
+        </id>
+        <property name="giaTu" type="java.lang.Double">
+            <column name="gia_tu" precision="17" scale="17" />
+        </property>
+        <property name="giaDen" type="java.lang.Double">
+            <column name="gia_den" precision="17" scale="17" />
+        </property>
+        <property name="tinhTrang" type="java.lang.Integer">
+            <column name="tinh_trang" />
+        </property>
+    </class>
+</hibernate-mapping>
