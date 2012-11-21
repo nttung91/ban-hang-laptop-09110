@@ -8,7 +8,7 @@
             <column name="username" length="50" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select" cascade="save-update">
+        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select" cascade="save-update" lazy="false">
             <column name="khach_hang" length="10" unique="true" />
         </many-to-one>
         <property name="matKhau" type="string">

@@ -6,29 +6,17 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/easySlider1.7.js"></script>
 <link type="text/css" href="css/screen.css" />
-<script type="text/javascript">
-  $(document).ready(function(){	
-	$("#slider").easySlider({
-		auto: true,
-		continuous: true 
-	});
-});
-</script>
+
 <style type="text/css">
 
 	</style>
 </head>
 
 <body>
-<div id="slider">
- 		<ul>
- 		<li><img src="images/DSC00176.JPG" alt=""/></li>
- 		<li><img src="images/DSC00176.JPG" alt=""/></li>
-		<li><img src="images/DSC00176.JPG" alt=""/></li>
-	<li><img src="images/DSC00176.JPG" alt=""/></li>
- 		<li><img src="images/DSC00176.JPG" alt="" /></li>
- 	</ul>
-	</div>
+    <form method="post" action="UploadFile.do" enctype="multipart/form-data">
+        <input type="file" name="uploadfile"/>
+        <input type="submit" value="upload"/>
+    </form>
 
 </body>
 </html>

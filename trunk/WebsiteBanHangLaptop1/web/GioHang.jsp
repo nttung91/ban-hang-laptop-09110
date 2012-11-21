@@ -15,16 +15,9 @@
 <%@page import="model.pojo.*,model.dao.*"%>
 <%@page import="myLib.*"%>
 <%@ page import="javax.servlet.http.HttpUtils.*" %> 
-<%!    String username, password;
-%>
-<%    //kiem tra dieu kien
-    
-    ArrayList<SanPham> gioHang = new ArrayList<SanPham>();
-    if (session.getAttribute("GioHang")!=null){
-        gioHang = (ArrayList<SanPham>)session.getAttribute("GioHang");
-    }
-   
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -46,11 +39,11 @@
         </style></head>
 
     <body topmargin="-10px">
-         <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
-             <tr><td>
-                     <jsp:include page="header.jsp"/>
-                 </td>
-             </tr>
+        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+            <tr><td>
+                    <jsp:include page="header.jsp"/>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <form method="get">
@@ -65,61 +58,58 @@
                                     <td width="20%" align="center" class="gio_hang_header">Tong</td>
                                     <td align="center" class="gio_hang_header">Xoa</td>
                                 </tr>
-                                <%if (gioHang.size() == 0) {
-                                %>
-                                <tr>
-                                    <td align="center" colspan="7"><p>GIỎ HÀNG ĐANG TRỐNG</p>
-                                        <p>----BẤM TIẾP TỤC MUA ĐỂ TIẾP TỤC MUA HÀNG ----</p></td>
+                                <c:choose>
+                                    <c:when test="${sessionScope.GioHang.size() == 0}">
 
-                                </tr>
-                                <%                                } else {
-                                %>
-                                <%
-                                    for (int i = 0; i < gioHang.size(); i++) {
-                                        SanPham sp = gioHang.get(i);
+                                        <tr>
+                                            <td align="center" colspan="7"><p>GIỎ HÀNG ĐANG TRỐNG</p>
+                                                <p>----BẤM TIẾP TỤC MUA ĐỂ TIẾP TỤC MUA HÀNG ----</p></td>
 
-                                %>
+                                        </tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="i" value="1"></c:set>
+                                        <c:forEach var="sp" items="${sessionScope.GioHang}"> 
+                                        
+                                       
+
+                                 
                                 <tr id="chi_tiet_gio_hang">
-                                    <td align="center"><%=(i + 1)%></td>
-                                    <td><div class="hinh_anh_san_pham"><img src="<%=sp.getHinhAnh()%>" width="100px" height="100px" alt="Loi Hinh anh" longdesc="#" /></div></td>
-                                    <td><p><%=sp.getTenSanPham()%></p></td>
-                                    <td><div class="gia_san_pham"><%=myLib.CurrencyConvertor.AmountToCurrencyFomat(sp.getGia(), "VND")%></div></td>
-                                    <td><div class="so_luong"><input name="txt_so_luong" type="text" size="5" maxlength="5" value="<%=sp.getSoLuongTon()%>" /></div></td>
-                                    <td><div class="thanh_tien"><span class="gia_san_pham"><%=myLib.CurrencyConvertor.AmountToCurrencyFomat(sp.getGia() * sp.getSoLuongTon(), "VND")%></span></div></td>
-                                    <td><div class="xoa_san_pham"><a href="GioHang.do?Action=XoaSanPham&maSanPham=<%= sp.getMaSanPham()%>" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
+                                    <td align="center">${i}</td>
+                                    <td><div class="hinh_anh_san_pham"><img src="${sp.getHinhAnh()}" width="100px" height="100px" alt="Loi Hinh anh" longdesc="#" /></div></td>
+                                    <td><p>${sp.getTenSanPham()}</p></td>
+                                    <td><div class="gia_san_pham"><fmt:formatNumber type="currency" value="${sp.getGia()}" currencySymbol=""></fmt:formatNumber> VND</div></td>
+                                    <td><div class="so_luong"><input name="txt_so_luong" type="text" size="5" maxlength="5" value="${sp.getSoLuongTon()}" /></div></td>
+                                    <td><div class="thanh_tien"><span class="gia_san_pham"><fmt:formatNumber type="currency" currencySymbol="" value="${sp.getGia() * sp.getSoLuongTon()}"></fmt:formatNumber>VND</span></div></td>
+                                    <td><div class="xoa_san_pham"><a href="GioHang.do?Action=XoaSanPham&maSanPham=${sp.getMaSanPham()}" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
                                 </tr>
-                                <%}
-                                     }%> 
+                                    <c:set var="i" value="${i+1}"></c:set>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
 
-                                <%
-                                    double tong = 0;
-                                    for (int i = 0; i < gioHang.size(); i++) {
-                                        tong += gioHang.get(i).getGia() * gioHang.get(i).getSoLuongTon();
-                                    }
-                                    double vat = tong * 0.1;
-                                    double thanhtien = tong + vat;
-                                %>
+                              
                                 <tr>
                                     <td colspan="5" align="right" style="padding-right:5px;" class="tong_tien" width="70%">Thanh tien</td>
-                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><%= myLib.CurrencyConvertor.AmountToCurrencyFomat(tong, "VND")%></td>
+                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><fmt:formatNumber type="currency" currencySymbol="" value="${tong}"></fmt:formatNumber>VND</td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" align="right" style="padding-right:5px;" class="tong_tien" width="70%">VAT (10%):</td>
-                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><%= myLib.CurrencyConvertor.AmountToCurrencyFomat(vat, "VND")%></td>
+                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><fmt:formatNumber type="currency" currencySymbol="" value="${vat}"></fmt:formatNumber>VND</td>
                                 </tr>
                                 <tr>
                                     <td colspan="5"align="right" style="padding-right:5px;" class="tong_tien" width="70%">Tong cong:</td>
-                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><%= myLib.CurrencyConvertor.AmountToCurrencyFomat(thanhtien, "VND")%></td>
+                                    <td colspan="2" class="tong_tien" style="padding-left:5px;"><fmt:formatNumber type="currency" currencySymbol="" value="${thanhtien}"></fmt:formatNumber>VND</td>
                                 </tr>
 
                             </table>
                             <div align="right">
                                 <p>
-                                    <%if (gioHang.size() > 0) {%>
+                                    <c:if test="${sessionScope.GioHang.size() > 0}">
                                     <input name="cap_nhat" type="submit" value="Cap nhat" class="button_control"/>
                                     <a href="GioHang.jsp?Action=HuyGioHang"><input name="huy_gio_hang" type="button" value="Huỷ Giỏ Hàng" class="button_control" /></a>
                                     <a href="ThanhToan.jsp"><input name="thanh_toan" type="button" class="button_control" value="Thanh toán"  /></a> 
-                                    <%}%>
+                                    </c:if>
                                     <a href="DanhSachSanPham.do"><input name="mua_tiep" type="button" value="Tiếp tục mua" class="button_control" /></a>
                                 </p>
                             </div>
@@ -129,6 +119,6 @@
                 </td>
             </tr>
         </table>
-        
+
     </body>
 </html>

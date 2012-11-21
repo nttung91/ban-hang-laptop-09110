@@ -6,13 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Untitled Document</title>
-        <link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
+        <link href="css/trangcanhan.css" rel="stylesheet" type="text/css" />
         <link href="css/cmxform.css" rel="stylesheet" type="text/css" />
         <link href="css/jquery.realperson.css" rel="stylesheet" type="text/css" />
         <script src="js/jquery-1.8.2.min.js" language="javascript" type="text/javascript"></script>
@@ -156,128 +157,67 @@
         </script>
     </head>
 
-    <body topmargin="-10px">	
-        <jsp:include page="header.jsp"/>
-        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
-            <tr>
+    <body topmargin="-10px">
+        <c:out value="${info}"/>
+    <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+
+<tr>
                 <td colspan="2">
                     <!-- Main content -->
-                    <form  id="signupForm" method="get" action="DangKyThanhVien.do">
-
-
-                        <div id="dangky_info" >
-                            <table width="100%" style="margin-top:10px">
+                    <form  id="signupForm" method="get" action="DoiThongTin.do">
+                      <div id="khachhang_info" >
+      <table width="100%">
                                 <tr>
-                                    <td colspan="2" class="login_header_td">Thông tin đăng nhập</td>
+                                    <td colspan="2" class="login_header_td">Thông tin giao hàng</td>
                                 </tr>
                                 <tr>
-                                    <td class="text_reg">&nbsp;</td>
-                                    <td class="text_input"><p id="errorList"><c:out value="${loi}"/></p></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text_reg"><label for="tenDangNhap">Tên Đăng nhập</label></td>
-                                    <td ><input class="text_input" id="tenDangNhap" name="tenDangNhap" type="text" size="30"  maxlength="50" value="${param.tenDangNhap}"/></td>
+                                  <td class="text_reg">&nbsp;</td>
+                                  <td  ><label id="errorList"><c:out value="${loi}"/></label></td>
                                 </tr>
                                 <tr>
-                                    <td class="text_reg"><label for="matKhau">Mật Khẩu</label></td>
-                                    <td  ><input id="matKhau" class="text_input" name="matKhau" type="password" size="30" maxlength="50" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="text_reg"><label for="nhapLaiMatKhau">Nhập lại mật khẩu</label></td>
-                                    <td  ><input id="nhapLaiMatKhau" class="text_input" name="nhapLaiMatKhau" type="password" size="30" maxlength="50" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="text_reg"><label for="email">Địa chỉ email</label></td>
-                                    <td  ><input id="email" class="text_input" name="email" type="email" size="30" maxlength="50" value="${param.email}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text_reg"><label for="nhapLaiEmail">Nhập Lại Địa chỉ email</label></td>
-                                    <td  ><input id="nhapLaiEmail" class="text_input" name="nhapLaiEmail" type="email" size="30" maxlength="50" value="${param.nhapLaiEmail}"/></td>
-                                </tr>
-                                <tr>
-                                    <td class="text_reg">Nhập thông tin cá nhân</td>
-                                    <td  ><input type="button" style="font-size:16px;font-weight:bolder;height:30px;width:200px;" value="Nhập sau" id="btn_More" onclick="optionCustomerInfo()" />
-                                        <input type="hidden" name="isMore" id="More" value="
-                                               <c:choose>
-                                                   <c:when test="${isMore}">
-                                                       <c:out value="More"/>    
-                                                   </c:when>
-                                                   <c:otherwise>
-                                                       <c:out value="noMore"/>
-                                                   </c:otherwise>
-                                               </c:choose>" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div id="khachhang_info" style="display:
-                             <c:choose>
-                                 <c:when test="${isMore}">
-                                     <c:out value="block"/>    
-                                 </c:when>
-                                 <c:otherwise>
-                                     <c:out value="none"/>
-                                 </c:otherwise>
-                             </c:choose>
-                             ;">
-                            <table width="100%">
-                                <tr>
-                                    <td colspan="2" class="login_header_td">Thông tin khách hàng</td>
-                                </tr>
-                                <tr>
-                                    <td class="text_reg"><label for="tenKhachHang">Họ và Tên</label></td>
-                                    <td  ><input class="text_input" id="tenKhachHang" name="tenKhachHang" type="text" size="30" maxlength="50" value="${param.tenKhachHang}"/></td>
+                                    <td width="311" class="text_reg"><label for="tenKhachHang">Họ và Tên</label></td>
+                                    <td width="673"  ><input class="text_input" id="tenKhachHang" name="tenKhachHang" type="text" size="30" maxlength="50" value="${kh.getTenKhachHang()}"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg"><label for="gioiTinh">Giới Tính</label></td>
-                                    <td>
-
-                                        <label>
-                                            <input name="gioiTinh" id="gioiTinh" type="radio" value="0" validate="required:true"/>
-                                            Nam</label>
-                                        <label>
-                                            <input name="gioiTinh" type="radio" value="1"/>
-                                            Nữ</label>
-                                        <label for="gioiTinh" class="error" style="margin-left:150px"> Bạn chưa chọn giới tính.</label>
-
-                                    </td>
+                                    <td><input name="gioiTinh" type="radio" value="Nam" checked />
+                                    Nam
+                                      <input name="gioiTinh" type="radio" value="Nu" />
+                                      Nữ</td>
                                 </tr>
                                 <tr >
                                     <td class="text_reg"><label>Ngày Sinh (ngày/tháng/năm)</label></td>
-                                    <td><input type="text" id="datepicker" name="datepicker" value="${param.datepicker}" /></td>
+                                    <td><input type="text" id="datepicker" name="datepicker" value="<fmt:formatDate value="${kh.getNgaySinh()}" pattern="dd/MM/yyyy"/>" /></td>
                                 </tr>
                                 <tr>
                                     <td class="text_reg"><label for="dienThoai">Điện Thoại</label></td>
-                                    <td  ><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="${param.datepicker}" /></td>
+                                    <td  ><input class="text_input" id="dienThoai" name="dienThoai" type="text" size="30" maxlength="50" value="${kh.getDienThoai()}" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="text_reg">Địa Chỉ</td>
-                                    <td  ><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="${param.diaChi}" /></td>
+                                    <td class="text_reg">Địa chỉ giao hàng</td>
+                                    <td  ><input class="text_input" id="diaChi" name="diaChi" type="text" size="30" maxlength="50" value="${kh.getDiaChi()}" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="text_reg"><label>Thành Phố</label></td>
-                                    <td  ><input class="text_input" id="thanhPho" name="thanhPho" type="text" size="30" maxlength="50" value="${param.thanhPho}" /></td>
+                                    <td class="text_reg">&nbsp;</td>
+                                    <td  >&nbsp;</td>
                                 </tr>
                             </table>
                         </div>
-                        <label for="defaultReal" class="text_reg" style="margin-bottom:10px;padding-left:210px;">Nhập mã xác nhận bên dưới</label>
-                        <p></p>
-                        <div id="captcha" style="padding-left:210px;">
-                            <input type="text" id="defaultReal" name="defaultReal">
-                        </div>
+                    <p></p>
+                        <div id="captcha" style="padding-left:210px;"></div>
 
                         <div id="control">
-                            <input name="dangKy" class="control_button" type="submit"  value="Đăng Ký"/> <input class="control_button" name="nhapLai" type="button" value="Nhập Lại" id="resetForm" onclick="processResetForm()"/>
+                            <input name="dangKy" class="control_button" type="submit"  value="Lưu thay đổi"/> <input class="control_button" name="nhapLai" type="button" value="Nhập Lại" id="resetForm" onclick="processResetForm()"/>
                         </div>
                     </form>
                 </td>
-                <td width="4">&nbsp;</td>
+        
             </tr>
+            <tr>
+  <td colspan="2"><a href="TrangCaNhan.do"><< Trở Lại</a></td>
+</tr>
             <!-- End of Main content -->
-        </table>
+      </table>
 
     </body>
 </html>
