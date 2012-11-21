@@ -14,7 +14,6 @@
 <%!    //khai bao bien vs ham
     SanPhamDAO spdao = new SanPhamDAO();
     HangSanXuatDAO hangsxDAO = new HangSanXuatDAO();
-
 %>
 
 
@@ -43,9 +42,6 @@
                         padding: 5px 6px 0px 6px;
                         height: 35px;
                         line-height: 100%;
-        
-        
-        
                         background: #D1D1D1;
                         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A9A9A9, endColorstr=#C2C2C2);
                         background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#C2C2C2));
@@ -307,10 +303,10 @@
                                         <!-- sp 1 - 1 -->
                                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="san_pham">
                                             <tr>
-                                                <td><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loai%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><img class="imgsp" src=<%= sp.getHinhAnh()%> width="130" height="103" /></a></td>
+                                                <td><a href="ChiTietSanPham.do?loaiSanPham=<%=loai%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><img class="imgsp" src=<%= sp.getHinhAnh()%> width="130" height="103" /></a></td>
                                             </tr>
                                             <tr>
-                                                <td class="ten_san_pham"><a href="ChiTietSanPham.jsp?loaiSanPham=<%=loaiSanPham%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><%=sp.getTenSanPham()%></a></td>
+                                                <td class="ten_san_pham"><a href="ChiTietSanPham.do?loaiSanPham=<%=loaiSanPham%>&maSanPham=<%=sp.getMaSanPham()%>" style="text-decoration:none;"><%=sp.getTenSanPham()%></a></td>
                                             </tr>
                                             <tr>
                                                 <td><span class="gia"><%= sp.getGia() + "00 VND"%></span></td>

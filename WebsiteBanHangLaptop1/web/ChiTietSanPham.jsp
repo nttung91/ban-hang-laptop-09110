@@ -12,61 +12,20 @@
 <%@page import="org.hibernate.HibernateException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.pojo.*,model.dao.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%
-    boolean isItemExist = false;
-    boolean hasSanPham = true;
-
-    Laptop lt = new Laptop();
-    LinhKien lk = new LinhKien();
-    SanPham sp = null;
-    String loaiSanPham = null, maSanPham = null;
-    ArrayList<SanPham> gioHang;
-     
-     out.println(request.getContextPath());
-    if (session.getAttribute("GioHang") != null) {
-        gioHang = (ArrayList<SanPham>) session.getAttribute("GioHang");
-        // out.println("set masp1");
-    } else {
-        gioHang = new ArrayList<SanPham>();
-        //out.println("set masp2");
-    }
-
-    if (request.getAttribute("sanPham") != null) {
-        sp = (SanPham) request.getAttribute("sanPham");
-    }
-    if (request.getAttribute("isItemExist") != null) {
-        isItemExist = (Boolean) request.getAttribute("isItemExist");
-    }
-    if (request.getAttribute("hasSanPham") != null) {
-        hasSanPham = (Boolean) request.getAttribute("hasSanPham");
-    }
-    if (request.getAttribute("loaiSanPham") != null) {
-        loaiSanPham = request.getAttribute("loaiSanPham").toString();
-    }
-    if (request.getAttribute("laptop") != null) {
-        lt = (Laptop) request.getAttribute("laptop");
-    }
-    if (request.getAttribute("linhkien") != null) {
-        lk = (LinhKien) request.getAttribute("linhkien");
-    }
-     out.println(request.getMethod());
-      if (sp!=null){
-                (new SanPhamDAO()).tangSoLuotXem(sp, 1);
-            }
-
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><%=maSanPham%></title>
+        <title>${maSanPham}</title>
         <link href="css/dang_nhap.css" rel="stylesheet" type="text/css" />
         <link href="css/thong_tin_san_pham.css" rel="stylesheet" type="text/css" />
         <link href="css/giohangsub.css" type="text/css" rel="stylesheet"/>
         <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
-         <script type="text/javascript" src="js/jquery.fancybox.js?v=2.1.3"></script>
-	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.2" media="screen" />
+        <script type="text/javascript" src="js/jquery.fancybox.js?v=2.1.3"></script>
+        <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.2" media="screen" />
         <script language="javascript" type="text/javascript">
             $(function() {
                 var offset = $("#giohang").offset();
@@ -96,59 +55,56 @@
                     
                 });
             });
-			$(document).ready(function() {
-			$("#soLuong").keydown(function(event) {
-        // Allow: backspace, delete, tab, escape, and enter
-        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || 
-             // Allow: Ctrl+A
-            (event.keyCode == 65 && event.ctrlKey === true) || 
-             // Allow: home, end, left, right
-            (event.keyCode >= 35 && event.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        else {
-            // Ensure that it is a number and stop the keypress
-            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-                event.preventDefault(); 
-            }   
-        }
-    });
-			// Disable opening and closing animations, change title type
-			$(".fancybox-effects-b").fancybox({
-				openEffect  : 'fade',
-				closeEffect	: 'fade',
+            $(document).ready(function() {
+                $("#soLuong").keydown(function(event) {
+                    // Allow: backspace, delete, tab, escape, and enter
+                    if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || 
+                        // Allow: Ctrl+A
+                    (event.keyCode == 65 && event.ctrlKey === true) || 
+                        // Allow: home, end, left, right
+                    (event.keyCode >= 35 && event.keyCode <= 39)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    else {
+                        // Ensure that it is a number and stop the keypress
+                        if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                            event.preventDefault(); 
+                        }   
+                    }
+                });
+                // Disable opening and closing animations, change title type
+                $(".fancybox-effects-b").fancybox({
+                    openEffect  : 'fade',
+                    closeEffect	: 'fade',
 				
-				helpers : {
-					title : {
-						type : 'over'
-					}
-				}
-			});
-				});
+                    helpers : {
+                        title : {
+                            type : 'over'
+                        }
+                    }
+                });
+            });
         </script>
         <style type="text/css">
-		.fancybox-custom .fancybox-skin {
-			box-shadow: 0 0 50px #222;
-		}
-	</style>
+            .fancybox-custom .fancybox-skin {
+                box-shadow: 0 0 50px #222;
+            }
+        </style>
     </head>
 
     <body topmargin="-10px">
         <!--pop up gio hang-->
         <div id="giohang">
-            <div id="title">Ban co <%=gioHang.size()%> </br>san pham</br>trong gio</div>
-            <%out.println(gioHang.size());%>
+            <div id="title">Ban co ${sessionScope.GioHang.size()} </br>san pham</br>trong gio</div>
+
             <div id="chitietgiohang">
-            <%
-                    for (int i = 0; i < gioHang.size(); i++) {
-                        SanPhamDAO spdao = new SanPhamDAO();
-                %>     
-                <a href="ChiTietSanPham.jsp?loaiSanPham=<%=spdao.getLoaiSanPham(gioHang.get(i).getMaSanPham())%>&maSanPham=<%=gioHang.get(i).getMaSanPham()%>">
-                    <li><%=gioHang.get(i).getTenSanPham()%></li>
-                </a>
-                <%      }
-                %> 
+                <c:forEach var="spp" items="${sessionScope.GioHang}" >
+
+                    <a href="ChiTietSanPham.jsp?loaiSanPham=${spdao.getLoaiSanPham(spp.getMaSanPham())}&maSanPham=${spp.getMaSanPham()}">
+                        <li>${spp.getTenSanPham()}</li>
+                    </a>
+                </c:forEach>
             </div>
             <div>
                 <a href="GioHang.jsp"><input type="button" value="Xem chi tiet" /></a>
@@ -157,241 +113,289 @@
         <!--pop up gio hang-->
 
         <jsp:include page="header.jsp"/>
-        <% if (isItemExist) {%>
+        <c:choose>
+            <c:when test="${isItemExist}">
 
-        <!-- Main content -->
-        <table width="1000px" cellpadding="0" cellspacing="0"  align="center">
-            <tr>
-                <td width="45%" rowspan="8" id="hinh_anh_sp_chi_tiet">
-					<a class="fancybox-effects-b" href="<% if (hasSanPham) {
-                            out.print(sp.getHinhAnh());
-                        }%>" title="<% if (hasSanPham) {
-                            out.print(sp.getTenSanPham());
-                        }%>"><img src="<% if (hasSanPham) {
-                            out.print(sp.getHinhAnh());
-                        }%>" alt=""  width="300" height="217"/></a>
-                </td>
-                <td width="22%" height="39" id="ten_san_pham"><% if (hasSanPham) {
-                        out.println(sp.getTenSanPham());
-                    }%></td>
-                <td height="39" colspan="2" id="ten_san_pham">&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="text_thong_tin_san_pham_even">Mã số</td>
-                <td colspan="2" class="text_thong_tin_san_pham_even">: <%out.println(sp.getMaSanPham());%></td>
-            </tr>
-            <tr>
-                <td class="text_thong_tin_san_pham">Nhà sản xuất</td>
-                <td colspan="2" class="text_thong_tin_san_pham">:
-                    <% if (hasSanPham) {
-                            out.println(sp.getHangSanXuat().getTenHang());
-                        }%></td>
-            </tr>
-            <tr>
-                <td class="text_thong_tin_san_pham_even">Bảo hành</td>
-                <td colspan="2" class="text_thong_tin_san_pham_even">: <% if (hasSanPham) {
-                        out.println(sp.getThoiGianBaoHanh() + " Tháng");
-                    }%></td>
-            </tr>
-            <tr>
-                <td class="text_thong_tin_san_pham">Ngày cập nhật</td>
-                <td colspan="2" class="text_thong_tin_san_pham">:
-                    <% if (hasSanPham) {
-                            out.println(myLib.DateConvertor.formatUtilDate(sp.getNgayCapNhat()));
-                        }%></td>
-            </tr>
-             <tr>
-                <td class="text_thong_tin_san_pham_even">Số Lượt xem</td>
-                <td colspan="2" class="text_thong_tin_san_pham_even">:
-                    <% if (hasSanPham) {
-                            out.println(sp.getSoLuotXem());
-                        }%></td>
-            </tr>
-            <tr>
-            <form action="GioHang.do" method="post">
-                <input type="hidden" name="Action" value="ThemVaoGio" />
-                <input type="hidden" name="maSanPham" value="<%=sp.getMaSanPham()%>" />
-              
-                <td class="text_thong_tin_san_pham"><label for="soLuong">Số Lượng</label><input type="text" name="soLuong" id="soLuong" style="margin-left:5px;width:100px" value="1" /> </td>
-                <td width="33%" class="gia_san_pham">  <input type="submit" value="" style="background-image:url(images/addtocart.png);background-repeat:no-repeat;background-size:100% 100%;width:159px;height:35px;" /></td>
-            </form>
-            </tr>
-            <tr>
-                <td height="38" colspan="3" class="gia_san_pham"><% if (hasSanPham) {
-                        out.println(myLib.CurrencyConvertor.AmountToCurrencyFomat(sp.getGia(), "VND"));
-                    }%>
-                </td>
-            </tr>
-            <tr>
-                <td height="24">&nbsp;</td>
-                <td height="24" colspan="3"> <p>
-                        <%
-                            if (hasSanPham) {
-                                Iterator<ChiTietKhuyenMai> it = sp.getChiTietKhuyenMais().iterator();
-                                while (it.hasNext()) {
-                                    ChiTietKhuyenMai ctkm = it.next();
-                                    out.println("<li class='khuyen_mai'>" + ctkm.getKhuyenMai().getNoiDungKhuyenMai() + "</li>");;
-                                }
-                            }
+                <!-- Main content -->
+                <table width="1000px" cellpadding="0" cellspacing="0"  align="center">
+                    <tr>
+                        <td width="45%" rowspan="8" id="hinh_anh_sp_chi_tiet">
+                            <a class="fancybox-effects-b" href="<c:if test="${hasSanPham}">
+                                   <c:out value="${sanPham.getHinhAnh()}"></c:out></c:if>"
+                               title="<c:if test="${hasSanPham}">
+                                   <c:out value="${sanPham.getTenSanPham()}"></c:out>
+                               </c:if>">
+                                <img src="<c:if test="${hasSanPham}">
+                                         <c:out value="${sanPham.getHinhAnh()}"></c:out>
+                                     </c:if>" alt=""  width="300" height="217"/></a>
+                        </td><td width="22%" height="39" id="ten_san_pham">
+                            <c:if test="${hasSanPham}">
+                                <c:out value="${sanPham.getTenSanPham()}"></c:out>
+                            </c:if>
+                        </td>
+                        <td height="39" colspan="2" id="ten_san_pham">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="text_thong_tin_san_pham_even">Mã số</td>
+                        <td colspan="2" class="text_thong_tin_san_pham_even">: <c:out value="${sanPham.getMaSanPham()}"></c:out></td>
+                        </tr>
+                        <tr>
+                            <td class="text_thong_tin_san_pham">Nhà sản xuất</td>
+                            <td colspan="2" class="text_thong_tin_san_pham">:
+                            <c:if test="${hasSanPham}">
+                                <c:out value="${sanPham.getHangSanXuat().getTenHang()}"></c:out>
+                            </c:if></td>
+                    </tr>
+                    <tr>
+                        <td class="text_thong_tin_san_pham_even">Bảo hành</td>
+                        <td colspan="2" class="text_thong_tin_san_pham_even">:
+                            <c:if test="${hasSanPham}">
+                                <c:out value="${sanPham.getThoiGianBaoHanh()}">Tháng</c:out>
+                            </c:if></td>
+                    </tr>
+                    <tr>
+                        <td class="text_thong_tin_san_pham">Ngày cập nhật</td>
+                        <td colspan="2" class="text_thong_tin_san_pham">:
 
-                        %>
-                    </p></td>
-            </tr>
-            <tr>
-                <td colspan="4" style="vertical-align:top;">
-                    <div class="container">
-                        <table width="100%" cellpadding="0" cellspacing="0" class="<% if (loaiSanPham.equals("laptop")) {
-                                out.println("showed");
-                            } else {
-                                out.println(
-                                        "hidden");
-                            }%>" style="margin-top:10px;">
-                            <tr>
-                                <td height="38"  colspan="4"><div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div></td>
-                            </tr>
-                            <tr>
-                                <td width="22%" class="text_thong_tin_san_pham">CPU</td>
-                                <td width="25%" class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getChipCpu());
-                                        }%></td>
-                                <td width="47%">&nbsp;</td>
-                                <td width="6%">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham_even"><label>Kích Thước Màn Hình</label></td>
-                                <td class="text_thong_tin_san_pham_even">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getManHinh() + "Inch");
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham">RAM</td>
-                                <td class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getRam());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham_even">Ổ Cứng</td>
-                                <td class="text_thong_tin_san_pham_even">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getOCung());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham">Đĩa quang</td>
-                                <td class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getDiaQuang());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham_even">VGA</td>
-                                <td class="text_thong_tin_san_pham_even">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getCardDoHoa());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham">Wireless</td>
-                                <td class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getCardKhongDay());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham_even">OS</td>
-                                <td class="text_thong_tin_san_pham_even">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getHeDieuHanh());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham">Tính năng khác</td>
-                                <td class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            if (lt.getTinhNangKhac() != null) {
-                                                out.println(lt.getTinhNangKhac());
-                                            } else {
-                                                out.println("Không có");
-                                            }
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham_even">Pin</td>
-                                <td class="text_thong_tin_san_pham_even">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getPin());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text_thong_tin_san_pham">Trọng lượng</td>
-                                <td class="text_thong_tin_san_pham">:
-                                    <% if (hasSanPham && lt != null) {
-                                            out.println(lt.getCanNang());
-                                        }%></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </table>
-                    </div>
+                            <c:if test="${hasSanPham}">
+                                <fmt:formatDate value="${sanPham.getNgayCapNhat()}" pattern="dd/MM/yyyy"></fmt:formatDate>
+                            </c:if>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text_thong_tin_san_pham_even">Số Lượt xem</td>
+                        <td colspan="2" class="text_thong_tin_san_pham_even">:
+                            <c:if test="${hasSanPham}">
+                                <c:out value="${sanPham.getSoLuotXem()}"></c:out>
+                            </c:if></td>
+                    </tr>
+                    <tr>
+                        <form action="GioHang.do" method="post">
+                            
+                                <input type="hidden" name="Action" value="ThemVaoGio" />
+                                <input type="hidden" name="maSanPham" value="<c:out value="${sanPham.getMaSanPham()}"></c:out>"/>
+                                    <td class="text_thong_tin_san_pham">
+                                        <label for="soLuong">Số Lượng</label>
+                                        <input type="text" name="soLuong" id="soLuong" style="margin-left:5px;width:100px" value="1" />
+                                    </td>
+                                    <td width="33%" class="gia_san_pham"><input type="submit" value="" style="background-image:url(images/addtocart.png);background-repeat:no-repeat;background-size:100% 100%;width:159px;height:35px;" /></td>
+                            </form>
+                        </tr>
+                        <tr>
+                            <td height="38" colspan="3" class="gia_san_pham"> 
+                            <c:if test="${hasSanPham}">
+                                <fmt:formatNumber type="currency" value="${sanPham.getGia()}" currencySymbol="" maxFractionDigits="0" ></fmt:formatNumber>
+                            </c:if>
+                            VND</td>
+                    </tr>
+                    <tr>
+                        <td height="24">&nbsp;</td>
+                        <td height="24" colspan="3"> <p>
+
+                                <c:if test="${hasSanPham}">
+
+                                    <c:forEach var="km" items="${khuyenMais}">
+                                        <li class='khuyen_mai'><c:out value="${km}"></c:out></li>
+
+                                    </c:forEach>
+                                </c:if>
 
 
-                    <div class="<% if (loaiSanPham.equals(
-                                "laptop")) {
-                            out.println("hidden");
-                        } else {
-                            out.println(
-                                    "showed");
-                        }%>">
-                        <div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div>
-                        <div style="margin-top:0px;top:0px;left:0px; ">
-                            <ul><% if (hasSanPham && loaiSanPham.equals("linhkien")) {
-                                    String s = lk.getMoTa();
-                                    String[] arr = s.split("</br>");
-                                    for (int i = 0; i < arr.length; i++) {
-										if (i%2==0)
-                                        out.println("<li class='chi_tiet_phu_kien'>" + arr[i] + "</li>");
-										else 
-										out.println("<li class='chi_tiet_phu_kien_even'>" + arr[i] + "</li>");
-                                    }
-                                }%>
-                            </ul>
-                        </div>
-                    </div>
+                            </p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="vertical-align:top;">
+                            <div class="container">
+                                <table width="100%" cellpadding="0" cellspacing="0" class="
+                                       <c:choose>
+                                           <c:when test="${loaiSanPham=='laptop'}">                                
+                                               <c:out value="showed"></c:out>
+                                           </c:when>
+                                           <c:otherwise>
+                                               <c:out value="hidden"></c:out>
 
 
-                    <div class="text_header">Sản phầm tương tự</div>
+                                           </c:otherwise>
+                                       </c:choose>" style="margin-top:10px;">
+                                    <tr>
+                                        <td height="38"  colspan="4"><div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="22%" class="text_thong_tin_san_pham">CPU</td>
+                                        <td width="25%" class="text_thong_tin_san_pham">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getChipCpu()}"></c:out>
 
-                </td>
-            </tr>
-        </table>
+                                            </c:if> </td>
+                                        <td width="47%">&nbsp;</td>
+                                        <td width="6%">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham_even"><label>Kích Thước Màn Hình</label></td>
+                                        <td class="text_thong_tin_san_pham_even">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getManHinh()}"></c:out>
 
-<%} else {%>
-        <div align="center" style="width:100%;"><h3>Sản phẩm không tồn tại !!</h3></div>
+                                            </c:if> 
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham">RAM</td>
+                                        <td class="text_thong_tin_san_pham">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getRam()}"></c:out>
 
-        <%                            }
+                                            </c:if> 
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham_even">Ổ Cứng</td>
+                                        <td class="text_thong_tin_san_pham_even">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getOCung()}"></c:out>
 
-        %>
+                                            </c:if> 
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham">Đĩa quang</td>
+                                        <td class="text_thong_tin_san_pham">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getDiaQuang()}"></c:out>
+
+                                            </c:if> </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham_even">VGA</td>
+                                        <td class="text_thong_tin_san_pham_even">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getCardDoHoa()}"></c:out>
+
+                                            </c:if> </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham">Wireless</td>
+                                        <td class="text_thong_tin_san_pham">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getCardKhongDay()}"></c:out>
+
+                                            </c:if> </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham_even">OS</td>
+                                        <td class="text_thong_tin_san_pham_even">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getHeDieuHanh()}"></c:out>
+
+                                            </c:if> </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham">Tính năng khác</td>
+                                        <td class="text_thong_tin_san_pham">:
+                                            <c:choose>
+                                                <c:when test="${hasSanPham && laptop !=null }">
+                                                    <c:if test="${laptop.getTinhNangKhac()}">
+                                                        <c:out value="${laptop.getTinhNangKhac()}"></c:out>
+
+                                                    </c:if> 
+
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:out value="Không có"></c:out>
+
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham_even">Pin</td>
+                                        <td class="text_thong_tin_san_pham_even">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getPin()}"></c:out>
+
+                                            </c:if></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text_thong_tin_san_pham">Trọng lượng</td>
+                                        <td class="text_thong_tin_san_pham">:
+                                            <c:if test="${hasSanPham && laptop !=null }">
+                                                <c:out value="${laptop.getCanNang()}"></c:out>
+
+                                            </c:if></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            <div class="<c:choose>
+                                     <c:when test="${loaiSanPham=='laptop'}">
+
+                                         <c:out value="hidden"></c:out>
+                                     </c:when>
+                                     <c:otherwise>
+                                         <c:out value="showed"></c:out>
+
+
+                                     </c:otherwise>
+                                 </c:choose>">
+                                <div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div>
+                                <div style="margin-top:0px;top:0px;left:0px; ">
+                                    <ul>
+                                        <c:if test="${hasSanPham && loaiSanPham =='linhkien'}">
+                                            <c:set var="i" value="0"></c:set>
+                                            <c:out value="${chiTietLinhKiens.size()}"></c:out>
+                                            <c:forEach var="cts" items="${chiTietLinhKiens}">
+                                                <c:choose>
+                                                    <c:when test="${i%2==0}">
+
+                                                        <li class='chi_tiet_phu_kien'>${cts}</li>
+                                                    </c:when>
+                                                    <c:otherwise>
+
+                                                        <li class='chi_tiet_phu_kien_even'>${cts}</li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                    <c:set var="i" value="${i+1}"></c:set>
+                                            </c:forEach>
+
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class="text_header">Sản phầm tương tự</div>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </c:when>
+            <c:otherwise>
+                <div align="center" style="width:100%;"><h3>Sản phẩm không tồn tại !!</h3></div>
+
+            </c:otherwise>
+        </c:choose>
         <!-- End of Main content -->
 
     </body>

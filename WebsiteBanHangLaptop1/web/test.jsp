@@ -42,7 +42,9 @@
     </head>
     <body>
       <p>
-		<a class="fancybox-effects-b" href="images/lap2.jpg" title="Ten san pham"><img src="images/lap2.jpg" alt="" /></a>	
+		<%
+                out.println(request.getSession().getServletContext().getRealPath(request.getScheme()));
+%>
 	</p>
     </body>
 </html>

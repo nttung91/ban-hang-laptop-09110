@@ -49,15 +49,15 @@
             </key>
             <one-to-many class="model.pojo.ChiTietKhuyenMai" />
         </set>
-        <set name="linhKiens" inverse="true" lazy="false">
+        <set name="linhKiens" inverse="true" lazy="false" cascade="save-update">
             <key>
                 <column name="ma_san_pham" length="10" not-null="true" unique="true" />
             </key>
             <one-to-many class="model.pojo.LinhKien" />
         </set>
-        <set name="laptops" inverse="true" lazy="false">
+        <set name="laptops" inverse="true" lazy="false" cascade="save-update" >
             <key>
-                <column name="ma_san_pham" length="10" not-null="true" unique="true" />
+                <column name="ma_san_pham" length="10" not-null="true" unique="true"  />
             </key>
             <one-to-many class="model.pojo.Laptop" />
         </set>
