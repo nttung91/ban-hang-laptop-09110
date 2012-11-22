@@ -7,19 +7,30 @@
     </session-config>
     <context-param>
         <description>Location to store uploaded file</description> 
-    <param-name>file-upload</param-name> 
-    <param-value>
-        C:\Users\THANHTUNG\Documents\NetBeansProjects\CNPMM\WebsiteBanHangLaptop1\web\images\hinh_san_pham\
-     </param-value> 
+        <param-name>file-upload</param-name> 
+        <param-value>
+            C:\Users\THANHTUNG\Documents\NetBeansProjects\CNPMM\WebsiteBanHangLaptop1\web\images\hinh_san_pham\
+        </param-value> 
     </context-param>
     <context-param>
         <description>Location to store uploaded file</description> 
-    <param-name>file-upload1</param-name> 
-    <param-value>
-        C:\Users\THANHTUNG\Documents\NetBeansProjects\CNPMM\WebsiteBanHangLaptop1\build\web\images\hinh_san_pham
-     </param-value> 
+        <param-name>file-upload1</param-name> 
+        <param-value>
+            C:\Users\THANHTUNG\Documents\NetBeansProjects\CNPMM\WebsiteBanHangLaptop1\build\web\images\hinh_san_pham
+        </param-value> 
     </context-param>
+    <context-param>
+        <param-name>
+            org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG
+        </param-name>
+        <param-value>          
+            /WEB-INF/tiles.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.apache.tiles.web.startup.TilesListener</listener-class>
+    </listener>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>BanLapTop.do</welcome-file>
     </welcome-file-list>
 </web-app>

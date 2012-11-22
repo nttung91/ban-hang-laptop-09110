@@ -13,17 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dao.HangSanXuatDAO;
-import model.dao.KhoanGiaDAO;
-import model.dao.SanPhamDAO;
 import model.pojo.temp_class;
 
 /**
  *
  * @author MRKYT
  */
-@WebServlet(name = "Header", urlPatterns = {"/Header.do"})
-public class Header extends HttpServlet {
+@WebServlet(name = "Footer", urlPatterns = {"/Footer.do"})
+public class Footer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,40 +37,15 @@ public class Header extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
-            ///////////////////// Đăng Nhập 
             HttpSession session = request.getSession();
+
+            // temp_class obj = (temp_class) session.getAttribute("Info");
             temp_class obj = (temp_class) session.getAttribute("temp");
-            //   temp_class obj = (temp_class) request.getAttribute("tam");
-            if (request.getParameter("logout") != null) {
-                if (Boolean.parseBoolean(request.getParameter("logout").toString())) {
-                    session.setAttribute("daDangNhap", false);
-                    session.removeAttribute("tenDangNhap");
-                }
-            }
-            if (session.getAttribute("daDangNhap") != null) {
-                // out.println("<h1>fad</h1>");
-            } else {
-
-                session.setAttribute("daDangNhap", false);
-            }
 
 
-            if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
-
-
-                obj.setTenDangNhap(session.getAttribute("tenDangNhap").toString());
-            }
-            ////////////////////////
-            HangSanXuatDAO hangSanXuatDAO = new HangSanXuatDAO();
-            KhoanGiaDAO khoanGiaDAO = new KhoanGiaDAO();
-            obj.setListHangSX(hangSanXuatDAO.getList());
-            obj.setListKhoanGia(khoanGiaDAO.getList());
-            session.setAttribute("temp", obj);
-            //request.setAttribute("tam", obj);
-//            left_1 left = new left_1();
-//            left.doGet(request, response);
-            String url = "Left.do?" + obj.getUrlp();
+            String url = "index.jsp";
+            
+            request.setAttribute("page",obj.getAction());
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } finally {
@@ -81,7 +53,7 @@ public class Header extends HttpServlet {
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

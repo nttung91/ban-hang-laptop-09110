@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="Home" template="/template/Template1.jsp">
+        <put-attribute name="Title" value="Trang chủ" />
+        <put-attribute name="Header" value="/pages/Header.jsp" />
+        
+        <put-attribute name="Left" value="/pages/Left.jsp" />
+        <put-attribute name="MainContent" value="/pages/HomeContent.jsp" />
+        <put-attribute name="Footer" value="/pages/Footer.jsp" />
+    </definition>
+    <definition name="SanPham" extends="Home">
+        <put-attribute name="Title" value="Trang Danh Sach San Pham"/>
+        <put-attribute name="MainContent" value="/pages/DanhSachSanPham.jsp"/>    
+    </definition>
+    <definition name="SuaSanPham" extends="Home">
+        <put-attribute name="Title" value="Trang Danh Sach San Pham"/>
+        <put-attribute name="MainContent" value="/pages/SuaThongTinSanPham.jsp"/>    
+    </definition>
+     <definition name="DangNhap" extends="Home">
+        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="MainContent" value="/pages/DangNhap.jsp"/>    
+    </definition>
+   
+</tiles-definitions>

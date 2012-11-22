@@ -13,17 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dao.HangSanXuatDAO;
-import model.dao.KhoanGiaDAO;
-import model.dao.SanPhamDAO;
 import model.pojo.temp_class;
 
 /**
  *
  * @author MRKYT
  */
-@WebServlet(name = "Header", urlPatterns = {"/Header.do"})
-public class Header extends HttpServlet {
+@WebServlet(name = "BanLapTop", urlPatterns = {"/BanLapTop.do"})
+public class BanLapTop extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -41,47 +38,79 @@ public class Header extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            ///////////////////// Đăng Nhập 
+            temp_class obj = new temp_class();
+
+
+            String urlp = request.getQueryString();
+
+//            int code =-1;
+//           
+//            for (int i = 0 ; i <urlp.length() ; i ++)
+//                if (urlp.charAt(i)=='?' )
+//                    code = i;
+//            if  (code !=-1)
+//            urlp = urlp.substring(code);
+            obj.setUrlp(urlp);
             HttpSession session = request.getSession();
-            temp_class obj = (temp_class) session.getAttribute("temp");
-            //   temp_class obj = (temp_class) request.getAttribute("tam");
-            if (request.getParameter("logout") != null) {
-                if (Boolean.parseBoolean(request.getParameter("logout").toString())) {
-                    session.setAttribute("daDangNhap", false);
-                    session.removeAttribute("tenDangNhap");
-                }
+
+
+
+
+            obj.setSosptrang(5);
+
+            obj.setTrang(1);
+
+            obj.setGiatu(0);
+            obj.setGiaden(0);
+
+            obj.setMahang("");
+            obj.setLoaiSanPham("");
+
+
+            obj.setTensp("");
+            if (request.getParameter("Action") == null) {
+                obj.setAction("SanPham");
             }
-            if (session.getAttribute("daDangNhap") != null) {
-                // out.println("<h1>fad</h1>");
-            } else {
-
-                session.setAttribute("daDangNhap", false);
+            if (request.getParameter("Action") != null) {
+                obj.setAction((request.getParameter("Action")));
             }
 
 
-            if (Boolean.parseBoolean(session.getAttribute("daDangNhap").toString())) {
 
 
-                obj.setTenDangNhap(session.getAttribute("tenDangNhap").toString());
-            }
-            ////////////////////////
-            HangSanXuatDAO hangSanXuatDAO = new HangSanXuatDAO();
-            KhoanGiaDAO khoanGiaDAO = new KhoanGiaDAO();
-            obj.setListHangSX(hangSanXuatDAO.getList());
-            obj.setListKhoanGia(khoanGiaDAO.getList());
-            session.setAttribute("temp", obj);
+
             //request.setAttribute("tam", obj);
+            session.setAttribute("temp", obj);
+
+//            header h = new header();
+//            h.doGet(request, response);
 //            left_1 left = new left_1();
 //            left.doGet(request, response);
-            String url = "Left.do?" + obj.getUrlp();
+//            if (obj.getAction().equals("SanPham")) {
+//
+//                DanhSachSanPham dssp = new DanhSachSanPham();
+//                dssp.doGet(request, response);
+//
+//            }
+//            footer foot = new footer();
+//            foot.doGet(request, response);
+
+//            String url = "index.jsp";
+//
+//            request.setAttribute("page", obj.getAction());
+//            RequestDispatcher rd = request.getRequestDispatcher(url);
+//            rd.forward(request, response);
+
+            String url = "Header.do?" + urlp;
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+
         } finally {
             out.close();
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

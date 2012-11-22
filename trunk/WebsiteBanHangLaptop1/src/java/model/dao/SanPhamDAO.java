@@ -152,5 +152,54 @@ public class SanPhamDAO extends ObjectDAO<SanPham, String> {
         
         return list;
     }
+    public List<SanPham> searchPhanTrangTheoGia(String timkiem, int sosptrang, int trang, double giatu, double giaden) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<SanPham> list = null;
+        String[] str = timkiem.split(",");
+        String hql = "";
+        if (giatu == 0 && giaden == 0) {
+            hql = String.format(
+                    "select obj from SanPham obj where (upper(obj.tenSanPham) like upper(:tensp) and upper(obj.hangSanXuat.maHang) like upper(:hangsx)) or upper(obj.hangSanXuat.tenHang) like upper(:tensp) ");
+            if ((str.length != 0 && str[0].equals("")) || (str.length == 2 && !str[0].equals("") && !str[1].equals(""))) {
+                hql = String.format(
+                        "select obj from SanPham obj where (upper(obj.tenSanPham) like upper(:tensp) and upper(obj.hangSanXuat.maHang) like upper(:hangsx))");
+            }
+        } else {
+            hql = String.format(
+                    "select obj from SanPham obj where( (upper(obj.tenSanPham) like upper(:tensp) and upper(obj.hangSanXuat.maHang) like upper(:hangsx)) or upper(obj.hangSanXuat.tenHang) like upper(:tensp)) and (obj.gia) >= :giatu and obj.gia <= :giaden  ");
+            if ((str.length != 0 && str[0].equals("")) || (str.length == 2 && !str[0].equals("") && !str[1].equals(""))) {
+                hql = String.format(
+                        "select obj from SanPham obj where (upper(obj.tenSanPham) like upper(:tensp) and upper(obj.hangSanXuat.maHang) like upper(:hangsx) and (obj.gia) >= :giatu and obj.gia <= :giaden )");
+            }
+        }
+
+        Query query = session.createQuery(hql);
+        if (giatu != 0 || giaden != 0) {
+            query.setParameter("giatu", giatu);
+            query.setParameter("giaden", giaden);
+        }
+        if (str.length == 0) {
+            query.setParameter("tensp", "%%");
+
+            query.setParameter("hangsx", "%%");
+        } else if (str.length == 1) {
+            query.setParameter("tensp", "%" + str[0] + "%");
+
+            query.setParameter("hangsx", "%%");
+        } else {
+            query.setParameter("tensp", "%" + str[0] + "%");
+
+            query.setParameter("hangsx", "%" + str[1] + "%");
+        }
+
+        query.setMaxResults(sosptrang);
+        query.setFirstResult((trang - 1) * sosptrang);
+        list = query.list();
+
+        session.close();
+
+        return list;
+    }
 
 }
