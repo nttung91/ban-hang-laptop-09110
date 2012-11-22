@@ -1,27 +1,12 @@
 <%-- 
-    Document   : Navigation1
-    Created on : Nov 3, 2012, 9:06:33 AM
-    Author     : THANHTUNG
+    Document   : index
+    Created on : Sep 23, 2012, 11:53:12 AM
+    Author     : MRKYT
 --%>
+<%@page import="model.pojo.temp_class"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="Gobal.Parameters"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
-<%@taglib prefix="template" uri="/WEB-INF/tlds/TagLibrary.tld" %> 
-<%
-    String pageNav = Parameters.DEFAULT_PAGE + ".do";
-    if (request.getParameter("page") != null) {
-        pageNav = request.getParameter("page");
-        pageNav += ".do";
-    }
-%>
-<template:insert template="MainTemplate.jsp"> 
-    <template:put name="title" content="<%=pageNav%>"  
-                  direct="true"/> 
-    <template:put name="header" content="header.jsp"  
-                  direct="false"/> 
-    <template:put name="main"  
-    content="<%=pageNav%>" direct="false"/> 
 
-    <template:put name="footer" content="footer.jsp"  
-                  direct="false"/>
-</template:insert>
+<%@taglib  prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+<tiles:insertDefinition name="${page}"/>
