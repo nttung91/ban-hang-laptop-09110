@@ -135,7 +135,7 @@ public class DanhSachSanPham extends HttpServlet {
             obj.setListsp(l);
             //////
              session.setAttribute("temp", obj);
-             String url = "footer.do?"+obj.getUrlp();
+             String url = "Footer.do?"+obj.getUrlp();
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
 
