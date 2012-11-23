@@ -56,7 +56,7 @@ public class BanLapTop extends HttpServlet {
 
 
 
-            obj.setSosptrang(5);
+            obj.setSosptrang(12);
 
             obj.setTrang(1);
 
@@ -79,8 +79,8 @@ public class BanLapTop extends HttpServlet {
 
 
 
-            //request.setAttribute("tam", obj);
-            session.setAttribute("temp", obj);
+            request.setAttribute("temp", obj);
+            //session.setAttribute("temp", obj);
 
 //            header h = new header();
 //            h.doGet(request, response);
