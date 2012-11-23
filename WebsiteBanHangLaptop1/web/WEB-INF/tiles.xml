@@ -5,7 +5,7 @@
 <tiles-definitions>
     <definition name="Home" template="/template/Template1.jsp">
         <put-attribute name="Title" value="Trang chủ" />
-        <put-attribute name="Header" value="/pages/Header.jsp" />
+        <put-attribute name="Header" value="/pages/header.jsp" />
         
         <put-attribute name="Left" value="/pages/Left.jsp" />
         <put-attribute name="MainContent" value="/pages/HomeContent.jsp" />
