@@ -24,9 +24,11 @@ import myLib.StringConverter;
  */
 public class CreateSanPham {
 
+    SanPhamDAO spd = new SanPhamDAO();
+
     public String nextSPID() {
 
-        SanPhamDAO spd = new SanPhamDAO();
+
         List<SanPham> arr = spd.getList();
         String svb = arr.get(0).getMaSanPham().trim();
 
@@ -43,9 +45,14 @@ public class CreateSanPham {
         //return String.valueOf(arr.size());
         return StringConverter.nextid(svb, "SP");
     }
-    //Read_DirectoryOfImage rd = new Read_DirectoryOfImage("E:/Lap trinh web/BaiGiang/De1/WebSiteOnlineShoppingCart/images");
-    Read_DirectoryOfImage rd = new Read_DirectoryOfImage("C:/Users/THANHTUNG/Documents/NetBeansProjects/CNPMM/WebsiteBanHangLaptop1/web");
-    List<String> HinhAnh_Ten = rd.getListOfName();
+    Read_DirectoryOfImage rd_laptop = new Read_DirectoryOfImage("E:/WEBthayNhanh/trunk/WebsiteBanHangLaptop1/web/imageSanPham/Laptop");
+    //Read_DirectoryOfImage rd = new Read_DirectoryOfImage("C:/Users/THANHTUNG/Documents/NetBeansProjects/CNPMM/WebsiteBanHangLaptop1/web");
+    List<String> HinhAnh_Ten_lap = rd_laptop.getListOfName();
+    
+     Read_DirectoryOfImage rd_linhkien = new Read_DirectoryOfImage("E:/WEBthayNhanh/trunk/WebsiteBanHangLaptop1/web/imageSanPham/LinhKien");
+    //Read_DirectoryOfImage rd = new Read_DirectoryOfImage("C:/Users/THANHTUNG/Documents/NetBeansProjects/CNPMM/WebsiteBanHangLaptop1/web");
+    List<String> HinhAnh_Ten_linhkien = rd_linhkien.getListOfName();
+    
     List<HangSanXuat> MA_HANG = new ArrayList<HangSanXuat>();
     List<String> CHIP = new ArrayList<String>();
     List<String> RAM = new ArrayList<String>();
@@ -128,7 +135,7 @@ public class CreateSanPham {
 
 
         Laptop lap = new Laptop();
-        String idsp = nextSPID();
+        String idsp = spd.generateKeyCode("SanPham", "maSanPham", "SP");
         lap.setMaSanPham(idsp);
 
         lap.setChipCpu(CHIP.get(getRandomAt(CHIP)));
@@ -141,10 +148,13 @@ public class CreateSanPham {
 
         SanPham sp = new SanPham();
         sp.setMaSanPham(idsp);
-        String hihanh = HinhAnh_Ten.get(getRandomAt(HinhAnh_Ten));
+        
+        
+        
+        String hihanh = HinhAnh_Ten_lap.get(getRandomAt(HinhAnh_Ten_lap));
 
         sp.setTenSanPham(StringConverter.getNamefromPicture(hihanh));
-        sp.setHinhAnh("imageSanPham"+"/"+hihanh);
+        sp.setHinhAnh("imageSanPham" + "/Laptop/" + hihanh);
 
         sp.setHangSanXuat(MA_HANG.get(getRandomAt(MA_HANG)));
         sp.setGia((double) getRandomAt(50) * 1000000);
@@ -164,16 +174,18 @@ public class CreateSanPham {
 
 
         LinhKien lap = new LinhKien();
-        String idsp = nextSPID();
+        String idsp = spd.generateKeyCode("SanPham", "maSanPham", "SP");
         lap.setMaSanPham(idsp);
 
-        lap.setMoTa(MOTA.get(getRandomAt(MOTA)));
+        
 
         SanPham sp = new SanPham();
         sp.setMaSanPham(idsp);
-        String hihanh = HinhAnh_Ten.get(getRandomAt(HinhAnh_Ten));
+        String hihanh = HinhAnh_Ten_linhkien.get(getRandomAt(HinhAnh_Ten_linhkien));
         sp.setTenSanPham(StringConverter.getNamefromPicture(hihanh));
-        sp.setHinhAnh("imageSanPham"+"/"+hihanh);
+        
+        lap.setMoTa(sp.getTenSanPham());
+        sp.setHinhAnh("imageSanPham" + "/LinhKien/" + hihanh);
         sp.setHangSanXuat(MA_HANG.get(getRandomAt(MA_HANG)));
         sp.setGia((double) getRandomAt(50) * 100000);
         sp.setSoLuongTon(getRandomAt(100));
