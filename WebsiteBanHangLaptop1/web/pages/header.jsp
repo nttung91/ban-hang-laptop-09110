@@ -9,9 +9,7 @@
 <%@page import="model.pojo.*,model.dao.*"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
 
-%>
 <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-1.8.2.min.js" language="javascript" type="text/javascript"></script>
 <script src="js/main.js" language="javascript" type="text/javascript"></script>

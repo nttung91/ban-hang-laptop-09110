@@ -122,10 +122,14 @@ public class ChiTietSanPham extends HttpServlet {
             }
             request.setAttribute("spdao", spdao);
             ArrayList<String> khuyenMais = new ArrayList<String>();
-            Iterator<ChiTietKhuyenMai> it = sp.getChiTietKhuyenMais().iterator();
-            while (it.hasNext()) {
-                ChiTietKhuyenMai ctkm = it.next();
-                khuyenMais.add(ctkm.getKhuyenMai().getNoiDungKhuyenMai());
+            Iterator<ChiTietKhuyenMai> it = null;
+            if (sp != null) {
+                it = sp.getChiTietKhuyenMais().iterator();
+
+                while (it.hasNext()) {
+                    ChiTietKhuyenMai ctkm = it.next();
+                    khuyenMais.add(ctkm.getKhuyenMai().getNoiDungKhuyenMai());
+                }
             }
             ArrayList<String> chiTietLinhKiens = new ArrayList<String>();
             if (hasSanPham && loaiSanPham.equals("linhkien")) {
@@ -144,9 +148,12 @@ public class ChiTietSanPham extends HttpServlet {
             request.setAttribute("laptop", lt);
             request.setAttribute("linhkien", lk);
             request.setAttribute("khuyenMais", khuyenMais);
-             request.setAttribute("chiTietLinhKiens", chiTietLinhKiens);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("ChiTietSanPham.jsp");
+            request.setAttribute("chiTietLinhKiens", chiTietLinhKiens);
+            request.setAttribute("tung", "nhan thanh cong");
+
+            temp_class obj = (temp_class) session.getAttribute("temp");
+            String url = "Footer.do?" + obj.getUrlp();
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             //  sp.getChiTietKhuyenMais().iterator().next()
         } finally {

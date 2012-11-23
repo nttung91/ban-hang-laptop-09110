@@ -13,16 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dao.HangSanXuatDAO;
-import model.dao.KhoanGiaDAO;
 import model.pojo.temp_class;
 
 /**
  *
  * @author MRKYT
  */
-@WebServlet(name = "Left", urlPatterns = {"/Left.do"})
-public class Left extends HttpServlet {
+@WebServlet(name = "Footer", urlPatterns = {"/Footer.do"})
+public class footer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -36,45 +34,23 @@ public class Left extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
-            HangSanXuatDAO hangsxDAO = new HangSanXuatDAO();
-            KhoanGiaDAO khoanGiaDAO = new KhoanGiaDAO();
-
             HttpSession session = request.getSession();
 
             // temp_class obj = (temp_class) session.getAttribute("Info");
             temp_class obj = (temp_class) session.getAttribute("temp");
-            obj.setListHangSX(hangsxDAO.getList());
-            obj.setListKhoanGia(khoanGiaDAO.getList());
-            //  session.setAttribute("term", out);
-            if (request.getParameter("Action") != null) {
-                obj.setAction((request.getParameter("Action")));
-            }
-           
-            session.setAttribute("temp", obj);
-            String url = "";
-            if(obj.getAction().equals("SanPham")){
-            url = "DanhSachSanPham.do?" + obj.getUrlp();
-            
-          
-            }
-            if(obj.getAction().equals("ChiTietSanPham")){
-            url = "ChiTietSanPham.do?" + obj.getUrlp();
-            
-          
-            }
 
 
+            String url = "index.jsp";
+            
+            request.setAttribute("page",obj.getAction());
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } finally {
             out.close();
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

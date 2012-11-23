@@ -138,7 +138,6 @@ public class DanhSachSanPham extends HttpServlet {
              String url = "Footer.do?"+obj.getUrlp();
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
         } finally {
             out.close();
         }

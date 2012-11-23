@@ -39,9 +39,8 @@
         </style></head>
 
     <body topmargin="-10px">
-        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr><td>
-                    <jsp:include page="header.jsp"/>
                 </td>
             </tr>
             <tr>
@@ -110,7 +109,7 @@
                                     <a href="GioHang.jsp?Action=HuyGioHang"><input name="huy_gio_hang" type="button" value="Huỷ Giỏ Hàng" class="button_control" /></a>
                                     <a href="ThanhToan.jsp"><input name="thanh_toan" type="button" class="button_control" value="Thanh toán"  /></a> 
                                     </c:if>
-                                    <a href="DanhSachSanPham.do"><input name="mua_tiep" type="button" value="Tiếp tục mua" class="button_control" /></a>
+                                    <a href="BanLapTop.do?Action=SanPham"><input name="mua_tiep" type="button" value="Tiếp tục mua" class="button_control" /></a>
                                 </p>
                             </div>
                         </div>

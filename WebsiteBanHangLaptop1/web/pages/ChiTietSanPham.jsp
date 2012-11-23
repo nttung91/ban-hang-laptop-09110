@@ -111,13 +111,12 @@
             </div>
         </div>
         <!--pop up gio hang-->
-
-        <jsp:include page="header.jsp"/>
+       
         <c:choose>
             <c:when test="${isItemExist}">
 
                 <!-- Main content -->
-                <table width="1000px" cellpadding="0" cellspacing="0"  align="center">
+                <table width="100%" cellpadding="0" cellspacing="0"  align="center">
                     <tr>
                         <td width="45%" rowspan="8" id="hinh_anh_sp_chi_tiet">
                             <a class="fancybox-effects-b" href="<c:if test="${hasSanPham}">

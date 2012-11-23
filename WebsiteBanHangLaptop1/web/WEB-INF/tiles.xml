@@ -23,5 +23,17 @@
         <put-attribute name="Title" value="Trang Đăng nhập"/>
         <put-attribute name="MainContent" value="/pages/DangNhap.jsp"/>    
     </definition>
+     <definition name="GioHang" extends="Home">
+        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="MainContent" value="/pages/GioHang.jsp"/>    
+    </definition>
+     <definition name="ChiTietSanPham" extends="Home">
+        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="MainContent" value="/pages/ChiTietSanPham.jsp"/>    
+    </definition>
+     <definition name="TrangCaNhan" extends="Home">
+        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="MainContent" value="/pages/TrangCaNhan.jsp"/>    
+    </definition>
    
 </tiles-definitions>
