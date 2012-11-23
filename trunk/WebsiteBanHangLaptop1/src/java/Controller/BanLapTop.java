@@ -101,7 +101,7 @@ public class BanLapTop extends HttpServlet {
 //            RequestDispatcher rd = request.getRequestDispatcher(url);
 //            rd.forward(request, response);
 
-            String url = "header.do?" + urlp;
+            String url = "Header.do?" + urlp;
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
 
