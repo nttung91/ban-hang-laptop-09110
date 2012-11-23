@@ -39,7 +39,7 @@ public class DangNhap extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
 
-
+      
         String username = null, password = null;
 
         //kiem tra dieu kien
@@ -79,8 +79,9 @@ public class DangNhap extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + session.getAttribute("prePage").toString());
                     return;
                 } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("GioHang.do");
+                    RequestDispatcher rd = request.getRequestDispatcher("BanLapTop.do?Action=SanPham");
                     rd.forward(request, response);
+                    return;
                 }
             }
         }
@@ -89,15 +90,21 @@ public class DangNhap extends HttpServlet {
         }
         request.setAttribute("oke", oke);
         out.println(oke);
-       
+
         boolean rememberPassword = false;
         if (request.getParameter("rememberPassword") != null && request.getParameter("rememberPassword").equals("Yes")) {
 
             rememberPassword = true;
         }
-         request.setAttribute("rememberPassword", rememberPassword);
-        RequestDispatcher rd = request.getRequestDispatcher("DangNhap.jsp");
-        rd.forward(request, response);
+        request.setAttribute("rememberPassword", rememberPassword);
+         temp_class obj = (temp_class) session.getAttribute("temp");
+
+
+            String url = "index.jsp";
+            
+            request.setAttribute("page",obj.getAction());
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         out.close();
 
 
