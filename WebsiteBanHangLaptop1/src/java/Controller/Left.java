@@ -66,7 +66,7 @@ public class Left extends HttpServlet {
           
             }
             else{
-                 url = "Footer.do?" + obj.getUrlp();
+                 url = "footer.do?" + obj.getUrlp();
             }
 
 

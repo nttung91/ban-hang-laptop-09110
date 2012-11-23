@@ -22,8 +22,8 @@ import model.pojo.temp_class;
  *
  * @author MRKYT
  */
-@WebServlet(name = "Header", urlPatterns = {"/Header.do"})
-public class Header extends HttpServlet {
+@WebServlet(name = "header", urlPatterns = {"/header.do"})
+public class header extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
