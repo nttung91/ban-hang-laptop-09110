@@ -19,8 +19,8 @@ import model.pojo.temp_class;
  *
  * @author MRKYT
  */
-@WebServlet(name = "Footer", urlPatterns = {"/Footer.do"})
-public class Footer extends HttpServlet {
+@WebServlet(name = "footer", urlPatterns = {"/footer.do"})
+public class footer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
