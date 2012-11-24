@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.SanPhamDAO;
 import model.pojo.SanPham;
+import model.pojo.temp_class;
 
 /**
  *
@@ -66,8 +67,8 @@ public class GioHang extends HttpServlet {
             } else {
                 session.setAttribute("GioHang", gioHang);
             }
-            if (request.getParameter("Action") != null) {
-                action = request.getParameter("Action");
+            if (request.getParameter("ThaoTac") != null) {
+                action = request.getParameter("ThaoTac");
             } else {
                 action = "CapNhat";
             }
@@ -146,15 +147,18 @@ public class GioHang extends HttpServlet {
                 }
             } else if (action.equals("HuyGioHang")) {
                 session.removeAttribute("GioHang");
-                out.println("session remove giohang");
+                //  out.println("session remove giohang");
                 //  response.sendRedirect("GioHang.do");
                 oke = false;
 
             }
             //tinh toan
+
             double tong = 0;
-            for (int i = 0; i < gioHang.size(); i++) {
-                tong += gioHang.get(i).getGia() * gioHang.get(i).getSoLuongTon();
+            if (session.getAttribute("GioHang") != null) {
+                for (int i = 0; i < gioHang.size(); i++) {
+                    tong += gioHang.get(i).getGia() * gioHang.get(i).getSoLuongTon();
+                }
             }
             double vat = tong * 0.1;
             double thanhtien = tong + vat;
@@ -162,8 +166,14 @@ public class GioHang extends HttpServlet {
             request.setAttribute("vat", vat);
             request.setAttribute("thanhtien", thanhtien);
 
-            RequestDispatcher rd = request.getRequestDispatcher("GioHang.jsp");
+            temp_class obj = (temp_class) session.getAttribute("temp");
+            out.println(obj.getAction());
+            obj.setAction("GioHang");
+            session.setAttribute("temp", obj);
+            String url = "Footer.do?" + obj.getUrlp();
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            out.close();
         } finally {
             out.close();
         }

@@ -79,7 +79,7 @@ public class BanLapTop extends HttpServlet {
 
 
 
-            request.setAttribute("temp", obj);
+            session.setAttribute("temp", obj);
             //session.setAttribute("temp", obj);
 
 //            header h = new header();

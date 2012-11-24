@@ -15,7 +15,7 @@
 
         rememberPassword = Boolean.parseBoolean(request.getAttribute("rememberPassword").toString());
     }
-    out.println(rememberPassword);
+    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,7 +89,7 @@
     </head>
 
     <body topmargin="-10px">
-
+        <c:out value="${oke}"/>
         <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td colspan="2">
@@ -136,7 +136,7 @@
                             </tr>
                             <tr>
                                 <td height="39" colspan="2" class="text_reg">Bạn chưa có tài khoản?</td>
-                                <td width="245" id="dang_ky"><a href="DangKyThanhVien.do">ĐĂNG KÝ</a></td>
+                                <td width="245" id="dang_ky"><a href="BanLapTop.do?Action=DangKyThanhVien">ĐĂNG KÝ</a></td>
                                 <td>&nbsp;</td>
                             </tr>
                         </form>

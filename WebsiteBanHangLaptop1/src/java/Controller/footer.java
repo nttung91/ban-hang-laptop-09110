@@ -43,7 +43,7 @@ public class footer extends HttpServlet {
             temp_class obj = (temp_class) session.getAttribute("temp");
 
 
-            String url = "index.jsp";
+            String url = "/index.jsp";
             
             request.setAttribute("page",obj.getAction());
             RequestDispatcher rd = request.getRequestDispatcher(url);

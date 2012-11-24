@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Gobal.SiteMaps;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -59,16 +60,12 @@ public class Left extends HttpServlet {
             String url = "";
             if(obj.getAction().equals("SanPham")){
             url = "DanhSachSanPham.do?" + obj.getUrlp();
-            
-          
             }
-            if(obj.getAction().equals("ChiTietSanPham")){
-            url = "ChiTietSanPham.do?" + obj.getUrlp();
+            url = SiteMaps.getPageFromAction(obj.getAction()) +"?"+obj.getUrlp();
+           
             
-          
-            }
-
-
+            if (url.equals("")) url = "Footer.do?" + obj.getUrlp();
+            
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } finally {

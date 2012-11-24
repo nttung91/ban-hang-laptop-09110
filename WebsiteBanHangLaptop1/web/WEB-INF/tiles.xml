@@ -11,8 +11,9 @@
         <put-attribute name="MainContent" value="/pages/HomeContent.jsp" />
         <put-attribute name="Footer" value="/pages/Footer.jsp" />
     </definition>
+    
     <definition name="SanPham" extends="Home">
-        <put-attribute name="Title" value="Trang Danh Sach San Pham"/>
+        <put-attribute name="Title" value="Danh Sách Sản Phẩm"/>
         <put-attribute name="MainContent" value="/pages/DanhSachSanPham.jsp"/>    
     </definition>
     <definition name="SuaSanPham" extends="Home">
@@ -20,20 +21,36 @@
         <put-attribute name="MainContent" value="/pages/SuaThongTinSanPham.jsp"/>    
     </definition>
      <definition name="DangNhap" extends="Home">
-        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="Title" value="Đăng nhập"/>
         <put-attribute name="MainContent" value="/pages/DangNhap.jsp"/>    
     </definition>
      <definition name="GioHang" extends="Home">
-        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="Title" value="Giỏ Hàng"/>
         <put-attribute name="MainContent" value="/pages/GioHang.jsp"/>    
     </definition>
      <definition name="ChiTietSanPham" extends="Home">
-        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="Title" value="Sản Phẩm"/>
         <put-attribute name="MainContent" value="/pages/ChiTietSanPham.jsp"/>    
     </definition>
      <definition name="TrangCaNhan" extends="Home">
-        <put-attribute name="Title" value="Trang Đăng nhập"/>
+        <put-attribute name="Title" value="Trang cá nhân"/>
         <put-attribute name="MainContent" value="/pages/TrangCaNhan.jsp"/>    
+    </definition>
+    <definition name="DoiMatKhau" extends="Home">
+        <put-attribute name="Title" value="Đổi mật khẩu"/>
+        <put-attribute name="MainContent" value="/pages/DoiMatKhau.jsp"/>    
+    </definition>
+    <definition name="DoiEmail" extends="Home">
+        <put-attribute name="Title" value="Đổi Email"/>
+        <put-attribute name="MainContent" value="/pages/DoiEmail.jsp"/>    
+    </definition>
+    <definition name="DoiThongTin" extends="Home">
+        <put-attribute name="Title" value="Đổi thông tin"/>
+        <put-attribute name="MainContent" value="/pages/DoiThongTin.jsp"/>    
+    </definition>
+    <definition name="DangKy" extends="Home">
+        <put-attribute name="Title" value="Đăng ký thành viên"/>
+        <put-attribute name="MainContent" value="/pages/DangKyThanhVien.jsp"/>    
     </definition>
    
 </tiles-definitions>

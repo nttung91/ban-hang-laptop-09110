@@ -159,7 +159,7 @@
 
     <body topmargin="-10px">
         <c:out value="${info}"/>
-    <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" align="left" >
 
 <tr>
                 <td colspan="2">
@@ -214,7 +214,7 @@
         
             </tr>
             <tr>
-  <td colspan="2"><a href="TrangCaNhan.do"><< Trở Lại</a></td>
+  <td colspan="2"><a href="BanLapTop.do?Action=TrangCaNhan"><< Trở Lại</a></td>
 </tr>
             <!-- End of Main content -->
       </table>

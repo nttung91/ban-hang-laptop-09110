@@ -149,7 +149,7 @@ public class ChiTietSanPham extends HttpServlet {
             request.setAttribute("linhkien", lk);
             request.setAttribute("khuyenMais", khuyenMais);
             request.setAttribute("chiTietLinhKiens", chiTietLinhKiens);
-            request.setAttribute("tung", "nhan thanh cong");
+          
 
             temp_class obj = (temp_class) session.getAttribute("temp");
             String url = "Footer.do?" + obj.getUrlp();

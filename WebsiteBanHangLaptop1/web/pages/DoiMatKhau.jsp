@@ -63,7 +63,7 @@
 
     <body topmargin="-10px">
         <c:out value="${sessionScope.tenDangNhap}"/>
-    <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
                 <td colspan="2">
                     <!-- Main content -->
@@ -101,7 +101,7 @@
                 <td width="4">&nbsp;</td>
             </tr>
             <tr>
-  <td colspan="2"><a href="TrangCaNhan.do"><< Trở Lại</a></td>
+  <td colspan="2"><a href="BanLapTop.do?Action=TrangCaNhan"><< Trở Lại</a></td>
 </tr>
             <!-- End of Main content -->
       </table>

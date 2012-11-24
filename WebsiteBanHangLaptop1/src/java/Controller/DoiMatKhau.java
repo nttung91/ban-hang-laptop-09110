@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.KhachHangTrucTuyenDAO;
 import model.pojo.KhachHangTrucTuyen;
+import model.pojo.temp_class;
 import org.hibernate.Session;
 
 /**
@@ -39,55 +40,67 @@ public class DoiMatKhau extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        String matKhauCu = null,matKhauMoi = null,nhapLaiMatKhauMoi,tenDangNhap = null;
+        String matKhauCu = null, matKhauMoi = null, nhapLaiMatKhauMoi, tenDangNhap = null;
         boolean oke = true;
-        String loi="";
+        String loi = "";
         try {
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("matKhauCu") != null && !request.getParameter("matKhauCu").equals("")) {
-            matKhauCu = request.getParameter("matKhauCu");
-        } else {
-            oke = false;
-        }
+                matKhauCu = request.getParameter("matKhauCu");
+            } else {
+                oke = false;
+            }
             if (request.getParameter("matKhau") != null && !request.getParameter("matKhau").equals("")) {
-            matKhauMoi = request.getParameter("matKhau");
-        } else {
-            oke = false;
-        }
-        if (request.getParameter("nhapLaiMatKhau") != null && !request.getParameter("nhapLaiMatKhau").equals("")) {
-            nhapLaiMatKhauMoi = request.getParameter("nhapLaiMatKhau");
-        } else {
-            oke = false;
-        }
-        if (session.getAttribute("tenDangNhap") != null) {
-            tenDangNhap = session.getAttribute("tenDangNhap").toString();
-        } else {
-            oke = false;
-            loi+="Bạn Chưa đăng nhập";
-        }
-        if (oke){
-            KhachHangTrucTuyenDAO dao = new KhachHangTrucTuyenDAO();
-            KhachHangTrucTuyen kh = dao.getObject(tenDangNhap);
-            if (kh!=null){
-                loi+=matKhauCu+kh.getMatKhau();
-                if (myLib.MD5Convertor.Convert2MD5(matKhauCu.trim()).equals(kh.getMatKhau())){
-                    kh.setMatKhau(myLib.MD5Convertor.Convert2MD5(matKhauMoi));
-                    dao.saveOrUpdateObject(kh);
-                     RequestDispatcher rd = request.getRequestDispatcher("TrangCaNhan.do");
-                     rd.forward(request, response);
-                }
-                else {
-                    loi+="Mật khẩu cũ không chính xác."+tenDangNhap;
+                matKhauMoi = request.getParameter("matKhau");
+            } else {
+                oke = false;
+            }
+            if (request.getParameter("nhapLaiMatKhau") != null && !request.getParameter("nhapLaiMatKhau").equals("")) {
+                nhapLaiMatKhauMoi = request.getParameter("nhapLaiMatKhau");
+            } else {
+                oke = false;
+            }
+            if (session.getAttribute("tenDangNhap") != null) {
+                tenDangNhap = session.getAttribute("tenDangNhap").toString();
+            } else {
+                oke = false;
+                loi += "Bạn Chưa đăng nhập";
+            }
+            if (oke) {
+                KhachHangTrucTuyenDAO dao = new KhachHangTrucTuyenDAO();
+                KhachHangTrucTuyen kh = dao.getObject(tenDangNhap);
+                if (kh != null) {
+                    loi += matKhauCu + kh.getMatKhau();
+                    if (myLib.MD5Convertor.Convert2MD5(matKhauCu.trim()).equals(kh.getMatKhau())) {
+                        kh.setMatKhau(myLib.MD5Convertor.Convert2MD5(matKhauMoi));
+                        dao.saveOrUpdateObject(kh);
+                        temp_class obj = (temp_class) session.getAttribute("temp");
+                        request.setAttribute("thongbao", "Mật khẩu đã được thay đổi.");
+                        String url = "TrangCaNhan.do";
+                        if (obj==null){
+                            obj = new temp_class();
+                            obj.setAction("TrangCaNhan");
+                        }else {
+                            obj.setAction("TrangCaNhan");
+                        }             
+                        session.setAttribute("temp",obj);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+                        return;
+                    } else {
+                        loi += "Mật khẩu cũ không chính xác." + tenDangNhap;
+                    }
+                } else {
+                    loi += "Tên đăng nhập không tồn tại.";
                 }
             }
-            else {
-                loi+="Tên đăng nhập không tồn tại.";
-            }
-        }
-        request.setAttribute("loi", loi);
-            RequestDispatcher rd = request.getRequestDispatcher("DoiMatKhau.jsp");
+            request.setAttribute("loi", loi);
+            temp_class obj = (temp_class) session.getAttribute("temp");
+            String url = "Footer.do";
+            if (obj!=null) url = "Footer.do?" + obj.getUrlp();
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } finally {            
+        } finally {
             out.close();
         }
     }

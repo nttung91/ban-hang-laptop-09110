@@ -96,18 +96,18 @@
     <body topmargin="-10px">
         <!--pop up gio hang-->
         <div id="giohang">
-            <div id="title">Ban co ${sessionScope.GioHang.size()} </br>san pham</br>trong gio</div>
+            <div id="title">Giỏ Hàng </br>${sessionScope.GioHang.size()} </br>sản phẩm</div>
 
             <div id="chitietgiohang">
                 <c:forEach var="spp" items="${sessionScope.GioHang}" >
 
-                    <a href="ChiTietSanPham.jsp?loaiSanPham=${spdao.getLoaiSanPham(spp.getMaSanPham())}&maSanPham=${spp.getMaSanPham()}">
+                    <a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${spdao.getLoaiSanPham(spp.getMaSanPham())}&maSanPham=${spp.getMaSanPham()}">
                         <li>${spp.getTenSanPham()}</li>
                     </a>
                 </c:forEach>
             </div>
             <div>
-                <a href="GioHang.jsp"><input type="button" value="Xem chi tiet" /></a>
+                <a href="BanLapTop.do?Action=GioHang"><input type="button" style="font-family:Arial, Helvetica, sans-serif;font-size:17px;font-weight:bold;" value="Xem Chi Tiết" /></a>
             </div>
         </div>
         <!--pop up gio hang-->
@@ -171,7 +171,7 @@
                     <tr>
                         <form action="GioHang.do" method="post">
                             
-                                <input type="hidden" name="Action" value="ThemVaoGio" />
+                                <input type="hidden" name="ThaoTac" value="ThemVaoGio" />
                                 <input type="hidden" name="maSanPham" value="<c:out value="${sanPham.getMaSanPham()}"></c:out>"/>
                                     <td class="text_thong_tin_san_pham">
                                         <label for="soLuong">Số Lượng</label>
@@ -220,13 +220,13 @@
                                         <td height="38"  colspan="4"><div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div></td>
                                     </tr>
                                     <tr>
-                                        <td width="22%" class="text_thong_tin_san_pham">CPU</td>
-                                        <td width="25%" class="text_thong_tin_san_pham">:
+                                        <td width="24%" class="text_thong_tin_san_pham">CPU</td>
+                                        <td width="66%" class="text_thong_tin_san_pham">:
                                             <c:if test="${hasSanPham && laptop !=null }">
                                                 <c:out value="${laptop.getChipCpu()}"></c:out>
 
                                             </c:if> </td>
-                                        <td width="47%">&nbsp;</td>
+                                        <td width="4%">&nbsp;</td>
                                         <td width="6%">&nbsp;</td>
                                     </tr>
                                     <tr>

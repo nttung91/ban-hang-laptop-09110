@@ -157,8 +157,7 @@
     </head>
 
     <body topmargin="-10px">	
-        <jsp:include page="header.jsp"/>
-        <table align="center" width="1000px" border="0" cellpadding="0" cellspacing="0">
+        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td colspan="2">
                     <!-- Main content -->

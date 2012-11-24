@@ -86,13 +86,13 @@
                 <td height="5px" colspan="3">&nbsp;</td>
             </tr>
             <tr>
-                <td width="190px" height="448">
+                <td width="160px" height="448">
 
                     <tiles:insertAttribute name="Left"/>
 
                 </td>
-                <td width="2px" id="cuter">&nbsp;</td>
-                <td width="678px" style="vertical-align: text-top;" id="MainContainer">
+                <td width="2px" >&nbsp;</td>
+                <td style="vertical-align: text-top;" id="MainContainer">
 
 
                     <tiles:insertAttribute name="MainContent"/>
