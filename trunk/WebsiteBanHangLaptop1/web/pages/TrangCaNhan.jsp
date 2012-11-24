@@ -163,6 +163,9 @@
             <td colspan="2">Xin chào, ${khachhang.getUsername()}</td>
           </tr>
           <tr>
+              <td colspan="2" style="color: red;">${thongbao}</td>
+          </tr>
+          <tr>
             <td colspan="2" class="login_header_td">Thông tin tài khoản</td>
           </tr>
           <tr>
@@ -202,15 +205,15 @@
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><a href="DoiMatKhau.do">Đổi mật khẩu</a></td>
+            <td><a href="BanLapTop.do?Action=DoiMatKhau">Đổi mật khẩu</a></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><a href="DoiEmail.do">Đổi email</a></td>
+            <td><a href="BanLapTop.do?Action=DoiEmail">Đổi email</a></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><a href="DoiThongTin.do">Đổi Thông Tin</a></td>
+            <td><a href="BanLapTop.do?Action=DoiThongTin">Đổi Thông Tin</a></td>
             <td>&nbsp;</td>
           </tr>
         </table>

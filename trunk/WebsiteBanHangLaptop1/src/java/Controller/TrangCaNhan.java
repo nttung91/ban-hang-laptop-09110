@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.KhachHangTrucTuyenDAO;
 import model.pojo.KhachHangTrucTuyen;
+import model.pojo.temp_class;
 
 /**
  *
@@ -54,14 +55,19 @@ public class TrangCaNhan extends HttpServlet {
             if (kh != null) {
                 request.setAttribute("loi", loi);
                 request.setAttribute("khachhang", kh);
-                RequestDispatcher rd = request.getRequestDispatcher("TrangCaNhan.jsp");
+                temp_class obj = (temp_class) session.getAttribute("temp");
+                String url = "Footer.do?" + obj.getUrlp();
+                RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else {
                 loi += "Tên đăng nhập không tồn tại.";
             }
         }
         request.setAttribute("loi", loi);
-        RequestDispatcher rd = request.getRequestDispatcher("TrangCaNhan.jsp");
+        temp_class obj = (temp_class) session.getAttribute("temp");
+        String url = "Footer.do?" + obj.getUrlp();
+        RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
 
 

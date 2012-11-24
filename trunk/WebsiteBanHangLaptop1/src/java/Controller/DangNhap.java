@@ -38,8 +38,8 @@ public class DangNhap extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+          temp_class obj = (temp_class) session.getAttribute("temp");
 
-      
         String username = null, password = null;
 
         //kiem tra dieu kien
@@ -71,25 +71,17 @@ public class DangNhap extends HttpServlet {
                 // response.sendRedirect("DanhSachSanPham.do");
                 //  return;
                 //out.println("<h1>fad</h1>");
-                if (session.getAttribute("prePage") != null) {
-
-                    //RequestDispatcher rd = (RequestDispatcher)session.getAttribute("prePage");
-                    // RequestDispatcher rd = request.getRequestDispatcher("DangKyThanhVien.do");
-                    // rd.forward(request, response);
-                    response.sendRedirect(request.getContextPath() + session.getAttribute("prePage").toString());
+               
+                    response.sendRedirect("BanLapTop.do");
                     return;
-                } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("BanLapTop.do?Action=SanPham");
-                    rd.forward(request, response);
-                    return;
-                }
+               
             }
         }
         if (!flag) {
-            oke = false;
+            oke = true;
         }
         request.setAttribute("oke", oke);
-        out.println(oke);
+        //out.println(oke);
 
         boolean rememberPassword = false;
         if (request.getParameter("rememberPassword") != null && request.getParameter("rememberPassword").equals("Yes")) {
@@ -97,17 +89,11 @@ public class DangNhap extends HttpServlet {
             rememberPassword = true;
         }
         request.setAttribute("rememberPassword", rememberPassword);
-         temp_class obj = (temp_class) session.getAttribute("temp");
-
-
-            String url = "index.jsp";
-            
-            request.setAttribute("page",obj.getAction());
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+      
+        String url = "Footer.do?" + obj.getUrlp();
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
         out.close();
-
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

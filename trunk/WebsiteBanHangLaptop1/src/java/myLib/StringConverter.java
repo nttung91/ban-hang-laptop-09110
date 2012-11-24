@@ -27,4 +27,11 @@ public class StringConverter {
         kq = toEqual+i;
         return kq;
     }
+    public static String rutGonTen(String s){
+        if (s.length()>20)
+        {
+            s = s.substring(0,20)+"...";
+        }
+        return s;
+    }
 }

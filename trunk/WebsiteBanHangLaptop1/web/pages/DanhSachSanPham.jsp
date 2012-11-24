@@ -173,7 +173,7 @@
                                 <!-- sp 1 - 1 -->
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="san_pham" >
                                     <tr>
-                                        <td><a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${loai}&maSanPham=${sp.getMaSanPham()}" style="text-decoration:none;"><img class="imgsp" src=${sp.getHinhAnh()} width="130" height="103" /></a></td>
+                                        <td><a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${loai}&maSanPham=${sp.getMaSanPham()}" style="text-decoration:none;"><img class="imgsp" src="${sp.getHinhAnh()}" width="130" height="103" /></a></td>
                                     </tr>
                                     <tr>
                                         <td class="ten_san_pham"><a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${obj.getLoaiSanPham()}&maSanPham=${sp.getMaSanPham()}" style="text-decoration:none;">${sp.getTenSanPham()}</a></td>

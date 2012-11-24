@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.KhachHangTrucTuyenDAO;
 import model.pojo.KhachHangTrucTuyen;
+import model.pojo.temp_class;
 
 /**
  *
@@ -60,14 +61,23 @@ public class DoiEmail extends HttpServlet {
                 KhachHangTrucTuyen kh = dao.getObject(tenDangNhap);
                 if (kh != null) {
                     kh.setEmail(email);
-                    
+
                     if (!dao.isEmailTonTai(email)) {
                         dao.saveOrUpdateObject(kh);
-                        RequestDispatcher rd = request.getRequestDispatcher("TrangCaNhan.do");
+                        temp_class obj = (temp_class) session.getAttribute("temp");
+                        request.setAttribute("thongbao", "Email đã được thay đổi.");
+                        String url = "TrangCaNhan.do";
+                        if (obj == null) {
+                            obj = new temp_class();
+                            obj.setAction("TrangCaNhan");
+                        } else {
+                            obj.setAction("TrangCaNhan");
+                        }
+                        session.setAttribute("temp", obj);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
-                    }
-                    else {
-                        loi+="Email đã được sử dụng.";
+                    } else {
+                        loi += "Email đã được sử dụng.";
                     }
 
                 } else {
@@ -75,7 +85,12 @@ public class DoiEmail extends HttpServlet {
                 }
             }
             request.setAttribute("loi", loi);
-            RequestDispatcher rd = request.getRequestDispatcher("DoiEmail.jsp");
+            temp_class obj = (temp_class) session.getAttribute("temp");
+            String url = "Footer.do";
+            if (obj != null) {
+                url = "Footer.do?" + obj.getUrlp();
+            }
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } finally {
             out.close();

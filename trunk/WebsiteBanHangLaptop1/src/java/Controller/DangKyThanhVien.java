@@ -19,6 +19,7 @@ import model.dao.KhachHangDAO;
 import model.dao.KhachHangTrucTuyenDAO;
 import model.pojo.KhachHang;
 import model.pojo.KhachHangTrucTuyen;
+import model.pojo.temp_class;
 import org.hibernate.HibernateException;
 
 /**
@@ -38,22 +39,21 @@ public class DangKyThanhVien extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
     String tenDanhNhap = null;
     boolean isMore = true;
 
     private String checkData(HttpServletRequest request, HttpSession session) {
-        String matKhau = null, email = null, hoTen = null, gioiTinh = null, dienThoai = null, thanhPho = null, nhapLaiMatKhau = null, nhapLaiEmail = null, diaChi = null,datepick=null;
+        String matKhau = null, email = null, hoTen = null, gioiTinh = null, dienThoai = null, thanhPho = null, nhapLaiMatKhau = null, nhapLaiEmail = null, diaChi = null, datepick = null;
 
-       
+
         String kq = "";
 
-       
+
         boolean oke = true;
-       
+
         if (request.getParameter("tenDangNhap") != null && !request.getParameter("tenDangNhap").equals("")) {
             tenDanhNhap = request.getParameter("tenDangNhap");
-            
+
         } else {
             oke = false;
         }
@@ -69,7 +69,7 @@ public class DangKyThanhVien extends HttpServlet {
         }
         if (request.getParameter("email") != null && !request.getParameter("email").equals("")) {
             email = request.getParameter("email");
-            
+
         } else {
             oke = false;
         }
@@ -90,75 +90,74 @@ public class DangKyThanhVien extends HttpServlet {
         if (isMore) {
             if (request.getParameter("tenKhachHang") != null && !request.getParameter("tenKhachHang").equals("")) {
                 hoTen = request.getParameter("tenKhachHang");
-                
+
             } else {
                 oke = false;
             }
 
             if (request.getParameter("gioiTinh") != null) {
                 gioiTinh = request.getParameter("gioiTinh");
-               
+
             } else {
                 oke = false;
             }
             if (request.getParameter("datepicker") != null) {
                 datepick = request.getParameter("datepicker");
-               
+
             } else {
                 oke = false;
             }
             if (request.getParameter("dienThoai") != null && !request.getParameter("dienThoai").equals("")) {
                 dienThoai = request.getParameter("dienThoai");
-                
+
             } else {
                 oke = false;
             }
             if (request.getParameter("thanhPho") != null) {
                 thanhPho = request.getParameter("thanhPho");
-                
+
             } else {
                 oke = false;
             }
             if (request.getParameter("diaChi") != null) {
                 diaChi = request.getParameter("diaChi");
-                
+
             } else {
                 oke = false;
             }
         }
-       
+
         if (!oke) {
             kq += "Các mục (*) không được bỏ trống.";
         } else {
 
             boolean f = true;
             if (!matKhau.equals(nhapLaiMatKhau)) {
-              
+
                 f = false;
             }
             if (!email.equals(nhapLaiEmail)) {
-                
+
                 f = false;
             }
             if (!myLib.RegexChecking.CheckEmail(email)) {
-                
+
                 f = false;
             }
             if (isMore) {
                 if (!myLib.RegexChecking.CheckDienThoai(dienThoai) && isMore) {
-                    
+
                     f = false;
                 }
             }
             if (rpHash(request.getParameter("defaultReal")).equals(
-				request.getParameter("defaultRealHash"))) {
-			// Accepted
-		}
-		else {
-			 kq += "Mã xác nhận không chính xác !";
-                        f = false;
-		}
-          
+                    request.getParameter("defaultRealHash"))) {
+                // Accepted
+            } else {
+                kq += "Mã xác nhận không chính xác !";
+                f = false;
+            }
+
             if (f) {
                 //check trung lap trong csdl
                 boolean f1 = true;
@@ -241,18 +240,23 @@ public class DangKyThanhVien extends HttpServlet {
             if (kq.equals("")) {
                 //dang ky thanh cong
                 //remove tham so dang ky
-              
+
                 session.setAttribute("tenDangNhap", tenDanhNhap);
                 session.setAttribute("daDangNhap", true);
                 //response.sendRedirect("DangNhap.jsp");
-                RequestDispatcher rd = request.getRequestDispatcher("DangNhap.do");
-                rd.forward(request, response);
+               response.sendRedirect("BanLapTop.do");
+                return;
             }
-         
-           
+
+
             request.setAttribute("loi", kq);
             request.setAttribute("isMore", isMore);
-            RequestDispatcher rd = request.getRequestDispatcher("DangKyThanhVien.jsp");
+            temp_class obj = (temp_class) session.getAttribute("temp");
+            String url="";
+            if (obj!=null)
+            url = "Footer.do?" + obj.getUrlp();
+            else url = "Footer.do";
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
 
         } finally {
@@ -300,12 +304,13 @@ public class DangKyThanhVien extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
     private String rpHash(String value) {
-		int hash = 5381;
-		value = value.toUpperCase();
-		for(int i = 0; i < value.length(); i++) {
-			hash = ((hash << 5) + hash) + value.charAt(i);
-		}
-		return String.valueOf(hash);
-	}
+        int hash = 5381;
+        value = value.toUpperCase();
+        for (int i = 0; i < value.length(); i++) {
+            hash = ((hash << 5) + hash) + value.charAt(i);
+        }
+        return String.valueOf(hash);
+    }
 }

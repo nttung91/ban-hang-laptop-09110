@@ -18,6 +18,7 @@ import model.dao.KhachHangDAO;
 import model.dao.KhachHangTrucTuyenDAO;
 import model.pojo.KhachHang;
 import model.pojo.KhachHangTrucTuyen;
+import model.pojo.temp_class;
 
 /**
  *
@@ -115,24 +116,38 @@ public class DoiThongTin extends HttpServlet {
                         kh.setNgaySinh(ns);
                         kh.setGioiTinh(gt);
                         khdao.saveOrUpdateObject(kh);
-                        RequestDispatcher rd = request.getRequestDispatcher("TrangCaNhan.do");
+                        temp_class obj = (temp_class) session.getAttribute("temp");
+                        request.setAttribute("thongbao", "Thông tin đã được thay đổi.");
+                        String url = "TrangCaNhan.do";
+                        if (obj == null) {
+                            obj = new temp_class();
+                            obj.setAction("TrangCaNhan");
+                        } else {
+                            obj.setAction("TrangCaNhan");
+                        }
+
+                        session.setAttribute("temp", obj);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
                     }
                     request.setAttribute("kh", kh);
-                } else 
-                {
+                } else {
                     loi += "Bạn chưa đăng nhập";
                 }
-            }
-            else {
+            } else {
                 loi += "Bạn chưa đăng nhập";
             }
         } else {
             loi += "Bạn chưa đăng nhập";
         }
         out.println(oke);
-        request.setAttribute("loi",loi);
-        RequestDispatcher rd = request.getRequestDispatcher("DoiThongTin.jsp");
+        request.setAttribute("loi", loi);
+        temp_class obj = (temp_class) session.getAttribute("temp");
+        String url = "Footer.do";
+        if (obj != null) {
+            url = "Footer.do?" + obj.getUrlp();
+        }
+        RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
 
     }

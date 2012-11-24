@@ -28,7 +28,8 @@
     <c:set var="obj" value="${ sessionScope.temp }"/>
   
     <tr width="100%">
-        <td height="50" colspan="3" id="banner_container"><table width="100%" height="197" border="0" cellspacing="0" cellpadding="0">
+        <td height="50" colspan="3" id="banner_container">
+        <table width="100%" height="197" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="200" height="56">&nbsp;</td>
                     <td width="482">&nbsp;</td>
@@ -38,14 +39,14 @@
                                     <!-- Sua noi dung -->
                                     <c:choose>
                                         <c:when test="${obj.getTenDangNhap() != null}">
-                                            <a href="TrangCaNhan.jsp?tenDanhNhap=${ obj.getTenDangNhap()}" class="menu_login">
+                                            <a href="BanLapTop.do?Action=TrangCaNhan&tenDanhNhap=${ obj.getTenDangNhap()}" class="menu_login">
                                                 Xin Chào 
                                                 ${obj.getTenDangNhap()}
                                             </a>
                                         </c:when>
                                         <c:otherwise >
 
-                                            <a href="DangNhap.jsp" class="menu_login">
+                                            <a href="BanLapTop.do?Action=DangNhap" class="menu_login">
                                                 Đăng Nhập
                                             </a>
                                         </c:otherwise>
@@ -54,14 +55,14 @@
                                 <td align="left" style="padding-left:5px">
                                     <c:choose>
                                         <c:when test="${obj.getTenDangNhap() != null}">
-                                            <a href="DangKyThanhVien.jsp?logout=true" class="menu_login">
+                                            <a href="BanLapTop.do?Action=DangKy&logout=true" class="menu_login">
                                                 Thoát
                                             </a>
 
                                         </c:when>
                                         <c:otherwise >
 
-                                            <a href="DangKyThanhVien.jsp" class="menu_login">
+                                            <a href="BanLapTop.do?Action=DangKy" class="menu_login">
                                                 Đăng Ký
                                             </a>
                                         </c:otherwise>
@@ -95,7 +96,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td height="50px" width="137"><img src="images/CartMenu.png" width="100%" height="50px" /></td>
+                    <td height="50px" width="137"><a href="BanLapTop.do?Action=GioHang"><img src="images/CartMenu.png" width="100%" height="50px" /></a></td>
                     <td>&nbsp;</td>
                 </tr>
             </table></td>
@@ -144,7 +145,7 @@
         </td>
     </tr>
     <tr width="100%">
-        <td height="70px" colspan="3">
+        <td colspan="3">
 
             <form method="post" action="BanLapTop.do?Action=SanPham&Trang=1&SoSanPham=${ obj.getSosptrang()}" name="frmSearch" >
                 <div id="timkiem_bg">
@@ -163,8 +164,8 @@
                             
                                                             <div class="loai_san_pham" id="laptop_icon" onclick="selectType(this)" style="background:url(images/laptop.png); background-size:100% 100%;background-repeat:no-repeat;background-position:center;"></div>
                                                         </td>-->
-                                                        <td width="17">  </td>
-                                                         <td width="269">
+                                                        <td width="10">  </td>
+                                                         <td width="205">
                                 <select name="HangSanXuat" style="width:200px; height:35px;font-size:22px; color:#666;">
                                     <option value="" selected="selected">--Chọn danh mục--</option>
                                     <c:forEach var="hsx" items="${obj.getListHangSX()}">
@@ -179,16 +180,16 @@
                                 </select>
                             </td>
                                                         
-                            <td width="118">
+                            <td width="86">
                                 <!--                                <input type="hidden" name="LoaiSanPham" id="Loaisp" value=""/>-->
-                                <label  for="tenSanPham" >Tên Sản Phẩm</label>
+                                <label  for="tenSanPham" style="font-family:Arial, Helvetica, sans-serif" >Tìm Kiếm</label>
                             </td>
-                            <td width="320">
+                            <td width="500">
 
-                                <input type="text"  name="tenSanPham" style="width:320px; font-size:22px; color:#666;" value="${ obj.getTimkiem()}" />
+                                <input type="text"  name="tenSanPham" style="width:500px; font-size:22px; color:#666;" value="${ obj.getTimkiem()}" />
                             </td>
                            
-                            <td width="179">
+                            <td width="102">
                                 <input type="submit" id="btn_tim_kiem" name="timKiem" value=""/>
                             </td>
                            

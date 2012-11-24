@@ -17,7 +17,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<link href="css/danh_sach_san_pham.css" rel="stylesheet" type="text/css" />
+<link href="../css/danh_sach_san_pham.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
     function showAvancedSearchMenu()
     {
@@ -28,12 +28,12 @@
         else {table.style.display = "none";}
     }
 </script>
-<table width="100%" height="100%" id="left_backg"  >
+<table width="90%" height="100%" id="left_backg" align="left"  >
     <tr >
-        <td style="vertical-align: top;">
+        <td style="vertical-align:top; width:95%">
             <div class="sidebox-wrapper " style="border:medium ; vertical-align: top; ">
-                <h3 class="sidebox-title"  ><span>THƯƠNG HIỆU</span></h3>
-                <div class="sidebox-body" style="width:180px ; border:solid 2px #6D6D6D ;" > 
+                <h3 class="sidebox-title"><span>THƯƠNG HIỆU</span></h3>
+                <div class="sidebox-body" style="border:solid 2px #6D6D6D ;" > 
                     <c:set var="obj" value="${ sessionScope.temp }"/>
                     <c:forEach var="hsx" items="${obj.getListHangSX()}">
                         <c:if test="${hsx.getTinhTrang() != 0}">
@@ -48,10 +48,10 @@
             <c:if test="${ true }">
 
                 <div class="sidebox-wrapper " style="border:medium ; ">
-                    <h3 class="sidebox-title"  ><span>Tính Năng</span></h3>
+                    <h3 class="sidebox-title"><span>Tính Năng</span></h3>
 
-                    <div class="sidebox-body" style="width:180px ; border:solid 2px #6D6D6D ;" > 
-                        <h4 style="margin-left:10px" >Giá Laptop</h4>
+                    <div class="sidebox-body" style="border:solid 2px #6D6D6D ;" > 
+                        <div class="sidebox-sub-title">Giá Laptop</div>
 
                         <form id="form1" name="form1" method="get" action="BanLapTop.do?Action=SanPham&HangSanXuat=${ obj.getMahang()}&LoaiSanPham=laptop&Trang=1&SoSanPham=${obj.getSosptrang()}">
                             <c:forEach var="kg" items="${obj.getListKhoanGia()}">
@@ -63,7 +63,7 @@
                                 
                                 <div>
                                     <a href="BanLapTop.do?Action=SanPham&HangSanXuat=${obj.getMahang()}&LoaiSanPham=${ obj.getLoaiSanPham()}&Trang=1&SoSanPham=${obj.getSosptrang()}&giatu=${ kg.getGiaTu()}&giaden=${kg.getGiaDen()}"> 
-                                        ${ tu} triệu - ${ den} triệu 
+                                        ${ tu} - ${ den} Triệu 
                                     </a>
 
                                 </div>
@@ -71,7 +71,7 @@
 
                         </form>
 
-                        <h4>Màn Hình</h4>
+                        <div class="sidebox-sub-title">Màn Hình</div>
 
                         <div>
                             <a href="/laptop/laptop-sony/">0 - 14 inch</a>

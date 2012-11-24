@@ -39,6 +39,7 @@
         </style></head>
 
     <body topmargin="-10px">
+        ${sessionScope.obj.getAction()}
         <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr><td>
                 </td>
@@ -58,7 +59,7 @@
                                     <td align="center" class="gio_hang_header">Xoa</td>
                                 </tr>
                                 <c:choose>
-                                    <c:when test="${sessionScope.GioHang.size() == 0}">
+                                    <c:when test="${sessionScope.GioHang.size() == 0 || sessionScope.GioHang ==null }">
 
                                         <tr>
                                             <td align="center" colspan="7"><p>GIỎ HÀNG ĐANG TRỐNG</p>
@@ -80,7 +81,7 @@
                                     <td><div class="gia_san_pham"><fmt:formatNumber type="currency" value="${sp.getGia()}" currencySymbol=""></fmt:formatNumber> VND</div></td>
                                     <td><div class="so_luong"><input name="txt_so_luong" type="text" size="5" maxlength="5" value="${sp.getSoLuongTon()}" /></div></td>
                                     <td><div class="thanh_tien"><span class="gia_san_pham"><fmt:formatNumber type="currency" currencySymbol="" value="${sp.getGia() * sp.getSoLuongTon()}"></fmt:formatNumber>VND</span></div></td>
-                                    <td><div class="xoa_san_pham"><a href="GioHang.do?Action=XoaSanPham&maSanPham=${sp.getMaSanPham()}" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
+                                    <td><div class="xoa_san_pham"><a href="BanLapTop.do?Action=GioHang&ThaoTac=XoaSanPham&maSanPham=${sp.getMaSanPham()}" target="_self"><img src="images/xoasanpham.png" alt="Loi hinh anh" width="30" height="30" align="middle" /></a></div></td>
                                 </tr>
                                     <c:set var="i" value="${i+1}"></c:set>
                                         </c:forEach>
@@ -106,7 +107,7 @@
                                 <p>
                                     <c:if test="${sessionScope.GioHang.size() > 0}">
                                     <input name="cap_nhat" type="submit" value="Cap nhat" class="button_control"/>
-                                    <a href="GioHang.jsp?Action=HuyGioHang"><input name="huy_gio_hang" type="button" value="Huỷ Giỏ Hàng" class="button_control" /></a>
+                                    <a href="BanLapTop.do?Action=GioHang&ThaoTac=HuyGioHang"><input name="huy_gio_hang" type="button" value="Huỷ Giỏ Hàng" class="button_control" /></a>
                                     <a href="ThanhToan.jsp"><input name="thanh_toan" type="button" class="button_control" value="Thanh toán"  /></a> 
                                     </c:if>
                                     <a href="BanLapTop.do?Action=SanPham"><input name="mua_tiep" type="button" value="Tiếp tục mua" class="button_control" /></a>
