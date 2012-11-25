@@ -132,15 +132,41 @@ public class DoiThongTin extends HttpServlet {
                     }
                     request.setAttribute("kh", kh);
                 } else {
-                    loi += "Bạn chưa đăng nhập";
+                    kh = new KhachHang();
+                    if (oke) {
+                        kh.setMaKhachHang(khdao.generateKeyCode("KhachHang", "maKhachHang", "KH"));
+                        kh.setTenKhachHang(hoTen);
+                        kh.setDienThoai(dienThoai);
+                        kh.setDiaChi(diaChi);
+                        kh.setThanhPho(thanhPho);
+                        Date ns = myLib.DateConvertor.Util2SqlDateConvertor(datepick);
+                        kh.setNgaySinh(ns);
+                        kh.setGioiTinh(gt);
+                        khtt.setKhachHang(kh);
+                        dao.saveOrUpdateObject(khtt);
+                        temp_class obj = (temp_class) session.getAttribute("temp");
+                        request.setAttribute("thongbao", "Thông tin đã được thay đổi.");
+                        String url = "TrangCaNhan.do";
+                        if (obj == null) {
+                            obj = new temp_class();
+                            obj.setAction("TrangCaNhan");
+                        } else {
+                            obj.setAction("TrangCaNhan");
+                        }
+
+                        session.setAttribute("temp", obj);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+                    }
                 }
             } else {
                 loi += "Bạn chưa đăng nhập";
+
             }
         } else {
             loi += "Bạn chưa đăng nhập";
         }
-        out.println(oke);
+
         request.setAttribute("loi", loi);
         temp_class obj = (temp_class) session.getAttribute("temp");
         String url = "Footer.do";

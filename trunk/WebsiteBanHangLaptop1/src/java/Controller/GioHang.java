@@ -88,7 +88,7 @@ public class GioHang extends HttpServlet {
                             soLuong = 1;
                         }
                     }
-                    if (request.getMethod().equals("POST") && sanPham != null) {
+                    if (sanPham != null) {
                         boolean isExist = false;
                         for (int i = 0; i < gioHang.size(); i++) {
                             if (gioHang.get(i).getMaSanPham().equals(maSanPham)) {
@@ -166,11 +166,18 @@ public class GioHang extends HttpServlet {
             request.setAttribute("vat", vat);
             request.setAttribute("thanhtien", thanhtien);
 
+
             temp_class obj = (temp_class) session.getAttribute("temp");
-            out.println(obj.getAction());
+            String url = "Footer.do";
+            if (obj != null) {
+                url = "Footer.do?" + obj.getUrlp();
+            } else {
+                obj = new temp_class();
+
+
+            }
             obj.setAction("GioHang");
             session.setAttribute("temp", obj);
-            String url = "Footer.do?" + obj.getUrlp();
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

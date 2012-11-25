@@ -7,19 +7,19 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/BanLaptopDatabase</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">thanhtung</property>
-    <mapping resource="model/pojo/Laptop.hbm.xml"/>
-    <mapping resource="model/pojo/KhachHangTrucTuyen.hbm.xml"/>
+    <mapping resource="model/pojo/DatHang.hbm.xml"/>
+    <mapping resource="model/pojo/SanPham.hbm.xml"/>
+    <mapping resource="model/pojo/TinhTrangSanPham.hbm.xml"/>
+    <mapping resource="model/pojo/ChiTietDonHang.hbm.xml"/>
+    <mapping resource="model/pojo/KhoanGia.hbm.xml"/>
     <mapping resource="model/pojo/KhuyenMai.hbm.xml"/>
     <mapping resource="model/pojo/HangSanXuat.hbm.xml"/>
-    <mapping resource="model/pojo/ChiTietDonHang.hbm.xml"/>
-    <mapping resource="model/pojo/SanPham.hbm.xml"/>
-    <mapping resource="model/pojo/KhoanGia.hbm.xml"/>
-    <mapping resource="model/pojo/ChiTietKhuyenMai.hbm.xml"/>
-    <mapping resource="model/pojo/LinhKien.hbm.xml"/>
-    <mapping resource="model/pojo/TinhTrangDonDatHang.hbm.xml"/>
-    <mapping resource="model/pojo/TinhTrangSanPham.hbm.xml"/>
-    <mapping resource="model/pojo/DatHang.hbm.xml"/>
     <mapping resource="model/pojo/KhachHang.hbm.xml"/>
+    <mapping resource="model/pojo/TinhTrangDonDatHang.hbm.xml"/>
+    <mapping resource="model/pojo/Laptop.hbm.xml"/>
+    <mapping resource="model/pojo/ChiTietKhuyenMai.hbm.xml"/>
+    <mapping resource="model/pojo/KhachHangTrucTuyen.hbm.xml"/>
     <mapping resource="model/pojo/NhanVien.hbm.xml"/>
+    <mapping resource="model/pojo/LinhKien.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -8,16 +8,28 @@
             <column name="ma_don_hang" length="10" />
             <generator class="assigned" />
         </id>
+        <property name="diaChiGiaoHang" type="string">
+            <column name="dia_chi_giao_hang" length="300" />
+        </property>
+        <property name="dienThoai" type="string">
+            <column name="dien_thoai" length="15" />
+        </property>
+        <property name="nguoiNhan" type="string">
+            <column name="nguoi_nhan" length="50" />
+        </property>
+          <property name="ngayDat" type="timestamp">
+            <column name="ngay_dat" length="29" />
+        </property>
         <many-to-one name="nhanVien" class="model.pojo.NhanVien" fetch="select">
             <column name="nhan_vien" length="10" />
         </many-to-one>
-        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select">
+        <many-to-one name="khachHang" class="model.pojo.KhachHang" fetch="select" cascade="save-update">
             <column name="khach_hang" length="10" />
         </many-to-one>
-        <many-to-one name="tinhTrangDonDatHang" class="model.pojo.TinhTrangDonDatHang" fetch="select">
+        <many-to-one name="tinhTrangDonDatHang" class="model.pojo.TinhTrangDonDatHang" fetch="select" cascade="save-update" lazy="false">
             <column name="tinh_trang" />
         </many-to-one>
-        <set name="chiTietDonHangs" inverse="true">
+        <set name="chiTietDonHangs" inverse="true" cascade="save-update,delete" >
             <key>
                 <column name="ma_don_hang" length="10" not-null="true" />
             </key>

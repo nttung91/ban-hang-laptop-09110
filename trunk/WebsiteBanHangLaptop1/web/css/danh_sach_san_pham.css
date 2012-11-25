@@ -29,17 +29,24 @@
 	color: #F00;
 	text-decoration: underline;
 }
+.imgsp
+{
+	height:180px;
+	width:230px;
+}
 .item{
 	float:left;
-	height:200px;
-	width:200px;
-	margin:0px 30px;
+	height:300px;
+	width:230px;
+	margin:0px 20px;
 	}
 a {
 	text-decoration:none;}
 a:hover {
 	text-decoration:underline;
 	}
+	
+	
 .timkiem_top_panel{
 	border-bottom:#00F medium solid;
 	}
