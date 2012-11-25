@@ -21,20 +21,26 @@ public class SiteMaps {
         if (action.equals("DangKy")) {
             res = "DangKyThanhVien.do";
         }
-         if (action.equals("DangNhap")) {
+        if (action.equals("DangNhap")) {
             res = "DangNhap.do";
         }
-          if (action.equals("TrangCaNhan")) {
+        if (action.equals("TrangCaNhan")) {
             res = "TrangCaNhan.do";
         }
-          if (action.equals("DoiMatKhau")) {
+        if (action.equals("DoiMatKhau")) {
             res = "DoiMatKhau.do";
         }
-          if (action.equals("DoiEmail")) {
+        if (action.equals("DoiEmail")) {
             res = "DoiEmail.do";
         }
-          if (action.equals("DoiThongTin")) {
+        if (action.equals("DoiThongTin")) {
             res = "DoiThongTin.do";
+        }
+        if (action.equals("DatHang")) {
+            res = "DatHang.do";
+        }
+        if (action.equals("ChiTietDonHang")) {
+            res = "ChiTietDonHang.do";
         }
         return res;
     }

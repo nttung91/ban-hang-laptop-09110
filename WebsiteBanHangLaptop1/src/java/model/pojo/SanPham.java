@@ -1,5 +1,5 @@
 package model.pojo;
-// Generated Oct 23, 2012 10:38:34 AM by Hibernate Tools 3.2.1.GA
+// Generated Nov 23, 2012 11:16:33 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -34,7 +34,7 @@ public class SanPham  implements java.io.Serializable {
     public SanPham(String maSanPham) {
         this.maSanPham = maSanPham;
     }
-    public SanPham(String maSanPham, HangSanXuat hangSanXuat, TinhTrangSanPham tinhTrangSanPham, String tenSanPham, String hinhAnh, Double gia, Integer soLuongTon, Date ngayCapNhat, Integer thoiGianBaoHanh, Set chiTietDonHangs, Set chiTietKhuyenMais, Set linhKiens, Set laptops) {
+    public SanPham(String maSanPham, HangSanXuat hangSanXuat, TinhTrangSanPham tinhTrangSanPham, String tenSanPham, String hinhAnh, Double gia, Integer soLuongTon, Date ngayCapNhat, Integer thoiGianBaoHanh, Integer soLuotXem, Set chiTietDonHangs, Set chiTietKhuyenMais, Set linhKiens, Set laptops) {
        this.maSanPham = maSanPham;
        this.hangSanXuat = hangSanXuat;
        this.tinhTrangSanPham = tinhTrangSanPham;
@@ -44,6 +44,7 @@ public class SanPham  implements java.io.Serializable {
        this.soLuongTon = soLuongTon;
        this.ngayCapNhat = ngayCapNhat;
        this.thoiGianBaoHanh = thoiGianBaoHanh;
+       this.soLuotXem = soLuotXem;
        this.chiTietDonHangs = chiTietDonHangs;
        this.chiTietKhuyenMais = chiTietKhuyenMais;
        this.linhKiens = linhKiens;
@@ -113,6 +114,13 @@ public class SanPham  implements java.io.Serializable {
     public void setThoiGianBaoHanh(Integer thoiGianBaoHanh) {
         this.thoiGianBaoHanh = thoiGianBaoHanh;
     }
+    public Integer getSoLuotXem() {
+        return this.soLuotXem;
+    }
+    
+    public void setSoLuotXem(Integer soLuotXem) {
+        this.soLuotXem = soLuotXem;
+    }
     public Set getChiTietDonHangs() {
         return this.chiTietDonHangs;
     }
@@ -140,14 +148,6 @@ public class SanPham  implements java.io.Serializable {
     
     public void setLaptops(Set laptops) {
         this.laptops = laptops;
-    }
-
-    public Integer getSoLuotXem() {
-        return soLuotXem;
-    }
-
-    public void setSoLuotXem(Integer soLuotXem) {
-        this.soLuotXem = soLuotXem;
     }
 
 

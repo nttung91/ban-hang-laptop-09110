@@ -20,7 +20,7 @@
         <script src="js/jquery.validate.js" type="text/javascript"></script>
         <script src="js/jquery.metadata.js" type="text/javascript"></script>
         <script src="js/dangky.js" type="text/javascript"></script>
-        <script type="text/javascript" src="js/jquery.realperson.js"></script>
+       	
         <link rel="stylesheet" href="css/jquery-ui.css" />
 
         <script src="js/jquery-ui.js"></script>
@@ -159,7 +159,7 @@
 
     <body topmargin="-10px">
         <c:out value="${info}"/>
-        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" align="left" >
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" >
 
 <tr>
                 <td colspan="2">
@@ -180,9 +180,9 @@
                                 </tr>
                                 <tr>
                                     <td class="text_reg"><label for="gioiTinh">Giới Tính</label></td>
-                                    <td><input name="gioiTinh" type="radio" value="Nam" checked />
+                                    <td><input name="gioiTinh" type="radio" value="Nam" ${(kh.getGioiTinh()==0)?"checked":""} />
                                     Nam
-                                      <input name="gioiTinh" type="radio" value="Nu" />
+                                      <input name="gioiTinh" type="radio" value="Nu" ${(kh.getGioiTinh()==1)?"checked":""} />
                                       Nữ</td>
                                 </tr>
                                 <tr >

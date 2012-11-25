@@ -52,5 +52,17 @@
         <put-attribute name="Title" value="Đăng ký thành viên"/>
         <put-attribute name="MainContent" value="/pages/DangKyThanhVien.jsp"/>    
     </definition>
+    <definition name="DatHang" extends="Home">
+        <put-attribute name="Title" value="Đặt Hàng"/>
+        <put-attribute name="MainContent" value="/pages/DatHang.jsp"/>    
+    </definition>
+    <definition name="ThongBao" extends="Home">
+        <put-attribute name="Title" value="Thông báo"/>
+        <put-attribute name="MainContent" value="/pages/HienThiThongBao.jsp"/>    
+    </definition>
+     <definition name="ChiTietDonHang" extends="Home">
+        <put-attribute name="Title" value="Thông báo"/>
+        <put-attribute name="MainContent" value="/pages/ChiTietDonHang.jsp"/>    
+    </definition>
    
 </tiles-definitions>

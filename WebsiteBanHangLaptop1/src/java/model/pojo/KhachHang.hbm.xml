@@ -29,13 +29,13 @@
         <property name="tinhTrang" type="java.lang.Integer">
             <column name="tinh_trang" />
         </property>
-        <set name="khachHangTrucTuyens" inverse="true">
+        <set name="khachHangTrucTuyens" inverse="true" cascade="save-update">
             <key>
                 <column name="khach_hang" length="10" unique="true" />
             </key>
             <one-to-many class="model.pojo.KhachHangTrucTuyen" />
         </set>
-        <set name="datHangs" inverse="true">
+        <set name="datHangs" inverse="true" lazy="false">
             <key>
                 <column name="khach_hang" length="10" />
             </key>

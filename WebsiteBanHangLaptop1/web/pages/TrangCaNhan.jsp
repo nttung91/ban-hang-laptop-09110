@@ -4,10 +4,10 @@
     Author     : THANHTUNG
 --%>
 
+<%@page import="Gobal.Parameters"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -158,64 +158,112 @@
     </head>
 
     <body topmargin="-10px">	
-        <table width="700px" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td colspan="2">Xin chào, ${khachhang.getUsername()}</td>
-          </tr>
-          <tr>
-              <td colspan="2" style="color: red;">${thongbao}</td>
-          </tr>
-          <tr>
-            <td colspan="2" class="login_header_td">Thông tin tài khoản</td>
-          </tr>
-          <tr>
-            <td width="157">&nbsp;</td>
-            <td width="543">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="text_reg underline">Tên đăng nhập</td>
-            <td class="underline">${khachhang.getUsername()}</td>
-          </tr>
-          <tr>
-            <td class="text_reg underline">Email</td>
-            <td class="underline">${khachhang.getEmail()}</td>
-          </tr>
-          <tr>
-            <td class="text_reg underline">Họ Tên</td>
-            <td class="underline">${khachhang.khachHang.getTenKhachHang()}</td>
-          </tr>
-         <tr>
-            <td class="text_reg underline">Ngày Sinh</td>
-            <td class="underline"><fmt:formatDate value="${khachhang.khachHang.getNgaySinh()}" pattern="dd/MM/yyyy"/> </td>
-          </tr>
-          <tr>
-            <td class="text_reg underline">Giới Tính</td>
-            <td class="underline">${khachhang.khachHang.getGioiTinh()}</td>
-          </tr>
-          <tr>
-            <td class="text_reg underline">Điện thoại</td>
-            <td class="underline">${khachhang.khachHang.getDienThoai()}</td>
-          </tr>
-          <tr >
-            <td class="text_reg underline">Địa chỉ giao hàng</td>
-            <td class="underline">${khachhang.khachHang.getDiaChi()}</td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td><a href="BanLapTop.do?Action=DoiMatKhau">Đổi mật khẩu</a></td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td><a href="BanLapTop.do?Action=DoiEmail">Đổi email</a></td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td><a href="BanLapTop.do?Action=DoiThongTin">Đổi Thông Tin</a></td>
-            <td>&nbsp;</td>
-          </tr>
+        <table width="90%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="2">Xin chào, ${khachhang.getUsername()}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="color: red;">${thongbao}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="login_header_td">Thông tin tài khoản</td>
+            </tr>
+            <tr>
+                <td width="157">&nbsp;</td>
+                <td width="543">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Tên đăng nhập</td>
+                <td class="underline">${khachhang.getUsername()}</td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Email</td>
+                <td class="underline">${khachhang.getEmail()}</td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Họ Tên</td>
+                <td class="underline">${khachhang.khachHang.getTenKhachHang()}</td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Ngày Sinh</td>
+                <td class="underline"><fmt:formatDate value="${khachhang.khachHang.getNgaySinh()}" pattern="dd/MM/yyyy"/> </td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Giới Tính</td>
+                <td class="underline">
+
+                    ${(khachhang.khachHang.getGioiTinh()==0)?"Nam":"Nữ"}</td>
+            </tr>
+            <tr>
+                <td class="text_reg underline">Điện thoại</td>
+                <td class="underline">${khachhang.khachHang.getDienThoai()}</td>
+            </tr>
+            <tr >
+                <td class="text_reg underline">Địa chỉ giao hàng</td>
+                <td class="underline">${khachhang.khachHang.getDiaChi()}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="BanLapTop.do?Action=DoiMatKhau">Đổi mật khẩu</a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="BanLapTop.do?Action=DoiEmail">Đổi email</a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="BanLapTop.do?Action=DoiThongTin">Đổi Thông Tin</a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="login_header_td">Lịch sử giao dịch</td>
+            </tr>
+            <tr>
+                <td colspan="2"><table width="100%" border="1" cellspacing="0" cellpadding="0">
+                        <tr class="td_header_giao_dich">
+                            <td width="3%">STT</td>
+                            <td width="20%">&nbsp;Người Nhận</td>
+                            <td width="35%">&nbsp;Địa Chỉ</td>
+                            <td width="15%">&nbsp;Ngày đặt</td>
+                            <td width="15%">Tình Trạng</td>
+                            <td ></td>
+                        </tr>
+                        <c:choose>
+                            <c:when test="${dhs.size()==0}">
+                                <tr>
+                                    <td colspan="6">BẠN CHƯA CÓ GIAO DỊCH NÀO</td>
+
+                                </tr>
+
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="i" value="1"/>
+                                <c:forEach var="dh" items="${dhs}">
+                                    <tr>
+                                        <td align="center">${i}</td>
+                                        <td> ${dh.getNguoiNhan()}</td>
+                                        <td> ${dh.getDiaChiGiaoHang()}</td>
+                                        <td> <fmt:formatDate value="${dh.getNgayDat()}" pattern="dd/MM/yyyy hh:mm:ss" /> </td>
+                                        <td align="center">${dh.getTinhTrangDonDatHang().getMota()}</td>
+                                        <td align="center"><a href="BanLapTop.do?Action=ChiTietDonHang&MaDonHang=${dh.getMaDonHang()}">Chi Tiết</a>
+                                            <c:if test="${dh.getTinhTrangDonDatHang().getMaTinhTrang()==TTDH_CHUA_DUYET}">
+                                               | <a href="BanLapTop.do?Action=TrangCaNhan&ThaoTac=HuyDonHang&MaDonHang=${dh.getMaDonHang()}">Huỷ</a></td>
+                                            </c:if>
+                                    </tr>
+                                    <c:set var="i" value="${i+1}"/>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </table></td>
+            </tr>
         </table>
     </body>
 </html>

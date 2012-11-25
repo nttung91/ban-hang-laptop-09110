@@ -121,12 +121,9 @@
                         <td width="45%" rowspan="8" id="hinh_anh_sp_chi_tiet">
                             <a class="fancybox-effects-b" href="<c:if test="${hasSanPham}">
                                    <c:out value="${sanPham.getHinhAnh()}"></c:out></c:if>"
-                               title="<c:if test="${hasSanPham}">
-                                   <c:out value="${sanPham.getTenSanPham()}"></c:out>
-                               </c:if>">
-                                <img src="<c:if test="${hasSanPham}">
-                                         <c:out value="${sanPham.getHinhAnh()}"></c:out>
-                                     </c:if>" alt=""  width="300" height="217"/></a>
+                               title="${sanPham.getTenSanPham()}">
+                               
+                                <img src="${sanPham.getHinhAnh()}" alt=""  width="300" height="217"/></a>
                         </td><td width="22%" height="39" id="ten_san_pham">
                             <c:if test="${hasSanPham}">
                                 <c:out value="${sanPham.getTenSanPham()}"></c:out>
@@ -188,19 +185,16 @@
                             VND</td>
                     </tr>
                     <tr>
-                        <td height="24">&nbsp;</td>
-                        <td height="24" colspan="3"> <p>
-
+                        <td height="24" align="center" style="color:#F00;font-style:italic;vertical-align:top;">Ấn để phóng to</td>
+                        <td height="24" colspan="3"> <ul>
                                 <c:if test="${hasSanPham}">
-
                                     <c:forEach var="km" items="${khuyenMais}">
-                                        <li class='khuyen_mai'><c:out value="${km}"></c:out></li>
-
+                                        <li class='khuyen_mai'>${km}</li>
                                     </c:forEach>
                                 </c:if>
 
 
-                            </p></td>
+                            </ul></td>
                     </tr>
                     <tr>
                         <td colspan="4" style="vertical-align:top;">
@@ -215,7 +209,7 @@
 
 
                                            </c:otherwise>
-                                       </c:choose>" style="margin-top:10px;">
+                                       </c:choose>" style="margin-top:10px;" >
                                     <tr>
                                         <td height="38"  colspan="4"><div bgcolor="#0066CC" class="text_header">Thông số kỹ thuật</div></td>
                                     </tr>

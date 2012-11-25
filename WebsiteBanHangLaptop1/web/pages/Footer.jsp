@@ -5,18 +5,18 @@
 
 <table width="100%">
   <tr>
-    <td>fdsaf</td>
-    <td>fdsa</td>
-    <td>fds</td>
-    <td>fdsaf</td>
-    <td>fasd</td>
+    <td width="21%"><a href="#">Trang Chủ</a></td>
+    <td width="21%"><a href="#">Trang Cá Nhân</a></td>
+    <td width="19%"><a href="#">Giỏ Hàng</a></td>
+    <td width="19%"><a href="#">Sản Phẩm</a></td>
+    <td width="20%"><a href="#">Sản Phẩm Khuyến Mãi</a></td>
   </tr>
   <tr>
-    <td>fdsa</td>
-    <td>fasd</td>
-    <td>fasd</td>
-    <td>fds</td>
-    <td>fds</td>
+    <td><a href="#">Dell</a></td>
+    <td><a href="#">Acer</a></td>
+    <td><a href="#">Tosiba</a></td>
+    <td><a href="#">Apple</a></td>
+    <td><a href="#">Acer</a></td>
   </tr>
 </table>
 <div>

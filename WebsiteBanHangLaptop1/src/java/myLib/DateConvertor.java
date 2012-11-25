@@ -87,6 +87,11 @@ public class DateConvertor {
          java.util.Date d = new Date(cal.getTime().getTime());
          return d;
     }
+    public static Timestamp getCurrentTimeStamp(){
+         java.util.Date date= new java.util.Date();
+        Timestamp d = new Timestamp(date.getTime());
+         return d;
+    }
     public static String getCurrentDateString(String fomat){
          java.util.Calendar cal = Calendar.getInstance();
          java.util.Date d = new Date(cal.getTime().getTime());
