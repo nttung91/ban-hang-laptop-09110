@@ -111,7 +111,7 @@
             </div>
         </div>
         <!--pop up gio hang-->
-       
+
         <c:choose>
             <c:when test="${isItemExist}">
 
@@ -122,22 +122,21 @@
                             <a class="fancybox-effects-b" href="<c:if test="${hasSanPham}">
                                    <c:out value="${sanPham.getHinhAnh()}"></c:out></c:if>"
                                title="${sanPham.getTenSanPham()}">
-                               
+
                                 <img src="${sanPham.getHinhAnh()}" alt=""  width="300" height="217"/></a>
-                        </td><td width="22%" height="39" id="ten_san_pham">
+                        </td><td height="39" colspan="3" id="ten_san_pham">
                             <c:if test="${hasSanPham}">
                                 <c:out value="${sanPham.getTenSanPham()}"></c:out>
                             </c:if>
                         </td>
-                        <td height="39" colspan="2" id="ten_san_pham">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td class="text_thong_tin_san_pham_even">Mã số</td>
+                        <td width="22%" class="text_thong_tin_san_pham_even">Mã số</td>
                         <td colspan="2" class="text_thong_tin_san_pham_even">: <c:out value="${sanPham.getMaSanPham()}"></c:out></td>
-                        </tr>
-                        <tr>
-                            <td class="text_thong_tin_san_pham">Nhà sản xuất</td>
-                            <td colspan="2" class="text_thong_tin_san_pham">:
+                    </tr>
+                    <tr>
+                        <td class="text_thong_tin_san_pham">Nhà sản xuất</td>
+                        <td colspan="2" class="text_thong_tin_san_pham">:
                             <c:if test="${hasSanPham}">
                                 <c:out value="${sanPham.getHangSanXuat().getTenHang()}"></c:out>
                             </c:if></td>
@@ -167,18 +166,18 @@
                     </tr>
                     <tr>
                         <form action="GioHang.do" method="post">
-                            
-                                <input type="hidden" name="ThaoTac" value="ThemVaoGio" />
-                                <input type="hidden" name="maSanPham" value="<c:out value="${sanPham.getMaSanPham()}"></c:out>"/>
-                                    <td class="text_thong_tin_san_pham">
-                                        <label for="soLuong">Số Lượng</label>
-                                        <input type="text" name="soLuong" id="soLuong" style="margin-left:5px;width:100px" value="1" />
-                                    </td>
-                                    <td width="33%" class="gia_san_pham"><input type="submit" value="" style="background-image:url(images/addtocart.png);background-repeat:no-repeat;background-size:100% 100%;width:159px;height:35px;" /></td>
-                            </form>
-                        </tr>
-                        <tr>
-                            <td height="38" colspan="3" class="gia_san_pham"> 
+
+                            <input type="hidden" name="ThaoTac" value="ThemVaoGio" />
+                            <input type="hidden" name="maSanPham" value="<c:out value="${sanPham.getMaSanPham()}"></c:out>"/>
+                            <td class="text_thong_tin_san_pham">
+                                <label for="soLuong">Số Lượng</label>
+                                <input type="text" name="soLuong" id="soLuong" style="margin-left:5px;width:100px" value="1" />
+                            </td>
+                            <td width="33%" class="gia_san_pham"><input type="submit" value="" style="background-image:url(images/addtocart.png);background-repeat:no-repeat;background-size:100% 100%;width:159px;height:35px;" /></td>
+                        </form>
+                    </tr>
+                    <tr>
+                        <td height="38" colspan="3" class="gia_san_pham"> 
                             <c:if test="${hasSanPham}">
                                 <fmt:formatNumber type="currency" value="${sanPham.getGia()}" currencySymbol="" maxFractionDigits="0" ></fmt:formatNumber>
                             </c:if>
@@ -301,10 +300,10 @@
                                         <td class="text_thong_tin_san_pham">:
                                             <c:choose>
                                                 <c:when test="${hasSanPham && laptop !=null }">
-                                                    <c:if test="${laptop.getTinhNangKhac()}">
-                                                        <c:out value="${laptop.getTinhNangKhac()}"></c:out>
 
-                                                    </c:if> 
+                                                    <c:out value="${laptop.getTinhNangKhac()}"></c:out>
+
+
 
                                                 </c:when>
                                                 <c:otherwise>
@@ -368,7 +367,7 @@
                                                         <li class='chi_tiet_phu_kien_even'>${cts}</li>
                                                     </c:otherwise>
                                                 </c:choose>
-                                                    <c:set var="i" value="${i+1}"></c:set>
+                                                <c:set var="i" value="${i+1}"></c:set>
                                             </c:forEach>
 
                                         </c:if>

@@ -35,7 +35,7 @@ public class LaptopDAO extends ObjectDAO<Laptop, String> {
            
        }
         Query query = session.createQuery(hql);
-         if (giatu != 0 && giaden !=0){
+         if (giatu != 0 || giaden !=0){
         query.setParameter("giatu", giatu);
         query.setParameter("giaden", giaden);
          }
