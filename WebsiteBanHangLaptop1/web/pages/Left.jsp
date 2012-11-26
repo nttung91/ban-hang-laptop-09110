@@ -38,7 +38,7 @@
                     <c:forEach var="hsx" items="${obj.getListHangSX()}">
                         <c:if test="${hsx.getTinhTrang() != 0}">
 
-                            <div><a href="BanLapTop.do?Action=SanPham&HangSanXuat=${hsx.getMaHang()}&LoaiSanPham=${ obj.getLoaiSanPham()}&Trang=1&SoSanPham=${ obj.getSosptrang()}">${ hsx.getTenHang()}</a></div>
+                            <div><a href="BanLapTop.do?Action=SanPham&HangSanXuat=${hsx.getMaHang()}&LoaiSanPham=${ obj.getLoaiSanPham()}&Trang=1&SoSanPham=${ obj.getSosptrang()}&giatu=${ obj.getGiatu()}&giaden=${obj.getGiaden()}">${ hsx.getTenHang()}</a></div>
 
                         </c:if>
                     </c:forEach>

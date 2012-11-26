@@ -43,7 +43,7 @@
 
 
         <c:set var="obj" value="${ sessionScope.temp }"/>
-       
+
         <table width="820px" height="100%" border="0" cellspacing="0" cellpadding="0" style="margin-left:10px ; vertical-align: top;" >
             <tr>
 
@@ -58,20 +58,75 @@
                     </c:choose>
                     <!-- list Trang Begin -->
 
-                    <%
-                        //SanPhamDAO spdao = new SanPhamDAO();
+                    <%                        //SanPhamDAO spdao = new SanPhamDAO();
                         //LaptopDAO lapdao = new LaptopDAO();
                         //LinhKienDAO lkdao = new LinhKienDAO();
                         //CreateSanPham create = new CreateSanPham();
-
                         //Laptop l = (Laptop) create.Create(0);
-                    %>
-                    
-                    <%
-                        // //             spdao.saveOrUpdateObject(l.getSanPham());
-//                        lapdao.saveOrUpdateObject(l);
 %>
 
+                    <%                        // //             spdao.saveOrUpdateObject(l.getSanPham());
+//                        lapdao.saveOrUpdateObject(l);
+                    %>
+                    <a href="BanLapTop.do?Action=SanPham">
+                        Sản Phẩm
+                    </a>
+                    <c:choose>
+                        <c:when test="${ obj.getLoaiSanPham() == 'laptop' }">
+
+                            ->
+                            <a href="BanLapTop.do?Action=SanPham&LoaiSanPham=laptop&Trang=1&SoSanPham=${obj.getSosptrang()}">
+                                Laptop
+                            </a>
+                        </c:when>
+                        <c:when test="${obj.getLoaiSanPham() == 'linhkien'}">
+
+                            ->
+                            <a href="BanLapTop.do?Action=SanPham&LoaiSanPham=linhkien&Trang=1&SoSanPham=${obj.getSosptrang()}">
+                                Linh Kiện
+                            </a>
+                        </c:when>
+                    </c:choose>
+                    <c:if test="${obj.getMahang()!=''}">
+
+                        ->
+
+
+                        <c:forEach var="hsx" items="${obj.getListHangSX()}">
+                            <c:if test="${hsx.getMaHang() == obj.getMahang()}">
+
+                                <a href="BanLapTop.do?Action=SanPham&HangSanXuat=${obj.getMahang()}&LoaiSanPham=${ obj.getLoaiSanPham()}&Trang=1&SoSanPham=${ obj.getSosptrang()}">${ hsx.getTenHang()}</a>
+
+                            </c:if>
+                        </c:forEach>
+
+                    </c:if>
+
+                    <c:if test="${obj.getGiaden()!=0}">
+                        ->  Giá 
+
+                        <fmt:formatNumber var="tu" value="${obj.getGiatu()/1000000}" type="number"/>
+                        <fmt:formatNumber var="den" value="${obj.getGiaden()/1000000}" type="number"/>
+
+
+                        <a href="BanLapTop.do?Action=SanPham&HangSanXuat=${ obj.getMahang() }&LoaiSanPham=${ obj.getLoaiSanPham()}&Trang=1&SoSanPham=${obj.getSosptrang()}&giatu=${ obj.getGiatu()}&giaden=${obj.getGiaden()}"> 
+                            từ
+                            <c:out value="${tu}"/>
+                            triệu 
+                            đến
+                            
+                            <c:out value="${den}"/>
+                            triệu 
+                        </a>
+
+
+                    </c:if>   
+
+
+
+
+
+                    </br>
                     <c:if test="${obj.getTongtrang()>=1}">
 
                         <c:out value="Trang"/>
@@ -133,14 +188,14 @@
                         <select name="SoSanPham" onchange="submit()">
                             <c:forEach var="i" begin="1" end="10">
                                 <c:choose>
-                                    <c:when test="${i == obj.getSosptrang()}">
+                                    <c:when test="${i*3 == obj.getSosptrang()}">
 
-                                        <option value=${ i} selected=true >${i}</option>
+                                        <option value=${ i*3} selected=true >${i*3}</option>
                                         <c:set var="i" value="${i+1}"/>
                                     </c:when>
                                     <c:otherwise>
 
-                                        <option value=${ i}  >${i}</option>
+                                        <option value=${ i*3}  >${i*3}</option>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
@@ -178,11 +233,13 @@
                                         <td class="ten_san_pham"><a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${obj.getLoaiSanPham()}&maSanPham=${sp.getMaSanPham()}" style="text-decoration:none;">${sp.getTenSanPham()}</a></td>
                                     </tr>
                                     <tr>
-                                        <td><span>Giá</span><span class="gia"><fmt:formatNumber type="number" value="${sp.getGia()}" groupingUsed="true"/> <c:out value=" VND"/></span></td>
+                                        <td><span class="gia">Giá:<fmt:formatNumber type="number" value="${sp.getGia()}" groupingUsed="true"/> <c:out value=" VND"/></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="khuyen_mai">
-                                            <c:out value="${loai}"/>
+                                        <td align="center">
+                                            <div style="position:relative;padding:13px;"><a href="BanLapTop.do?Action=ChiTietSanPham&loaiSanPham=${loai}&maSanPham=${sp.getMaSanPham()}" style="vertical-align:middle;"><li class="tag">Chi Tiết</li></a><div style="width:3px;float:left;">&nbsp;</div>  
+                                            <a href="BanLapTop.do?Action=GioHang&ThaoTac=ThemVaoGio&maSanPham=${sp.getMaSanPham()}" ><li class="tag">Đặt Mua</li></a>
+                                            </div>
                                         </td>
                                     </tr>
 
